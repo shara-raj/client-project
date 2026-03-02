@@ -4,14 +4,12 @@ import { ProtectedRoute } from "@/modules/auth";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import { UserDashboard } from "../pages/user/UserDashboard";
 import AdminUIController from "../layouts/admin/AdminUIController";
 import AdminEditorsPage from "../pages/admin/users/AdminEditorsPage";
-import AdminFlagsPage from "../pages/admin/moderation/AdminFlagsPage";
-import AdminReportsPage from "../pages/admin/moderation/AdminReportsPage";
 import AdminMediaPage from "../pages/admin/media/AdminMediaPage";
 import AdminSubscribersPage from "../pages/admin/users/AdminSubscribersPage";
 import AdminSystemAlertsPage from "../pages/admin/system/AdminSystemAlertsPage";
+import AdminPendingSubmissionsPage from "../pages/admin/review/AdminPendingSubmissionsPage";
 
 //Editor Routes
 
@@ -25,6 +23,14 @@ import { EditorNewPostPage } from "../pages/editor/create/EditorNewPostPage";
 import { EditorProfilePage } from "../pages/editor/profile/EditorProfilePage";
 import { EditorUIController } from "../layouts/editor/EditorUIController";
 
+//user routes
+import UserLayout from "../layouts/user/UserLayout";
+import UserDashboard from "../pages/user/UserDashboard";
+import UserMyContentPage from "../pages/user/UserMyContentPage";
+import UserHealingPathsPage from "../pages/user/UserHealingPathsPage";
+import UserSubscriptionPage from "../pages/user/UserSubscriptionPage";
+import UserSettingsPage from "../pages/user/UserSettingsPage";
+
 export function DashboardRoutes() {
   return (
     <Routes>
@@ -34,8 +40,7 @@ export function DashboardRoutes() {
           <Route element={<AdminUIController />}>
             <Route index element={<AdminDashboard />} />
             {/* Moderation */}
-            <Route path="moderation/reports" element={<AdminReportsPage />} />
-            <Route path="moderation/flags" element={<AdminFlagsPage />} />
+            <Route path="review" element={<AdminPendingSubmissionsPage />} />
 
             {/* Users */}
             <Route
@@ -76,11 +81,24 @@ export function DashboardRoutes() {
         </Route>
 
         {/* USER */}
-        {/* <Route path="user" element={<ProtectedRoute requiredRole="user" />}>
+        <Route path="user" element={<ProtectedRoute requiredRole="user" />}>
           <Route element={<UserLayout />}>
+            {/* Home / Overview */}
             <Route index element={<UserDashboard />} />
+
+            {/* My Content */}
+            <Route path="my-content" element={<UserMyContentPage />} />
+
+            {/* Healing Paths */}
+            <Route path="healing-paths" element={<UserHealingPathsPage />} />
+
+            {/* Subscription */}
+            <Route path="subscription" element={<UserSubscriptionPage />} />
+
+            {/* Settings */}
+            <Route path="settings" element={<UserSettingsPage />} />
           </Route>
-        </Route> */}
+        </Route>
       </Route>
     </Routes>
   );

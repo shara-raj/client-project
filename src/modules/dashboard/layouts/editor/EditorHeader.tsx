@@ -1,3 +1,4 @@
+import { useAuth } from "@/modules/auth";
 import type { ReactNode } from "react";
 
 interface EditorHeaderProps {
@@ -11,6 +12,8 @@ export function EditorHeader({
   onMenuClick,
   children,
 }: EditorHeaderProps) {
+  const { logout } = useAuth();
+
   return (
     <header className="h-16 bg-white border-b border-neutral-200 px-4 md:px-6 flex items-center justify-between">
       {/* Left */}
@@ -42,6 +45,14 @@ export function EditorHeader({
 
         {/* Profile slot */}
         <div className="h-8 w-8 rounded-full bg-neutral-200" />
+        <div className="w-8 h-8 rounded-full cursor-pointer bg-neutral-100 hover:bg-neutral-200 flex align-middle justify-center">
+          <img
+            className="w-5 h-auto"
+            src="/images/logout/logout.svg"
+            alt="log out"
+            onClick={logout}
+          />
+        </div>
       </div>
     </header>
   );

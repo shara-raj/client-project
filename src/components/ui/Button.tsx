@@ -21,7 +21,7 @@ export default function Button({
   const variantStyles =
     variant === "primary"
       ? "bg-[#d4af37]/70 hover:bg-[#d4af37]/40 text-primary-foreground"
-      : "bg-[#d4af37]/70 hover:bg-neutral-200 border border-neutral-800 text-black cursor-pointer";
+      : "bg-[#d4af37]/70 hover:bg-neutral-200 border border-neutral-200 text-black cursor-pointer";
 
   const widthStyles = fullWidth ? "w-full" : "";
 

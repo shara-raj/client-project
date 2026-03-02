@@ -44,10 +44,10 @@ export default function AdminSidebar() {
         {/* Moderation */}
         <section>
           <p className="mb-2 text-xs uppercase tracking-wide text-neutral-500 hidden lg:block">
-            Moderation
+            Review
           </p>
           <NavLink
-            to="/dashboard/admin/moderation/reports"
+            to="/dashboard/admin/review"
             className={({ isActive }) =>
               `${baseLink} ${isActive ? active : inactive}`
             }
@@ -55,18 +55,7 @@ export default function AdminSidebar() {
             <span className="lg:hidden md:h-5 md:w-5 rounded bg-neutral-300 flex ">
               <p className="lg:hidden text-center w-full">R</p>
             </span>
-            <span className="hidden lg:inline">Reports</span>
-          </NavLink>
-          <NavLink
-            to="/dashboard/admin/moderation/flags"
-            className={({ isActive }) =>
-              `${baseLink} ${isActive ? active : inactive}`
-            }
-          >
-            <span className="lg:hidden md:h-5 md:w-5 rounded bg-neutral-300 flex ">
-              <p className="lg:hidden text-center w-full">F</p>
-            </span>
-            <span className="hidden lg:inline">Flags</span>
+            <span className="hidden lg:inline">Review Posts</span>
           </NavLink>
         </section>
 
