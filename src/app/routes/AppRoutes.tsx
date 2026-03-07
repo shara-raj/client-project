@@ -18,7 +18,8 @@ import LegalDynamicPage from "@/modules/legal/pages/LegalDynamicPage";
 import AuthLayout from "@/modules/auth/layouts/AuthLayout";
 import { AuthRoutes } from "@/modules/auth/routes/auth.routes";
 //Dashboard Routes
-import { DashboardRoutes } from "@/modules/dashboard";
+import { AdminRoutes } from "./AdminRoutes";
+import { EditorRoutes } from "./EditorRoutes";
 
 function AppRoutes() {
   return (
@@ -45,8 +46,9 @@ function AppRoutes() {
       <Route path="/auth" element={<AuthLayout />}>
         {AuthRoutes()}
       </Route>
-      {/*Dashboard Routes */}
-      <Route path="/dashboard/*" element={<DashboardRoutes />} />
+      {/*Dashoard Routes */}
+      {AdminRoutes()}
+      {EditorRoutes()}
     </Routes>
   );
 }

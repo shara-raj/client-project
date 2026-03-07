@@ -1,0 +1,74 @@
+.dashboard-theme {
+  --bg-page: #fff9f1;
+  --bg-sidebar: #f5ebdd;
+
+  --card-bg: #ffffff;
+  --card-soft: #e9d8c2;
+  --card-header: #3d2b1f;
+
+  --primary: #9a7b4f;
+  --button-primary: #d4af37;
+
+  --button-secondary: #708090;
+  --button-secondary-hover: #8a99a8;
+
+  --border-color: #e8ded0;
+
+  --text-primary: #3a2e1f;
+  --text-secondary: #7a6a55;
+  --text-muted: #9f8e76;
+
+  font-family: "Inter", sans-serif;
+
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+.dashboard-theme .bg-page {
+  background-color: var(--bg-page);
+}
+.dashboard-theme .bg-sidebar {
+  background-color: var(--bg-sidebar);
+}
+.dashboard-theme .bg-card {
+  background-color: var(--card-bg);
+}
+.dashboard-theme .text-main {
+  color: var(--text-primary);
+}
+.dashboard-theme .text-sub {
+  color: var(--text-secondary);
+}
+.dashboard-theme .btn-prime {
+  background-color: var(--button-primary);
+}
+.dashboard-theme .btn-secondary {
+  background-color: var(--button-secondary);
+}
+.dashboard-theme .btn-secondary:hover {
+  background-color: var(--button-secondary-hover);
+}
+.dashboard-theme .border-main {
+  border: 1px solid var(--border-color);
+}
+
+.dashboard-theme .bg-soft {
+  background-color: var(--card-soft);
+}
+.dashboard-theme .bg-card-header {
+  background-color: var(--card-header);
+}
+
+.dashboard-theme .text-muted {
+  color: var(--text-muted);
+}
+
+.dashboard-theme .hover-soft:hover {
+  background-color: var(--card-soft);
+}
+
+.dashboard-theme .card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
