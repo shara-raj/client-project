@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { $insertNodes } from "lexical";
 import { $createImageNode } from "../nodes/ImageNode";
 import { useAuth } from "@/modules/auth";
-import { uploadMedia } from "@/services/supabase/media.service";
+import { useMediaLibrary } from "@/modules/dashboard/admin/hooks/useMediaLibrary";
+import toast from "react-hot-toast";
 
 const DragDropImagePlugin = () => {
   const [editor] = useLexicalComposerContext();
+  const { upload } = useMediaLibrary();
 
   const auth = useAuth();
   const user = auth?.user;
@@ -33,8 +35,9 @@ const DragDropImagePlugin = () => {
         return;
       }
 
+      const toastId = toast.loading("Uploading Media...");
       try {
-        const url = await uploadMedia(file, file.name, "editor");
+        const url = await upload(file, file.name, "editor", user.id);
 
         editor.update(() => {
           const imageNode = $createImageNode({
@@ -47,8 +50,9 @@ const DragDropImagePlugin = () => {
 
           $insertNodes([imageNode]);
         });
+        toast.success("Image added", { id: toastId });
       } catch (err) {
-        console.error("Upload failed", err);
+        toast.error("Upload failed", { id: toastId });
       }
     };
 

@@ -6,6 +6,7 @@ import { PasswordField } from "../components/PasswordField";
 import { AuthButton } from "../components/AuthButton";
 import { AuthFooterLink } from "../components/AuthFooterLink";
 import { signupUser } from "@/services/supabase/auth.service";
+import toast from "react-hot-toast";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -17,16 +18,21 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      toast.error("Email and password required");
+      return;
+    }
+
     try {
       setLoading(true);
 
       await signupUser(email, password);
 
-      alert("Account created successfully. Please login.");
+      toast.success("Signup successful! Check your email");
 
       navigate("/auth/login");
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message || "Signup failed");
     } finally {
       setLoading(false);
     }
@@ -50,7 +56,7 @@ export default function SignupPage() {
         />
 
         <AuthButton type="submit" disabled={loading}>
-          Sign up
+          {loading ? "Signing up..." : "Sign Up"}
         </AuthButton>
       </form>
 

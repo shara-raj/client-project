@@ -13,6 +13,7 @@ import { loadDraftBackup, clearDraftBackup } from "../utils/draftRecovery";
 import { useUserRole } from "@/modules/auth/hooks/useUserRole";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
@@ -67,33 +68,39 @@ const CreatePostPage = () => {
 
   const handleSave = async () => {
     if (!authorId) {
-      console.error("User not loaded yet");
+      toast.error("User not loaded yet");
       return;
     }
 
-    if (!postId) {
-      const post = await saveDraft(title, contentState, authorId, slug, {
-        post_type: postType,
-        featured_image: featuredImage || undefined,
-        tags,
-        meta_title: metaTitle,
-        meta_description: metaDescription,
-        category_id: categoryId,
-      });
+    try {
+      if (!postId) {
+        const post = await saveDraft(title, contentState, authorId, slug, {
+          post_type: postType,
+          featured_image: featuredImage || undefined,
+          tags,
+          meta_title: metaTitle,
+          meta_description: metaDescription,
+          category_id: categoryId,
+        });
 
-      if (post?.id) setPostId(post.id);
-    } else {
-      await updateDraft(postId, {
-        title,
-        content: contentState,
-        slug,
-        post_type: postType,
-        featured_image: featuredImage || undefined,
-        tags,
-        meta_title: metaTitle,
-        meta_description: metaDescription,
-        category_id: categoryId,
-      });
+        if (post?.id) setPostId(post.id);
+      } else {
+        await updateDraft(postId, {
+          title,
+          content: contentState,
+          slug,
+          post_type: postType,
+          featured_image: featuredImage || undefined,
+          tags,
+          meta_title: metaTitle,
+          meta_description: metaDescription,
+          category_id: categoryId,
+        });
+      }
+
+      toast.success("Draft saved");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to save draft");
     }
   };
 
@@ -101,26 +108,35 @@ const CreatePostPage = () => {
   const handlePublish = async () => {
     if (!authorId) return;
     let currentPostId = postId;
-    // Ensure draft exists before publishing
-    if (!currentPostId) {
-      const post = await saveDraft(title, contentState, authorId, slug, {
-        post_type: postType,
-        featured_image: featuredImage || undefined,
-        tags,
-        meta_title: metaTitle,
-        meta_description: metaDescription,
-        category_id: categoryId,
-      });
-      if (post?.id) {
-        setPostId(post.id);
-        currentPostId = post.id;
-      }
-    }
-    if (!currentPostId) return;
-    await publish(currentPostId);
 
-    // Optional UX improvement
-    navigate("/dashboard/posts/create");
+    // Ensure draft exists before publishing
+    try {
+      if (!currentPostId) {
+        const post = await saveDraft(title, contentState, authorId, slug, {
+          post_type: postType,
+          featured_image: featuredImage || undefined,
+          tags,
+          meta_title: metaTitle,
+          meta_description: metaDescription,
+          category_id: categoryId,
+        });
+
+        if (post?.id) {
+          setPostId(post.id);
+          currentPostId = post.id;
+        }
+      }
+
+      if (!currentPostId) return;
+
+      await publish(currentPostId);
+
+      toast.success("Post published");
+
+      navigate("/dashboard/posts/create");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to publish post");
+    }
   };
 
   // ---------------- SUBMIT FOR REVIEW ----------------
@@ -129,22 +145,28 @@ const CreatePostPage = () => {
 
     let currentPostId = postId;
 
-    if (!currentPostId) {
-      const post = await saveDraft(title, contentState, authorId, slug, {
-        post_type: postType,
-        featured_image: featuredImage || undefined,
-        tags,
-        meta_title: metaTitle,
-        meta_description: metaDescription,
-        category_id: categoryId,
-      });
-      if (post?.id) {
-        setPostId(post.id);
-        currentPostId = post.id;
+    try {
+      if (!currentPostId) {
+        const post = await saveDraft(title, contentState, authorId, slug, {
+          post_type: postType,
+          featured_image: featuredImage || undefined,
+          tags,
+          meta_title: metaTitle,
+          meta_description: metaDescription,
+          category_id: categoryId,
+        });
+        if (post?.id) {
+          setPostId(post.id);
+          currentPostId = post.id;
+        }
       }
+      if (!currentPostId) return;
+      await submitForReview(currentPostId);
+
+      toast.success("Submitted for review");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit for review");
     }
-    if (!currentPostId) return;
-    await submitForReview(currentPostId);
   };
 
   // ---------------- AUTOSAVE ----------------

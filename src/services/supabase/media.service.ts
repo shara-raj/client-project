@@ -23,18 +23,6 @@ export const uploadMedia = async (
   category: string,
   uploadedBy?: string,
 ) => {
-  {
-    /*Prevent duplicate uploads */
-  }
-  const { data: existing } = await supabase
-    .from("media")
-    .select("id")
-    .eq("title", title)
-    .limit(1);
-
-  if (existing && existing.length > 0) {
-    throw new Error("A media file with this name already exists.");
-  }
   const filePath = `${Date.now()}-${file.name}`;
 
   /* Upload file to storage */
@@ -58,6 +46,7 @@ export const uploadMedia = async (
     category,
     url: publicUrl,
     uploaded_by: uploadedBy ?? null,
+    size: file.size,
   });
 
   if (insertError) throw insertError;

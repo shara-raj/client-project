@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import type { ReviewPost, PostType } from "@/shared/types/post.types";
+import type { PostType, ReviewPost } from "@/shared/types/post.types";
 
 // REVIEW QUEUE FUNCTIONS
 
@@ -203,4 +203,14 @@ export const getRecentPosts = async (limit: number = 3) => {
   if (error) throw error;
 
   return data ?? [];
+};
+
+//Hard deletion
+export const deletePostService = async (postId: string) => {
+  const { error } = await supabase
+    .from("posts")
+    .delete()
+    .eq("id", postId);
+
+  if (error) throw error;
 };

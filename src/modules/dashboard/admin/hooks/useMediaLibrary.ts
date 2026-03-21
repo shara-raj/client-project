@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import {
+  deleteMedia,
   getMedia,
   uploadMedia,
-  deleteMedia,
 } from "@/services/supabase/media.service";
-import toast from "react-hot-toast";
 
 export const useMediaLibrary = () => {
   const [media, setMedia] = useState<any[]>([]);
@@ -31,38 +30,40 @@ export const useMediaLibrary = () => {
     title: string,
     category: string,
     userId: string,
-  ) => {
+  ): Promise<string> => {
     setUploading(true);
     setUploadFileName(file.name);
 
-    const loading = toast.loading("Uploading image...");
-
     try {
-      await uploadMedia(file, title, category, userId);
+      // DUPLICATE CHECK
+      const isDuplicate = media.some(
+        (item) =>
+          item.name === file.name &&
+          item.size === file.size,
+      );
 
-      toast.success("Image uploaded successfully");
+      if (isDuplicate) {
+        throw new Error("File already exists");
+      }
+      const url = await uploadMedia(file, title, category, userId);
       await fetchMedia();
+
+      return url;
     } catch (error: any) {
-      toast.error(error.message || "Upload failed");
+      throw error;
     } finally {
-      toast.dismiss(loading);
       setUploading(false);
       setUploadFileName(null);
     }
   };
 
   const remove = async (id: string, url: string) => {
-    const loading = toast.loading("Deleting image...");
-
     try {
       await deleteMedia(id, url);
 
-      toast.success("Image deleted");
       await fetchMedia();
     } catch (error: any) {
-      toast.error(error.message);
-    } finally {
-      toast.dismiss(loading);
+      throw error;
     }
   };
 

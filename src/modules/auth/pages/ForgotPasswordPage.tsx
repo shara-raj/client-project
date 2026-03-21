@@ -4,6 +4,7 @@ import { AuthInput } from "../components/AuthInput";
 import { AuthButton } from "../components/AuthButton";
 import { AuthFooterLink } from "../components/AuthFooterLink";
 import { resetPasswordEmail } from "@/services/supabase/auth.service";
+import toast from "react-hot-toast";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -12,14 +13,19 @@ export default function ForgotPasswordPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!email) {
+      toast.error("Email is required");
+      return;
+    }
+
     try {
       setLoading(true);
 
       await resetPasswordEmail(email);
 
-      alert("Password reset link sent to your email.");
+      toast.success("Password reset link sent to your email.");
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message || "Failed to send reset email");
     } finally {
       setLoading(false);
     }
@@ -37,7 +43,7 @@ export default function ForgotPasswordPage() {
         />
 
         <AuthButton type="submit" disabled={loading}>
-          Send Reset Link
+          {loading ? "Sending..." : "Send Reset Link"}
         </AuthButton>
       </form>
 

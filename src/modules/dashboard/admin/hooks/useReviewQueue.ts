@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  getPostsForReview,
   approvePost,
+  getPostsForReview,
   rejectPost,
 } from "@/services/supabase/post.service";
 import type { ReviewPost } from "@/shared/types/post.types";
@@ -25,13 +25,21 @@ export const useReviewQueue = () => {
   };
 
   const approve = async (postId: string) => {
-    await approvePost(postId);
-    await fetchQueue();
+    try {
+      await approvePost(postId);
+      await fetchQueue();
+    } catch (error) {
+      throw error;
+    }
   };
 
   const reject = async (postId: string, feedback: string) => {
-    await rejectPost(postId, feedback);
-    await fetchQueue();
+    try {
+      await rejectPost(postId, feedback);
+      await fetchQueue();
+    } catch (error) {
+      throw error;
+    }
   };
 
   useEffect(() => {

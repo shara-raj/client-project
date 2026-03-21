@@ -45,7 +45,6 @@ const EditorTable = ({ editors, loading, onDelete }: Props) => {
               <td>
                 <button
                   onClick={() => {
-                    console.log("Deleting editor id:", editor.id);
                     onDelete(editor.id);
                   }}
                   className="btn-secondary px-3 py-1 rounded"

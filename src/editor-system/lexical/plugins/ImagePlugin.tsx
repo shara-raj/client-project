@@ -1,6 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useState } from "react";
 import { $insertNodes } from "lexical";
+import toast from "react-hot-toast";
 
 import MediaLibraryModal from "@/modules/dashboard/media/components/MediaLibraryModal";
 import { $createImageNode } from "../nodes/ImageNode";
@@ -14,7 +15,10 @@ const ImagePlugin = () => {
   const [url, setUrl] = useState("");
 
   const insertImage = (src: string) => {
-    if (!src) return;
+    if (!src || !src.trim()) {
+      toast.error("Invalid Image Source");
+      return;
+    }
 
     editor.update(() => {
       const imageNode = $createImageNode({
@@ -100,9 +104,22 @@ const ImagePlugin = () => {
 
               <button
                 onClick={() => {
-                  insertImage(url);
-                  setUrl("");
-                  setUrlModalOpen(false);
+                  if (!url.trim()) {
+                    toast.error("Please enter image URL");
+                    return;
+                  }
+
+                  const toastId = toast.loading("Adding image...");
+
+                  try {
+                    insertImage(url);
+
+                    toast.success("Image added", { id: toastId });
+                    setUrl("");
+                    setUrlModalOpen(false);
+                  } catch (err: any) {
+                    toast.error("Failed to add image", { id: toastId });
+                  }
                 }}
                 className="btn-prime px-4 py-2 rounded text-white"
               >

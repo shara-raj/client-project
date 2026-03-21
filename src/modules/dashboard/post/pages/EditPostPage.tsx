@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import Editor from "@/editor-system/lexical/Editor";
 import { getPostById } from "@/services/supabase/post.service";
@@ -65,8 +66,8 @@ const EditPostPage = () => {
         setMetaTitle(post.meta_title ?? "");
         setMetaDescription(post.meta_description ?? "");
         setPostType(post.post_type ?? "normal");
-      } catch (error) {
-        console.error("Failed to load post", error);
+      } catch (error: any) {
+        toast.error(error.message || "Failed to load post");
       }
     };
 
@@ -78,43 +79,55 @@ const EditPostPage = () => {
   const handleUpdate = async () => {
     if (!id) return;
 
-    await updateDraft(id, {
-      title,
-      slug,
-      content: contentState,
-      featured_image: featuredImage,
-      tags,
-      category_id: categoryId,
-      meta_title: metaTitle,
-      meta_description: metaDescription,
-      post_type: postType,
-    });
+    try {
+      await updateDraft(id, {
+        title,
+        slug,
+        content: contentState,
+        featured_image: featuredImage,
+        tags,
+        category_id: categoryId,
+        meta_title: metaTitle,
+        meta_description: metaDescription,
+        post_type: postType,
+      });
+
+      toast.success("Draft updated");
+    } catch (error: any) {
+      toast.error(error.messge || "failes to update draft");
+    }
   };
 
   // ---------------- SMART ACTION ----------------
   const handleSmartAction = async () => {
     if (!id) return;
 
-    // EDITOR FLOW
-    if (role !== "admin") {
-      if (status === "draft") {
-        await submitForReview(id);
-        setStatus("review_requested");
+    try {
+      // EDITOR FLOW
+      if (role !== "admin") {
+        if (status === "draft") {
+          await submitForReview(id);
+          setStatus("review_requested");
+          toast.success("Submitted for review");
+        }
+        return;
       }
-      return;
-    }
 
-    // ADMIN FLOW
-    if (role === "admin") {
-      if (status === "approved") {
-        await publish(id);
-        setStatus("published");
+      // ADMIN FLOW
+      if (role === "admin") {
+        if (status === "approved") {
+          await publish(id);
+          setStatus("published");
+          toast.success("Post Published");
 
-        //optional redirect
-        navigate("/dashboard/posts");
-      } else if (status === "review_requested") {
-        navigate("/dashboard/review");
+          //optional redirect
+          navigate("/dashboard/posts");
+        } else if (status === "review_requested") {
+          navigate("/dashboard/review");
+        }
       }
+    } catch (error: any) {
+      toast.error(error.message || "Action Failed");
     }
   };
 

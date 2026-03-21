@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {
   createPost,
-  updatePost,
   publishPost,
+  updatePost,
 } from "@/services/supabase/post.service";
 import type { PostType } from "@/shared/types/post.types";
 import { submitPostForReview } from "@/services/supabase/post.service";
@@ -15,6 +15,8 @@ export const usePostEditor = () => {
 
     try {
       await submitPostForReview(postId);
+    } catch (error) {
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -38,8 +40,9 @@ export const usePostEditor = () => {
 
     try {
       const post = await createPost(title, content, authorId, slug, metadata);
-
       return post;
+    } catch (error) {
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -49,6 +52,8 @@ export const usePostEditor = () => {
 
     try {
       await updatePost(postId, updates);
+    } catch (error) {
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -59,6 +64,8 @@ export const usePostEditor = () => {
 
     try {
       await publishPost(postId);
+    } catch (error) {
+      throw error;
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../providers/AuthProvider";
 import { changeUserPassword } from "@/services/supabase/auth.service";
 import { markPasswordAsSet } from "@/services/supabase/user.service";
+import { signOutUser } from "@/services/supabase/auth.service";
 
 export const useSetPassword = () => {
   const { user } = useAuth();
@@ -18,6 +19,11 @@ export const useSetPassword = () => {
 
       //Mark password_set = true in DB
       await markPasswordAsSet(user.id);
+    } catch (err) {
+      console.error("Set password failed:", err);
+      await signOutUser(); // optional safety
+
+      throw err;
     } finally {
       setLoading(false);
     }

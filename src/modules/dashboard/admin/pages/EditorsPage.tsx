@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EditorTable from "../components/EditorTable";
 import { useEditors } from "../hooks/useEditors";
+import toast from "react-hot-toast";
 
 const EditorsPage = () => {
   const {
@@ -20,13 +21,25 @@ const EditorsPage = () => {
   const [editorToDisable, setEditorToDisable] = useState<string | null>(null);
   const [editorToActivate, setEditorToActivate] = useState<string | null>(null);
 
+  //add new editor
   const handleCreate = async () => {
-    await addEditor(name, email, tempPassword);
+    if (!name || !email || !tempPassword) {
+      toast.error("All fields are required");
+      return;
+    }
 
-    setShowModal(false);
-    setName("");
-    setEmail("");
-    setTempPassword("");
+    try {
+      await addEditor(name, email, tempPassword);
+
+      toast.success("Editor created successfully");
+
+      setShowModal(false);
+      setName("");
+      setEmail("");
+      setTempPassword("");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to add editor");
+    }
   };
 
   return (
@@ -149,9 +162,14 @@ const EditorsPage = () => {
 
               <button
                 onClick={async () => {
-                  if (editorToDisable) {
-                    await removeEditor(editorToDisable);
-                    setEditorToDisable(null);
+                  try {
+                    if (editorToDisable) {
+                      await removeEditor(editorToDisable);
+                      toast.success("Editor successfully disabled");
+                      setEditorToDisable(null);
+                    }
+                  } catch (error: any) {
+                    toast.error(error.message || "Failed to diable editor");
                   }
                 }}
                 className="btn-prime px-3 py-2 rounded"
@@ -184,9 +202,14 @@ const EditorsPage = () => {
 
               <button
                 onClick={async () => {
-                  if (editorToActivate) {
-                    await enableEditor(editorToActivate);
-                    setEditorToActivate(null);
+                  try {
+                    if (editorToActivate) {
+                      await enableEditor(editorToActivate);
+                      toast.success("Editor reactivated");
+                      setEditorToActivate(null);
+                    }
+                  } catch (error: any) {
+                    toast.error(error.message || "Failed to reactivate editor");
                   }
                 }}
                 className="btn-prime px-3 py-2 rounded"

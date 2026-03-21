@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MediaLibraryModal from "@/modules/dashboard/media/components/MediaLibraryModal";
+import toast from "react-hot-toast";
 
 interface Props {
   value?: string | null;
@@ -30,7 +31,16 @@ const PostFeaturedImage = ({ value, onChange }: Props) => {
             </button>
 
             <button
-              onClick={() => onChange(null)}
+              onClick={() => {
+                const toastId = toast.loading("Removing image...");
+
+                try {
+                  onChange(null);
+                  toast.success("Image removed", { id: toastId });
+                } catch (err) {
+                  toast.error("Failed to remove image", { id: toastId });
+                }
+              }}
               className="btn-secondary px-3 py-1 text-sm rounded text-white"
             >
               Remove
@@ -49,7 +59,23 @@ const PostFeaturedImage = ({ value, onChange }: Props) => {
       <MediaLibraryModal
         open={libraryOpen}
         onClose={() => setLibraryOpen(false)}
-        onSelect={(url) => onChange(url)}
+        onSelect={(url) => {
+          if (url === value) {
+            toast("Same image selected");
+            return;
+          }
+
+          const toastId = toast.loading("Setting featured image...");
+
+          try {
+            onChange(url);
+            toast.success("Featured image updated", { id: toastId });
+          } catch (err) {
+            toast.error("Failed to update image", { id: toastId });
+          }
+
+          setLibraryOpen(false);
+        }}
       />
     </div>
   );

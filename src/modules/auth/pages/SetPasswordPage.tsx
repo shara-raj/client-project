@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useSetPassword } from "../hooks/useSetPassword";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 type FormData = {
   password: string;
@@ -22,10 +23,12 @@ export default function SetPasswordPage() {
     try {
       await setPassword(data.password);
 
-      // Redirect after success
-      navigate("/editor/dashboard");
+      toast.success("Password updated successfully");
+
+      navigate("/editor/dashboard", { replace: true });
     } catch (err) {
-      console.error("Failed to set password", err);
+      console.error(err);
+      toast.error("Failed to update password");
     }
   };
 

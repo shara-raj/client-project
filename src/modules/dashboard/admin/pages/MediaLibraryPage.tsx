@@ -2,6 +2,8 @@ import MediaGrid from "../components/MediaGrid";
 import { useMediaLibrary } from "../hooks/useMediaLibrary";
 import MediaUploadDropzone from "../../media/components/MediaUploadDropzone";
 import { useAuth } from "@/modules/auth";
+import toast from "react-hot-toast";
+import { withToast } from "@/utils/withToast";
 
 const MediaLibraryPage = () => {
   const { media, loading, upload, remove, uploading, uploadFileName } =
@@ -12,7 +14,19 @@ const MediaLibraryPage = () => {
   const handleUpload = async (file: File) => {
     if (!user) return;
 
-    await upload(file, file.name, "general", user.id);
+    await withToast(() => upload(file, file.name, "general", user.id), {
+      loading: "Uploading image...",
+      success: "Image uploaded",
+      error: "Upload failed",
+    });
+  };
+
+  const handleDelete = async (id: string, url: string) => {
+    await withToast(() => remove(id, url), {
+      loading: "Deleting image...",
+      success: "Image deleted",
+      error: "Delete failed",
+    });
   };
 
   return (
@@ -29,7 +43,7 @@ const MediaLibraryPage = () => {
 
       {/* Media Grid */}
 
-      <MediaGrid media={media} loading={loading} onDelete={remove} />
+      <MediaGrid media={media} loading={loading} onDelete={handleDelete} />
     </div>
   );
 };

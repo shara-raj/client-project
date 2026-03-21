@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMedia } from "@/services/supabase/media.service";
+import toast from "react-hot-toast";
 
 interface Props {
   open: boolean;
@@ -12,22 +13,27 @@ const MediaLibraryModal = ({ open, onClose, onSelect }: Props) => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
+  const [selecting, setSelecting] = useState(false);
 
   const loadMedia = async () => {
-    const res = await getMedia();
-    let filtered = res;
+    try {
+      const res = await getMedia();
+      let filtered = res;
 
-    if (search) {
-      filtered = filtered.filter((item: any) => {
-        item.title?.toLowerCase().includes(search.toLocaleLowerCase());
-      });
+      if (search) {
+        filtered = filtered.filter((item: any) =>
+          item.title?.toLowerCase().includes(search.toLowerCase()),
+        );
+      }
+
+      if (category) {
+        filtered = filtered.filter((item: any) => item.category === category);
+      }
+
+      setMedia(filtered);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to upload media");
     }
-
-    if (category) {
-      filtered = filtered.filter((item: any) => item.category === category);
-    }
-
-    setMedia(res);
   };
 
   useEffect(() => {
@@ -64,17 +70,29 @@ const MediaLibraryModal = ({ open, onClose, onSelect }: Props) => {
         </div>
 
         <div className="grid grid-cols-4 gap-4 overflow-y-auto">
-          {media.map((item) => (
-            <img
-              key={item.id}
-              src={item.url}
-              className="cursor-pointer rounded hover-soft"
-              onClick={() => {
-                onSelect(item.url);
-                onClose();
-              }}
-            />
-          ))}
+          {media.length === 0 ? (
+            <div className="col-span-4 text-center text-sm text-gray-400 py-10">
+              No media found
+            </div>
+          ) : (
+            media.map((item) => (
+              <img
+                key={item.id}
+                src={item.url}
+                className="cursor-pointer rounded hover-soft"
+                onClick={() => {
+                  if (selecting) return;
+
+                  setSelecting(true);
+
+                  onSelect(item.url);
+                  onClose();
+
+                  setTimeout(() => setSelecting(false), 300);
+                }}
+              />
+            ))
+          )}
         </div>
 
         <div className="flex justify-between mt-4">

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  updateUserProfile,
   changeUserPassword,
+  deleteWebsiteUserAccount,
   getUserProfile,
-  deleteUserAccount,
+  updateUserProfile,
 } from "@/services/supabase/auth.service";
 
 export function useAccountSettings() {
@@ -45,7 +45,7 @@ export function useAccountSettings() {
   const deleteAccount = async () => {
     try {
       setLoading(true);
-      await deleteUserAccount();
+      await deleteWebsiteUserAccount();
     } finally {
       setLoading(false);
     }

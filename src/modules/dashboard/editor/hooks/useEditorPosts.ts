@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import {
+  deletePostService,
   getEditorPosts,
+  requestPostDeletion,
   submitPostForReview,
 } from "@/services/supabase/post.service";
 
 import type { Post } from "../../post/types/post.types";
 
-export const useEditorPosts = (authorId: string) => {
+export const useEditorPosts = (authorId?: string) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -34,6 +36,30 @@ export const useEditorPosts = (authorId: string) => {
     }
   };
 
+  const deletePost = async (
+    postId: string,
+    options: { type: "hard" | "soft"; reason?: string },
+  ) => {
+    try {
+      if (options.type === "hard") {
+        await deletePostService(postId);
+      } else {
+        if (!authorId) {
+          throw new Error("User ID is required for deletion requests");
+        }
+        await requestPostDeletion(
+          postId,
+          options.reason || "Requested by editor",
+          authorId,
+        );
+      }
+
+      await fetchPosts();
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     fetchPosts();
   }, [authorId]);
@@ -42,6 +68,7 @@ export const useEditorPosts = (authorId: string) => {
     posts,
     loading,
     submitForReview,
+    deletePost,
     refreshPosts: fetchPosts,
   };
 };

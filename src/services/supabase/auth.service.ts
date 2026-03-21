@@ -112,16 +112,21 @@ export async function getUserProfile() {
   return data;
 }
 
-export async function deleteUserAccount() {
+export async function deleteWebsiteUserAccount() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) throw new Error("User not found");
 
-  const { error } = await supabase.from("users").delete().eq("id", user.id);
+  const { error } = await supabase
+    .from("users")
+    .delete()
+    .eq("id", user.id);
 
-  if (error) throw error;
+  if (error) throw new Error(error.message);
+
+  return true;
 }
 
 // Auth-specific profile (used for guards & onboarding)
@@ -141,4 +146,18 @@ export async function getAuthUserProfile() {
   if (error) throw error;
 
   return data;
+}
+
+//signout user if something fails
+export async function signOutUser() {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) throw error;
+}
+
+//signput users after account deletion
+export async function logoutUser() {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) throw new Error(error.message);
 }

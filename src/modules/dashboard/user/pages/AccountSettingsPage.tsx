@@ -1,5 +1,7 @@
 import { useAccountSettings } from "../hooks/useAccountSettings";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import { DeleteAccountSection } from "../components/DeleteAccountSection";
 
 export default function AccountSettingsPage() {
   const { profile, updateProfile, updatePassword, deleteAccount, loading } =
@@ -19,37 +21,34 @@ export default function AccountSettingsPage() {
   const handleProfileSave = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!name) {
+      toast.error("Name is required");
+      return;
+    }
+
     try {
       await updateProfile({ name, bio });
-      alert("Profile updated successfully");
-    } catch (err: any) {
-      alert(err.message);
+      toast.success("Profile updated");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to update profile");
     }
   };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
     try {
       await updatePassword(password);
       setPassword("");
-      alert("Password updated successfully");
+      toast.success("Password updated successfully");
     } catch (err: any) {
-      alert(err.message);
+      toast.error(err.message || "Failed to update password");
     }
-  };
-
-  const handleDelete = async () => {
-    const confirmDelete = confirm(
-      "Are you sure you want to delete your account?",
-    );
-
-    if (!confirmDelete) return;
-
-    await deleteAccount();
-
-    alert("Account deleted");
-    window.location.href = "/";
   };
 
   return (
@@ -80,7 +79,7 @@ export default function AccountSettingsPage() {
           </div>
 
           <button className="btn-primary" disabled={loading}>
-            Save Changes
+            {loading ? "Saving..." : "Save Changes"}
           </button>
         </form>
       </div>
@@ -101,22 +100,13 @@ export default function AccountSettingsPage() {
           />
 
           <button className="btn-primary" disabled={loading}>
-            Update Password
+            {loading ? "Updating..." : "Update Password"}
           </button>
         </form>
       </div>
 
       {/* Delete Account */}
-      <div className="card border-red-400">
-        <h2 className="text-lg font-semibold mb-4 text-main">Danger Zone</h2>
-
-        <button
-          onClick={handleDelete}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Delete Account
-        </button>
-      </div>
+      <DeleteAccountSection />
     </div>
   );
 }

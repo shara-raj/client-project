@@ -3,29 +3,41 @@ import { useNavigate } from "react-router-dom";
 import { AuthCard } from "../components/AuthCard";
 import { PasswordField } from "../components/PasswordField";
 import { AuthButton } from "../components/AuthButton";
-import { updatePassword } from "@/services/supabase/auth.service";
+import { useResetPassword } from "../hooks/useResetPassword";
+import toast from "react-hot-toast";
 
 export default function ResetPasswordPage() {
   const navigate = useNavigate();
+  const { handleResetPassword, loading } = useResetPassword();
 
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!password || !confirmPassword) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
     try {
-      setLoading(true);
+      await handleResetPassword(password);
 
-      await updatePassword(password);
-
-      alert("Password updated successfully.");
+      toast.success("Password updated successfully.");
 
       navigate("/auth/login");
+
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 1500);
     } catch (error: any) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
+      toast.error(error.message || "Failed to update password");
     }
   };
 
@@ -38,8 +50,16 @@ export default function ResetPasswordPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {/*Added confirm password */}
+        <PasswordField
+          required
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Confirm password"
+        />
+
         <AuthButton type="submit" disabled={loading}>
-          Update Password
+          {loading ? "Updating..." : "Update Password"}
         </AuthButton>
       </form>
     </AuthCard>

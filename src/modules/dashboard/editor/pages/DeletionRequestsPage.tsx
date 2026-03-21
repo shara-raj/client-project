@@ -1,9 +1,11 @@
 import TableSkeleton from "../../shared/components/TableSkeleton";
 import { useDeletionRequests } from "../hooks/useDeletionRequests";
+import { useAuth } from "@/modules/auth";
 
 const DeletionRequestsPage = () => {
-  // temporary placeholder until auth is connected
-  const authorId = "demo-editor-id";
+  const { user } = useAuth() ?? {};
+
+  const authorId = user?.id;
 
   const { requests, loading } = useDeletionRequests(authorId);
 
@@ -38,7 +40,9 @@ const DeletionRequestsPage = () => {
             <tbody>
               {requests.map((req) => (
                 <tr key={req.id} className="border-main hover-soft">
-                  <td className="p-3 text-main">{req.posts?.[0]?.title}</td>
+                  <td className="p-3 text-main">
+                    {req.posts?.[0]?.title || "Unknown Post"}
+                  </td>
 
                   <td className="p-3 text-sub">{req.reason}</td>
 

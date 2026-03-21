@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { withToast } from "@/utils/withToast";
 
 interface Props {
   postId: string;
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (postId: string, reason: string) => void;
+  onSubmit: (postId: string, reason: string) => Promise<void>;
 }
 
 const DeletionRequestModal: React.FC<Props> = ({
@@ -14,15 +16,32 @@ const DeletionRequestModal: React.FC<Props> = ({
   onSubmit,
 }) => {
   const [reason, setReason] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = () => {
-    if (!reason.trim()) return;
+  const handleSubmit = async () => {
+    if (!reason.trim()) {
+      toast.error("Please enter a reason");
+      return;
+    }
 
-    onSubmit(postId, reason);
-    setReason("");
-    onClose();
+    if (submitting) return;
+
+    setSubmitting(true);
+
+    try {
+      await withToast(() => onSubmit(postId, reason), {
+        loading: "Submitting request...",
+        success: "Deletion request sent",
+        error: "Request failed",
+      });
+
+      setReason("");
+      onClose();
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -52,7 +71,7 @@ const DeletionRequestModal: React.FC<Props> = ({
             onClick={handleSubmit}
             className="btn-prime px-3 py-1 rounded"
           >
-            Submit Request
+            {submitting ? "Submitting..." : "Submit Request"}
           </button>
         </div>
       </div>

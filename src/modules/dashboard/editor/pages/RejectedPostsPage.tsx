@@ -1,10 +1,12 @@
 import { useEditorPosts } from "../hooks/useEditorPosts";
 import type { Post } from "../../post/types/post.types";
 import TableSkeleton from "../../shared/components/TableSkeleton";
+import { useAuth } from "@/modules/auth";
 
 const RejectedPostsPage = () => {
-  // Temporary placeholder until Supabase auth is connected
-  const authorId = "demo-editor-id";
+  const { user } = useAuth() ?? {};
+
+  const authorId = user?.id;
 
   const { posts, loading } = useEditorPosts(authorId);
 
@@ -40,7 +42,7 @@ const RejectedPostsPage = () => {
             </thead>
 
             <tbody>
-              {rejectedPosts.map((post) => (
+              {rejectedPosts.map((post: Post) => (
                 <tr key={post.id} className="border-main hover-soft">
                   <td className="p-3 text-main">{post.title}</td>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  requestPostDeletion,
   getDeletionRequests,
+  requestPostDeletion,
 } from "@/services/supabase/post.service";
 
 interface DeletionRequest {
@@ -15,7 +15,7 @@ interface DeletionRequest {
   }[];
 }
 
-export const useDeletionRequests = (authorId: string) => {
+export const useDeletionRequests = (authorId?: string) => {
   const [requests, setRequests] = useState<DeletionRequest[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +26,17 @@ export const useDeletionRequests = (authorId: string) => {
 
     try {
       const data = await getDeletionRequests(authorId);
-      setRequests(data);
+
+      // Normalize + ensure correct structure
+      const formatted: DeletionRequest[] = (data ?? []).map((req: any) => ({
+        id: req.id,
+        reason: req.reason,
+        status: req.status,
+        created_at: req.created_at,
+        posts: Array.isArray(req.posts) ? req.posts : [],
+      }));
+
+      setRequests(formatted);
     } catch (error) {
       console.error("Failed to fetch deletion requests", error);
     } finally {
@@ -35,6 +45,9 @@ export const useDeletionRequests = (authorId: string) => {
   };
 
   const submitDeletionRequest = async (postId: string, reason: string) => {
+    if (!authorId) {
+      throw new Error("User not authenticated");
+    }
     try {
       await requestPostDeletion(postId, reason, authorId);
       await fetchRequests();

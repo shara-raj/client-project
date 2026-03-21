@@ -30,9 +30,6 @@ export default function AdminHeader() {
 
       {/* Right Section */}
       <div className="flex items-center gap-4">
-        {/* Notifications Placeholder */}
-        <button className="text-sub hover:text-main transition">🔔</button>
-
         {/* Admin Avatar */}
         <div className="w-9 h-9 rounded-full bg-soft flex items-center justify-center text-sm font-medium">
           A
@@ -40,7 +37,7 @@ export default function AdminHeader() {
 
         {/* Logout */}
         <button
-          className="text-sm text-sub hover:text-main transition cursor-pointer"
+          className="btn-secondary text-white px-3 py-1 rounded-md text-sm hover:text-main transition cursor-pointer"
           onClick={handleLogout}
         >
           Logout
