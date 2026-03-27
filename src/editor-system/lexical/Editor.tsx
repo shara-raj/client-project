@@ -16,6 +16,9 @@ import DragDropImagePlugin from "./plugins/DragDropImagePlugin";
 import Toolbar from "./Toolbar";
 import HistoryPlugin from "./plugins/HistoryPlugin";
 import { serializeEditorState } from "./utils/serializeEditorState";
+import { TableNode, TableRowNode, TableCellNode } from "@lexical/table";
+import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
+import TableActionMenuPlugin from "./plugins/TableActionMenuPlugin";
 
 interface Props {
   onChange: (editorState: any, html: string) => void;
@@ -33,8 +36,12 @@ const Editor = ({ onChange, initialContent }: Props) => {
       ListItemNode,
       LinkNode,
       ImageNode,
+      TableNode,
+      TableCellNode,
+      TableRowNode,
     ],
     editorState: initialContent || null,
+    readOnly: false,
     onError(error: Error) {
       console.error(error);
     },
@@ -62,6 +69,9 @@ const Editor = ({ onChange, initialContent }: Props) => {
           />
         </div>
 
+        <TablePlugin />
+        <TableActionMenuPlugin />
+
         <FloatingToolbarPlugin />
         <DragDropImagePlugin />
 
@@ -72,6 +82,11 @@ const Editor = ({ onChange, initialContent }: Props) => {
 
         <OnChangePlugin
           onChange={(editorState, editor) => {
+            let json;
+
+            editorState.read(() => {
+              json = editorState.toJSON();
+            });
             const html = serializeEditorState(editorState, editor);
             onChange(editorState, html);
           }}

@@ -6,16 +6,22 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post }: BlogCardProps) {
+  const categorySlug = post.category?.slug ?? "uncategorized";
+
+  if (!categorySlug) {
+    console.warn("Missing category slug for post:", post);
+  }
+
   return (
     <article className="group bg-[#c1a88d]/70 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
       <div className="relative h-56 overflow-hidden">
         <img
-          src="/images/hero/meditation-center.png" //{post.coverImage}
+          src={post.featured_image || "/images/hero/meditation-center.png"}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
         />
         <div className="absolute top-4 left-4 bg-white/60 text-xs px-3 py-1 rounded-full">
-          {post.category.name}
+          {post.category?.name}
         </div>
       </div>
 
@@ -34,7 +40,7 @@ export function BlogCard({ post }: BlogCardProps) {
           </span>
 
           <Link
-            to={`/blog/${post.category.slug}/${post.slug}`}
+            to={`/blog/${categorySlug || "uncategorized"}/${post.slug}`}
             className="text-sm font-medium"
           >
             Read More

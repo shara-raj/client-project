@@ -1,4 +1,4 @@
-import { useBlogPosts } from "../../hooks/useBlogPosts";
+import { useBlogPosts } from "../../hooks/useBlogPost";
 import { BlogCard } from "../../components/BlogCard";
 
 export default function RecentPostsSection() {

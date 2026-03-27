@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getNodeByKey } from "lexical";
+import { ImageNode, $isImageNode } from "../nodes/ImageNode";
 
 interface Props {
   src: string;
@@ -20,32 +21,36 @@ const ImageComponent = ({
   nodeKey,
 }: Props) => {
   const [editor] = useLexicalComposerContext();
-
   const [currentWidth, setWidth] = useState(width);
   const [currentCaption, setCaption] = useState(caption);
 
-  const updateNode = (updates: any) => {
+  // Sync state if props change (e.g., undo/redo)
+  useEffect(() => {
+    setWidth(width);
+    setCaption(caption);
+  }, [width, caption]);
+
+  const updateNodeProperty = (type: "width" | "caption", value: any) => {
     editor.update(() => {
-      const node: any = $getNodeByKey(nodeKey);
-
-      if (!node) return;
-
-      Object.assign(node, updates);
+      const node = $getNodeByKey(nodeKey);
+      if ($isImageNode(node)) {
+        if (type === "width") node.setWidth(value);
+        if (type === "caption") node.setCaption(value);
+      }
     });
   };
 
-  const resizeImage = (e: React.MouseEvent) => {
+  const onResize = (e: React.MouseEvent) => {
     const startX = e.clientX;
     const startWidth = currentWidth;
 
-    const onMove = (event: MouseEvent) => {
-      const newWidth = Math.max(150, startWidth + (event.clientX - startX));
-
+    const onMove = (moveEvent: MouseEvent) => {
+      const newWidth = Math.max(150, startWidth + (moveEvent.clientX - startX));
       setWidth(newWidth);
-      updateNode({ __width: newWidth });
     };
 
     const onStop = () => {
+      updateNodeProperty("width", currentWidth);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onStop);
     };
@@ -61,30 +66,34 @@ const ImageComponent = ({
   };
 
   return (
-    <div className={`my-4 ${alignmentClass[alignment]}`}>
-      <div className="relative group" style={{ width: currentWidth }}>
+    <div className={`my-4 flex flex-col ${alignmentClass[alignment]}`}>
+      <div
+        className="relative group self-center"
+        style={{ width: currentWidth }}
+      >
         <img
           src={src}
           alt={alt}
-          style={{ width: currentWidth }}
-          className="rounded-md"
+          style={{ width: currentWidth, height: "auto" }}
+          className="rounded-md border border-transparent hover:border-primary transition-all shadow-sm"
+          draggable="false"
         />
 
-        {/* resize handle */}
+        {/* Resize Handle */}
         <div
-          onMouseDown={resizeImage}
-          className="absolute bottom-0 right-0 w-3 h-3 bg-primary cursor-se-resize opacity-0 group-hover:opacity-100"
+          onMouseDown={onResize}
+          className="absolute bottom-1 right-1 w-4 h-4 bg-primary rounded-full cursor-se-resize opacity-0 group-hover:opacity-100 transition-opacity border-2 border-white"
         />
       </div>
 
       <input
         value={currentCaption}
-        placeholder="Write caption..."
+        placeholder="Add a caption..."
         onChange={(e) => {
           setCaption(e.target.value);
-          updateNode({ __caption: e.target.value });
+          updateNodeProperty("caption", e.target.value);
         }}
-        className="text-sm text-muted mt-2 w-full bg-transparent outline-none"
+        className="text-center text-sm text-gray-500 mt-2 w-full bg-transparent border-none outline-none focus:ring-0 italic"
       />
     </div>
   );

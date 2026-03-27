@@ -22,6 +22,10 @@ const navItems = [
     path: "/admin/posts/create",
   },
   {
+    name: "Posts",
+    path: "/admin/posts",
+  },
+  {
     name: "Analytics",
     path: "/admin/analytics",
   },

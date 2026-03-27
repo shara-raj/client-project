@@ -3,7 +3,8 @@ export type PostStatus =
   | "review_requested"
   | "approved"
   | "published"
-  | "rejected";
+  | "rejected"
+  | "request_revision";
 
 export interface Post {
   id: string;
@@ -44,3 +45,16 @@ export interface CreatePostPayload {
   meta_title?: string;
   meta_description?: string;
 }
+
+export type AdminPost = Post & {
+  role: "admin" | "editor";
+};
+
+export type AdminPostListItem = {
+  id: string;
+  title: string;
+  status: PostStatus;
+  author_id: string;
+  created_at: string;
+  role: "admin" | "editor";
+};

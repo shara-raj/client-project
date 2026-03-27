@@ -1,5 +1,6 @@
 import { supabase } from "./supabaseClient";
 import type { PostType, ReviewPost } from "@/shared/types/post.types";
+import type { AdminPostListItem } from "@/modules/dashboard/post/types/post.types";
 
 // REVIEW QUEUE FUNCTIONS
 
@@ -90,15 +91,18 @@ export const createPost = async (
 };
 
 export const updatePost = async (postId: string, updates: any) => {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("posts")
     .update({
       ...updates,
-      updated_at: new Date(),
+      updated_at: new Date().toISOString(),
     })
-    .eq("id", postId);
+    .eq("id", postId)
+    .select()
+    .maybeSingle();
 
   if (error) throw error;
+  return data;
 };
 
 export const publishPost = async (postId: string) => {
@@ -213,4 +217,125 @@ export const deletePostService = async (postId: string) => {
     .eq("id", postId);
 
   if (error) throw error;
+};
+
+export const getPublishedPostsPaginated = async (
+  page: number,
+  pageSize: number,
+) => {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+  const { data, count, error } = await supabase.from("posts").select(
+    ` id, title, slug, content, created_at, featured_image, category_id, categories (id, name, slug) `,
+    { count: "exact" },
+  ).eq("status", "published").is("deleted_at", null).order("created_at", {
+    ascending: false,
+  }).range(from, to);
+  if (error) throw error;
+  return { data: data ?? [], total: count ?? 0 };
+};
+
+export const getPublishedPostsRaw = async () => {
+  const { data, error } = await supabase
+    .from("posts")
+    .select(
+      `
+      id,
+      title,
+      slug,
+      content,
+      created_at,
+      featured_image,
+      post_type,
+      category_id,
+      categories (id, name, slug)
+    `,
+    )
+    .eq("status", "published")
+    .is("deleted_at", null)
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+
+  return data ?? [];
+};
+
+export const getPostBySlug = async (
+  slug: string,
+) => {
+  const { data, error } = await supabase
+    .from("posts")
+    .select(
+      `
+      id,
+      title,
+      slug,
+      content,
+      created_at,
+      featured_image,
+      post_type,
+      category_id
+    `,
+    )
+    .eq("slug", slug)
+    .eq("status", "published")
+    .is("deleted_at", null)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  return data;
+};
+
+//post pagination for admin dashboard.
+export const getAllPostsPaginatedForAdmin = async (
+  page: number,
+  pageSize: number,
+): Promise<{ data: AdminPostListItem[]; total: number }> => {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data, error, count } = await supabase
+    .from("posts")
+    .select(
+      `
+      id,
+      title,
+      status,
+      created_at,
+      author_id,
+      deleted_at
+    `,
+      { count: "exact" },
+    )
+    .is("deleted_at", null)
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  if (error) throw error;
+
+  // FETCH ROLES SEPARATELY
+  const authorIds = [...new Set((data ?? []).map((p) => p.author_id))];
+
+  const { data: rolesData, error: roleError } = await supabase
+    .from("user_roles")
+    .select("user_id, role")
+    .in("user_id", authorIds);
+
+  if (roleError) throw roleError;
+
+  const roleMap = new Map(
+    (rolesData ?? []).map((r) => [r.user_id, r.role]),
+  );
+
+  // MERGE ROLE INTO POSTS
+  const enrichedPosts: AdminPostListItem[] = (data ?? []).map((post) => ({
+    ...post,
+    role: roleMap.get(post.author_id) ?? "admin",
+  }));
+
+  return {
+    data: enrichedPosts,
+    total: count ?? 0,
+  };
 };

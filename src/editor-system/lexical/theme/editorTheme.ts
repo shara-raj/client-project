@@ -25,4 +25,11 @@ export const editorTheme = {
   },
 
   link: "text-blue-600 underline",
+
+  table:
+    "border-collapse border-spacing-0 overflow-hidden m-0 mb-2 table-fixed w-full border border-gray-300",
+  tableRow: "border-b border-gray-300",
+  tableCell:
+    "border border-gray-300 p-2 relative min-w-[75px] align-top text-left",
+  tableCellHeader: "bg-gray-100 font-bold",
 };

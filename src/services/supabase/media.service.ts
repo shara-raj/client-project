@@ -4,15 +4,44 @@ const BUCKET = "media";
 
 /* FETCH MEDIA */
 
-export const getMedia = async () => {
-  const { data, error } = await supabase
+type GetMediaParams = {
+  search?: string;
+  category?: string;
+  page?: number;
+  limit?: number;
+};
+
+export const getMedia = async ({
+  search = "",
+  category = "",
+  page = 1,
+  limit = 12,
+}: GetMediaParams) => {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  let query = supabase
     .from("media")
-    .select("id,title,url,category,created_at")
-    .order("created_at", { ascending: false });
+    .select("id,title,url,category,created_at", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  if (search) {
+    query = query.ilike("title", `%${search}%`);
+  }
+
+  if (category) {
+    query = query.eq("category", category);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) throw error;
 
-  return data ?? [];
+  return {
+    media: data ?? [],
+    total: count ?? 0,
+  };
 };
 
 /* UPLOAD MEDIA */

@@ -5,28 +5,23 @@ export const recordActivity = async (
   contentType: "healing_path" | "blog_post",
   contentId: string,
 ) => {
-  const { data: existing } = await supabase
+  const { error } = await supabase
     .from("user_activity")
-    .select("id")
-    .eq("user_id", userId)
-    .eq("content_type", contentType)
-    .eq("content_id", contentId)
-    .maybeSingle();
+    .upsert(
+      {
+        user_id: userId,
+        content_type: contentType,
+        content_id: contentId,
+        last_accessed: new Date().toISOString(),
+      },
+      {
+        onConflict: "user_id,content_type,content_id",
+      },
+    );
 
-  if (existing) {
-    await supabase
-      .from("user_activity")
-      .update({ last_accessed: new Date().toISOString() })
-      .eq("id", existing.id);
-
-    return;
+  if (error) {
+    console.error("Activity error:", error);
   }
-
-  await supabase.from("user_activity").insert({
-    user_id: userId,
-    content_type: contentType,
-    content_id: contentId,
-  });
 };
 
 export const getUserHealingActivity = async (userId: string) => {

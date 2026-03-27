@@ -11,6 +11,7 @@ import SettingsPage from "@/modules/dashboard/admin/pages/SettingsPage";
 import AdminLayout from "../layouts/AdminLayout";
 import CreatePostPage from "@/modules/dashboard/post/pages/CreatePostPage";
 import MessagesPage from "@/modules/dashboard/admin/pages/MessagesPage";
+import AdminPostsPage from "@/modules/dashboard/admin/pages/AdminPostsPage";
 
 export function AdminRoutes() {
   return (
@@ -33,6 +34,7 @@ export function AdminRoutes() {
         <Route path="messages" element={<MessagesPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="posts/create" element={<CreatePostPage />} />
+        <Route path="posts" element={<AdminPostsPage />} />
       </Route>
     </>
   );

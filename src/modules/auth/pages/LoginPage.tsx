@@ -6,41 +6,35 @@ import { PasswordField } from "../components/PasswordField";
 import { AuthButton } from "../components/AuthButton";
 import { AuthFooterLink } from "../components/AuthFooterLink";
 import { useAuth } from "../providers/AuthProvider";
-import { getUserRole } from "@/services/supabase/role.service";
+import { useUserRole } from "../hooks/useUserRole";
+import { getDashboardRouteByRole } from "../utils/roleRedirect";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
-  const { login, signInWithGoogle, isLoading } = useAuth();
+  const { login, signInWithGoogle, isLoading, user, loading } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const { user, loading } = useAuth();
+  const { role, loading: roleLoading } = useUserRole();
 
   useEffect(() => {
     if (loading) return;
 
-    const redirectUser = async () => {
-      if (!user?.id) return;
+    if (!user) return;
 
-      try {
-        const role = await getUserRole(user.id);
+    if (roleLoading) return;
 
-        if (role === "admin") {
-          navigate("/admin/dashboard");
-        } else if (role === "editor") {
-          navigate("/editor/dashboard");
-        } else {
-          navigate("/user/dashboard");
-        }
-      } catch (err) {
-        console.error("Role fetch failed", err);
-      }
-    };
-    redirectUser();
-  }, [user]);
+    if (!role) return;
+
+    const redirectPath = getDashboardRouteByRole(role);
+
+    if (redirectPath) {
+      navigate(redirectPath);
+    }
+  }, [user, loading, role, roleLoading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,26 +46,12 @@ export default function LoginPage() {
     }
 
     try {
-      const user = await login({ email: email.trim().toLowerCase(), password });
+      await login({
+        email: email.trim().toLowerCase(),
+        password,
+      });
+
       toast.success("Login Successful");
-
-      let role;
-
-      try {
-        role = await getUserRole(user.id);
-      } catch (err) {
-        console.error("Role fetch failed", err);
-        toast.error("Failed to determine user role");
-        return;
-      }
-
-      if (role === "admin") {
-        navigate("/admin/dashboard");
-      } else if (role === "editor") {
-        navigate("/editor/dashboard");
-      } else {
-        navigate("/user/dashboard");
-      }
     } catch (error: any) {
       toast.error(
         error?.message?.includes("Invalid login")

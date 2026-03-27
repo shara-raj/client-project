@@ -8,6 +8,9 @@ import { $getSelection, $isRangeSelection } from "lexical";
 import { $createParagraphNode } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
 import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
+import { $createTableNodeWithDimensions } from "@lexical/table";
+import { $insertNodes } from "lexical";
+import { $isElementNode } from "lexical";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
@@ -16,8 +19,6 @@ import ImagePlugin from "./plugins/ImagePlugin";
 import { useState, useEffect } from "react";
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from "lucide-react";
 import { List, ListOrdered } from "lucide-react";
-
-import { SELECTION_CHANGE_COMMAND } from "lexical";
 
 const Toolbar = () => {
   const [editor] = useLexicalComposerContext();
@@ -30,6 +31,7 @@ const Toolbar = () => {
   const [isUnderline, setUnderline] = useState(false);
   const [isBulletList, setBulletList] = useState(false);
   const [isNumberList, setNumberList] = useState(false);
+  const [tableOpen, setTableOpen] = useState(false);
 
   const updateToolbar = () => {
     editor.getEditorState().read(() => {
@@ -40,7 +42,14 @@ const Toolbar = () => {
         setItalic(selection.hasFormat("italic"));
         setUnderline(selection.hasFormat("underline"));
 
-        const element = selection.anchor.getNode().getTopLevelElementOrThrow();
+        const node = selection.anchor.getNode();
+        let element;
+
+        try {
+          element = selection.anchor.getNode().getTopLevelElementOrThrow();
+        } catch {
+          return;
+        }
 
         if ($isListNode(element)) {
           const type = element.getListType();
@@ -88,6 +97,32 @@ const Toolbar = () => {
   const applyFormat = (command: any, value?: any) => {
     editor.dispatchCommand(command, value);
     editor.focus();
+  };
+
+  const insertTable = (rows: number, cols: number) => {
+    editor.update(() => {
+      const tableNode = $createTableNodeWithDimensions(rows, cols, {
+        rows: true,
+        columns: false,
+      });
+
+      // 2. Insert into the editor
+      $insertNodes([tableNode]);
+
+      // 3. Create a paragraph node to act as a "landing zone" below the table
+      const bufferParagraph = $createParagraphNode();
+      tableNode.insertAfter(bufferParagraph);
+
+      const firstRow = tableNode.getFirstChild();
+
+      if ($isElementNode(firstRow)) {
+        const firstCell = firstRow.getFirstChild();
+        if ($isElementNode(firstCell)) {
+          firstCell.select();
+        }
+      }
+    });
+    setTableOpen(false);
   };
 
   return (
@@ -279,6 +314,41 @@ const Toolbar = () => {
             >
               <AlignJustify size={16} /> Justify
             </button>
+          </div>
+        )}
+      </div>
+
+      {/* Table */}
+      <div className="relative">
+        <button
+          onClick={() => setTableOpen(!tableOpen)}
+          className={`${buttonBase}`}
+        >
+          Table
+        </button>
+
+        {tableOpen && (
+          <div className="absolute z-20 bg-card border border-main rounded shadow-md mt-1 min-w-36 p-1">
+            <div className="grid grid-cols-5 gap-1">
+              {Array.from({ length: 50 }).map((_, index) => {
+                const row = Math.floor(index / 5) + 1;
+                const col = (index % 5) + 1;
+
+                return (
+                  <div
+                    key={index}
+                    onClick={() => insertTable(row, col)}
+                    className="
+          w-4 h-4
+          border border-main
+          hover:bg-gray-300
+          cursor-pointer
+        "
+                    title={`${row} x ${col}`}
+                  />
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

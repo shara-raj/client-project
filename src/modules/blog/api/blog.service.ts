@@ -1,6 +1,11 @@
 import type { BlogPost } from "../types/blog.types";
-import { mockPosts } from "../data/mockPosts";
 import type { BlogPostQuery } from "../types/blog.query";
+import * as categorySupabase from "@/services/supabase/category.service";
+
+import {
+  getPostBySlug as getPostBySlugFromDB,
+  getPublishedPostsRaw,
+} from "@/services/supabase/post.service";
 
 export interface PaginatedResult<T> {
   data: T[];
@@ -10,27 +15,67 @@ export interface PaginatedResult<T> {
   totalPages: number;
 }
 
+/**
+ * Normalize Supabase relation (array → object)
+ */
+const normalizeCategory = (categories: any) => {
+  if (Array.isArray(categories)) return categories[0];
+  return categories;
+};
+
+/**
+ * Map DB → BlogPost (Single Source of Truth)
+ */
+const mapToBlogPost = (post: any): BlogPost => {
+  const category = normalizeCategory(post.categories);
+
+  return {
+    id: post.id,
+    title: post.title,
+    slug: post.slug,
+    excerpt: extractExcerpt(post.content),
+    content: normalizeContent(post.content?.root?.children ?? post.content),
+    contentType: "blog" as const,
+    status: "published",
+    category: {
+      id: post.category_id,
+      name: "",
+      slug: "",
+    },
+    readingTime: calculateReadingTime(post.content),
+    publishedAt: post.created_at,
+    createdAt: post.created_at,
+    featured_image: post.featured_image ?? null,
+  };
+};
+
 export const blogService = {
+  /**
+   * Get posts (all / recent / featured)
+   */
   async getPosts(query: BlogPostQuery): Promise<PaginatedResult<BlogPost>> {
-    let posts = mockPosts.filter((post) => post.status === "published");
+    const rawPosts = await getPublishedPostsRaw();
 
-    posts = posts.sort(
-      (a, b) =>
-        new Date(b.publishedAt ?? 0).getTime() -
-        new Date(a.publishedAt ?? 0).getTime(),
-    );
+    const posts: BlogPost[] = rawPosts.map(mapToBlogPost);
 
+    // --- RECENT POSTS ---
     if (query.mode === "recent") {
+      const limit = query.limit ?? 3;
+
       return {
-        data: posts.slice(0, query.limit ?? 3),
+        data: posts.slice(0, limit),
         total: posts.length,
         page: 1,
-        pageSize: query.limit ?? 3,
+        pageSize: limit,
         totalPages: 1,
       };
     }
+
+    // --- FEATURED POSTS (FIXED) ---
     if (query.mode === "featured") {
-      const featured = posts.filter((post) => post.flags?.featured);
+      const featured = rawPosts
+        .filter((post: any) => post.post_type === "featured")
+        .map(mapToBlogPost);
 
       return {
         data: featured,
@@ -41,6 +86,7 @@ export const blogService = {
       };
     }
 
+    // --- PAGINATED POSTS ---
     if (query.mode === "all") {
       const page = query.page ?? 1;
       const pageSize = query.pageSize ?? 6;
@@ -59,6 +105,8 @@ export const blogService = {
         totalPages,
       };
     }
+
+    // --- FALLBACK ---
     return {
       data: posts,
       total: posts.length,
@@ -68,17 +116,119 @@ export const blogService = {
     };
   },
 
+  /**
+   * Get single post by slug + category
+   */
   async getPostBySlug(
-    categorySlug: string,
     slug: string,
   ): Promise<BlogPost | null> {
-    return (
-      mockPosts.find(
-        (post) =>
-          post.category.slug === categorySlug &&
-          post.slug === slug &&
-          post.status === "published",
-      ) ?? null
-    );
+    const post = await getPostBySlugFromDB(slug);
+
+    if (!post) return null;
+
+    return mapToBlogPost(post);
   },
+};
+
+/**
+ * Extract excerpt from Lexical content
+ */
+const extractExcerpt = (content: any): string => {
+  if (!content || !Array.isArray(content)) return "";
+
+  const block = content.find((b: any) => b.type === "paragraph");
+
+  return block?.text?.slice(0, 120) || "";
+};
+
+/**
+ * Calculate reading time
+ */
+const calculateReadingTime = (content: any): number => {
+  if (!content || !Array.isArray(content)) return 1;
+
+  const text = content.map((b: any) => b.text || "").join(" ");
+
+  return Math.max(1, Math.ceil(text.split(" ").length / 200));
+};
+
+const normalizeContent = (content: any) => {
+  if (!content) return [];
+
+  let blocks: any[] = [];
+
+  // Extract blocks
+  if (content?.root?.children) {
+    blocks = content.root.children;
+  } else if (Array.isArray(content)) {
+    blocks = content;
+  } else if (typeof content === "string") {
+    try {
+      const parsed = JSON.parse(content);
+      blocks = parsed?.root?.children ?? parsed ?? [];
+    } catch {
+      return [];
+    }
+  } else {
+    return [];
+  }
+
+  return blocks.map((block: any) => {
+    // Image
+    if (block.type === "image") {
+      return {
+        type: "image",
+        url: block.src,
+        caption: block.caption || "",
+      };
+    }
+
+    // Table
+    if (block.type === "table") {
+      const rows: string[][] = [];
+
+      block.children?.forEach((row: any) => {
+        if (row.type === "tablerow") {
+          const rowData: string[] = [];
+
+          row.children?.forEach((cell: any) => {
+            if (cell.type === "tablecell") {
+              const text = cell.children
+                ?.map((child: any) => child.text || "")
+                .join(" ") || "";
+
+              rowData.push(text);
+            }
+          });
+
+          rows.push(rowData);
+        }
+      });
+
+      return {
+        type: "table",
+        rows,
+      };
+    }
+
+    return block;
+  });
+};
+
+export const createCategory = async (name: string) => {
+  // Basic slug safety (avoid duplicates later if needed)
+  const slug = name
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(
+      /\s+/g,
+      "-",
+    );
+
+  return await categorySupabase.createCategory(name, slug);
+};
+
+export const fetchCategories = async () => {
+  return await categorySupabase.getCategories();
 };

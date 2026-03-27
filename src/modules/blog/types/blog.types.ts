@@ -20,29 +20,35 @@ export interface Category {
 
 export type RichTextBlock =
   | {
-      type: "heading";
-      level: 1 | 2 | 3 | 4 | 5 | 6;
-      text: string;
-    }
+    type: "heading";
+    level: 1 | 2 | 3 | 4 | 5 | 6;
+    text?: string;
+    children?: { text: string }[];
+  }
   | {
-      type: "paragraph";
-      text: string;
-    }
+    type: "paragraph";
+    text?: string;
+    children?: { text: string }[];
+  }
   | {
-      type: "image";
-      url: string;
-      caption?: string;
-    }
+    type: "image";
+    url: string;
+    caption?: string;
+  }
   | {
-      type: "list";
-      style: "bullet" | "ordered";
-      items: string[];
-    }
+    type: "list";
+    style: "bullet" | "ordered";
+    items: string[];
+  }
   | {
-      type: "quote";
-      text: string;
-      author?: string;
-    };
+    type: "quote";
+    text: string;
+    author?: string;
+  }
+  | {
+    type: "table";
+    rows: string[][];
+  };
 
 export interface BlogPost {
   id: string;
@@ -50,7 +56,7 @@ export interface BlogPost {
   slug: string;
 
   excerpt: string;
-  //coverImage: //string;
+  featured_image?: string | null;
 
   content: RichTextBlock[];
 

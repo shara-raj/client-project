@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export const useAutosaveDraft = (
   saveFunction: () => Promise<void>,
-  delay: number = 20000,
+  delay: number = 3000,
 ) => {
   const timeout = useRef<any>(null);
 
@@ -25,9 +25,7 @@ export const useAutosaveDraft = (
 
         setStatus("saved");
 
-        setTimeout(() => {
-          setStatus("idle");
-        }, 2000);
+        setTimeout(() => setStatus("idle"), 2000);
       } catch (err) {
         console.error(err);
         setStatus("error");

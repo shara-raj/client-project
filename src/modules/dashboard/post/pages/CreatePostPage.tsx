@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Editor from "@/editor-system/lexical/Editor";
 import { usePostEditor } from "../hooks/usePostEditor";
 import { saveDraftBackup } from "../utils/draftRecovery";
@@ -14,11 +14,15 @@ import { useUserRole } from "@/modules/auth/hooks/useUserRole";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useCategories } from "@/modules/blog/hooks/useCategories";
+import { getDashboardRouteByRole } from "@/modules/auth/utils/roleRedirect";
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
   const { saveDraft, updateDraft, loading, publish, submitForReview } =
     usePostEditor();
+
+  const { categories } = useCategories();
 
   const auth = useAuth();
   const user = auth?.user;
@@ -26,7 +30,10 @@ const CreatePostPage = () => {
   const { role, loading: roleLoading } = useUserRole();
 
   const [title, setTitle] = useState("");
-  const [postId, setPostId] = useState<string | null>(null);
+  const [postId, _setPostId] = useState<string | null>(null);
+  const postIdRef = useRef<string | null>(null);
+  const isSavingRef = useRef(false);
+
   const [postType, setPostType] = useState<"normal" | "featured">("normal");
 
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -42,11 +49,15 @@ const CreatePostPage = () => {
   const [metaDescription, setMetaDescription] = useState("");
   const [slug, setSlug] = useState("");
 
+  const categoryName = categories.find((cat) => cat.id === categoryId)?.name;
+
   const generateSlug = (value: string) => {
-    return value
+    const baseSlug = value
       .toLowerCase()
       .replace(/[^\w\s]/gi, "")
       .replace(/\s+/g, "-");
+
+    return `${baseSlug}-${Date.now()}`;
   };
 
   const handleTitleChange = (value: string) => {
@@ -64,6 +75,11 @@ const CreatePostPage = () => {
     triggerSave();
   };
 
+  const setPostId = (id: string | null) => {
+    postIdRef.current = id;
+    _setPostId(id);
+  };
+
   // ---------------- SAVE DRAFT ----------------
 
   const handleSave = async () => {
@@ -73,7 +89,7 @@ const CreatePostPage = () => {
     }
 
     try {
-      if (!postId) {
+      if (!postIdRef.current) {
         const post = await saveDraft(title, contentState, authorId, slug, {
           post_type: postType,
           featured_image: featuredImage || undefined,
@@ -85,7 +101,7 @@ const CreatePostPage = () => {
 
         if (post?.id) setPostId(post.id);
       } else {
-        await updateDraft(postId, {
+        await updateDraft(postIdRef.current, {
           title,
           content: contentState,
           slug,
@@ -133,7 +149,16 @@ const CreatePostPage = () => {
 
       toast.success("Post published");
 
-      navigate("/dashboard/posts/create");
+      if (roleLoading || !role) {
+        toast.error("User role not ready. Please try again.");
+        return;
+      }
+
+      const redirectPath = getDashboardRouteByRole(role);
+
+      if (!redirectPath) return;
+
+      navigate(redirectPath);
     } catch (error: any) {
       toast.error(error.message || "Failed to publish post");
     }
@@ -172,12 +197,18 @@ const CreatePostPage = () => {
   // ---------------- AUTOSAVE ----------------
 
   const autosave = async () => {
-    if (!authorId) return;
-    if (!title && !contentState) return;
-    if (previewOpen) return;
+    if (
+      !authorId ||
+      (!title && !contentState) ||
+      previewOpen ||
+      isSavingRef.current
+    )
+      return;
 
     try {
-      if (!postId) {
+      isSavingRef.current = true;
+
+      if (!postIdRef.current) {
         const post = await saveDraft(title, contentState, authorId, slug, {
           post_type: postType,
           featured_image: featuredImage || undefined,
@@ -191,7 +222,7 @@ const CreatePostPage = () => {
           setPostId(post.id);
         }
       } else {
-        await updateDraft(postId, {
+        await updateDraft(postIdRef.current, {
           title,
           content: contentState,
           slug,
@@ -204,9 +235,11 @@ const CreatePostPage = () => {
       }
     } catch (error) {
       console.error("Autosave failed:", error);
+    } finally {
+      isSavingRef.current = false;
     }
   };
-  const { triggerSave, status } = useAutosaveDraft(autosave, 20000);
+  const { triggerSave, status } = useAutosaveDraft(autosave, 3000);
 
   const handlePreview = () => {
     setPreviewOpen(true);
@@ -309,13 +342,13 @@ const CreatePostPage = () => {
           />
 
           <Editor
-            onChange={(state, html) => {
-              setContentState(state);
+            onChange={(editorState, html) => {
+              const json = editorState.toJSON();
+              setContentState(json);
               setPreviewHtml(html);
-
               saveDraftBackup({
                 title,
-                content: state,
+                content: json,
                 html,
                 featuredImage,
                 tags,
@@ -370,7 +403,7 @@ const CreatePostPage = () => {
         onClose={() => setPreviewOpen(false)}
         title={title}
         featuredImage={featuredImage}
-        categoryName={categoryId}
+        categoryName={categoryName || ""}
         tags={tags}
         content={previewHtml}
       />

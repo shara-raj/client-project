@@ -1,6 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useState } from "react";
-import { $insertNodes } from "lexical";
+import { $getSelection, $isRangeSelection, $getRoot } from "lexical";
 import toast from "react-hot-toast";
 
 import MediaLibraryModal from "@/modules/dashboard/media/components/MediaLibraryModal";
@@ -11,6 +11,7 @@ const ImagePlugin = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [urlModalOpen, setUrlModalOpen] = useState(false);
+  const [selectionState, setSelectionState] = useState<any>(null);
 
   const [url, setUrl] = useState("");
 
@@ -29,9 +30,15 @@ const ImagePlugin = () => {
         alignment: "center",
       });
 
-      $insertNodes([imageNode]);
-    });
+      let selection = $getSelection();
 
+      if ($isRangeSelection(selection)) {
+        selection.insertNodes([imageNode]);
+      } else {
+        $getRoot().append(imageNode);
+      }
+    });
+    setSelectionState(null);
     editor.focus();
   };
 
@@ -51,6 +58,9 @@ const ImagePlugin = () => {
             <button
               className="dropdown-item"
               onClick={() => {
+                editor.getEditorState().read(() => {
+                  setSelectionState($getSelection());
+                });
                 setLibraryOpen(true);
                 setDropdownOpen(false);
               }}

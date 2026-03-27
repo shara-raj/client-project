@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { recordActivity } from "@/services/supabase/activity.service";
 
 export function useUserActivity(
@@ -6,9 +6,30 @@ export function useUserActivity(
   contentType?: "healing_path" | "blog_post",
   contentId?: string,
 ) {
+  // Prevent duplicate calls
+  const hasTrackedRef = useRef(false);
+
   useEffect(() => {
+    // Guard clause
     if (!userId || !contentType || !contentId) return;
 
-    recordActivity(userId, contentType, contentId);
+    // Prevent duplicate tracking
+    if (hasTrackedRef.current) return;
+
+    hasTrackedRef.current = true;
+
+    const trackActivity = async () => {
+      try {
+        await recordActivity(userId, contentType, contentId);
+      } catch (error) {
+        console.error("Error recording activity:", error);
+      }
+    };
+
+    console.log("ACTIVITY PAYLOAD:", {
+      user_id: userId,
+    });
+
+    trackActivity();
   }, [userId, contentType, contentId]);
 }

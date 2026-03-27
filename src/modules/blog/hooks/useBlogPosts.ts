@@ -3,15 +3,20 @@ import type { BlogPost } from "../types/blog.types";
 import { blogService } from "../api/blog.service";
 import type { BlogPostQuery } from "../types/blog.query";
 
-// interface UseBlogPostsOptions {
-//   contentType?: ContentType;
-//   limit?: number;
-// }
+interface UseBlogPostsResult {
+  posts: BlogPost[];
+  totalPages: number;
+  loading: boolean;
+  error: string | null;
+}
 
-export const useBlogPosts = (query: BlogPostQuery) => {
+export const useBlogPosts = (
+  query: BlogPostQuery,
+): UseBlogPostsResult => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const mode = query.mode;
   const page = mode === "all" ? (query.page ?? 1) : 1;
@@ -19,25 +24,42 @@ export const useBlogPosts = (query: BlogPostQuery) => {
   const limit = mode === "recent" ? (query.limit ?? 3) : 0;
 
   useEffect(() => {
-    setLoading(true);
+    let isMounted = true;
 
-    const stableQuery: BlogPostQuery =
-      mode === "all"
-        ? { mode: "all", page, pageSize }
-        : mode === "recent"
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const stableQuery: BlogPostQuery = mode === "all"
+          ? { mode: "all", page, pageSize }
+          : mode === "recent"
           ? { mode: "recent", limit }
           : { mode: "featured" };
 
-    blogService
-      .getPosts(stableQuery)
-      .then((result) => {
+        const result = await blogService.getPosts(stableQuery);
+
+        if (!isMounted) return;
+
         setPosts(result.data);
         setTotalPages(result.totalPages);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      } catch (err) {
+        if (!isMounted) return;
+
+        console.error(err);
+        setError("Failed to load posts");
+        setPosts([]);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchPosts();
+
+    return () => {
+      isMounted = false;
+    };
   }, [mode, page, pageSize, limit]);
 
-  return { posts, totalPages, loading };
+  return { posts, totalPages, loading, error };
 };
