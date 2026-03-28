@@ -4,7 +4,8 @@ export type PostStatus =
   | "approved"
   | "published"
   | "rejected"
-  | "request_revision";
+  | "request_revision"
+  | "needs_revision";
 
 export interface Post {
   id: string;

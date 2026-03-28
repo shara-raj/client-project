@@ -7,6 +7,10 @@ import {
   TableRow,
   TableCell,
 } from "@/shared/components/ui/Table";
+import { getStatusConfig } from "../utils/postStatus.util";
+import { StatusBadge } from "@/shared/components/ui/StatusBadge";
+import { ActionButton } from "@/shared/components/ui/ActionButton";
+import { getPostActions } from "../utils/postActions.util";
 
 export default function AdminPostsPage() {
   const { posts, loading, filter, setFilter } = useAdminPosts();
@@ -49,25 +53,45 @@ export default function AdminPostsPage() {
                 <TableHeaderCell>Author</TableHeaderCell>
                 <TableHeaderCell>Status</TableHeaderCell>
                 <TableHeaderCell>Created</TableHeaderCell>
+                <TableHeaderCell>Actions</TableHeaderCell>
               </tr>
             </TableHead>
 
             <TableBody>
-              {posts.map((post) => (
-                <TableRow key={post.id}>
-                  <TableCell>{post.title}</TableCell>
+              {posts.map((post) => {
+                const config = getStatusConfig(post.status);
+                return (
+                  <TableRow key={post.id}>
+                    <TableCell>{post.title}</TableCell>
 
-                  <TableCell>
-                    {post.role === "admin" ? "Admin" : "Editor"}
-                  </TableCell>
+                    <TableCell>
+                      {post.role === "admin" ? "Admin" : "Editor"}
+                    </TableCell>
 
-                  <TableCell>{post.status}</TableCell>
+                    <TableCell>
+                      <StatusBadge
+                        label={config.label}
+                        className={config.className}
+                      />
+                    </TableCell>
 
-                  <TableCell>
-                    {new Date(post.created_at).toLocaleDateString()}
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell>
+                      {new Date(post.created_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-2 flex-wrap">
+                        {getPostActions(post).map((action) => (
+                          <ActionButton
+                            key={action}
+                            label={formatActionLabel(action)}
+                            variant={action === "delete" ? "danger" : "default"}
+                          />
+                        ))}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         )}
@@ -75,3 +99,26 @@ export default function AdminPostsPage() {
     </div>
   );
 }
+
+const formatActionLabel = (action: string) => {
+  switch (action) {
+    case "view":
+      return "View";
+    case "edit":
+      return "Edit";
+    case "approve":
+      return "Approve";
+    case "reject":
+      return "Reject";
+    case "publish":
+      return "Publish";
+    case "request_edit":
+      return "Request Edit";
+    case "delete":
+      return "Delete";
+    case "request_delete":
+      return "Request Delete";
+    default:
+      return action;
+  }
+};
