@@ -3,6 +3,7 @@ import { useEditorPosts } from "../hooks/useEditorPosts";
 
 const DashboardPage = () => {
   const { user } = useAuth();
+
   if (!user?.id) {
     return <div className="p-6">Loading user...</div>;
   }

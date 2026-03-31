@@ -26,6 +26,14 @@ interface Props {
 }
 
 const Editor = ({ onChange, initialContent }: Props) => {
+  const getInitialState = () => {
+    if (!initialContent) return null;
+
+    return typeof initialContent === "string"
+      ? initialContent
+      : JSON.stringify(initialContent);
+  };
+
   const initialConfig = {
     namespace: "cms-editor",
     theme: editorTheme,
@@ -40,12 +48,19 @@ const Editor = ({ onChange, initialContent }: Props) => {
       TableCellNode,
       TableRowNode,
     ],
-    editorState: initialContent || null,
+    editorState: getInitialState(),
     readOnly: false,
     onError(error: Error) {
       console.error(error);
     },
   };
+
+  //preventing the composer to not render until the initial content is not present
+  if (initialContent === null) {
+    return (
+      <div className="h-[650px] border rounded-md bg-soft animate-pulse" />
+    );
+  }
 
   return (
     <LexicalComposer initialConfig={initialConfig}>

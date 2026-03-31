@@ -17,20 +17,14 @@ const MediaLibraryModal = ({ open, onClose, onSelect }: Props) => {
 
   const loadMedia = async () => {
     try {
-      const res = await getMedia();
-      let filtered = res;
+      const { media: fetchedMedia } = await getMedia({
+        search,
+        category,
+        page,
+        limit: 12,
+      });
 
-      if (search) {
-        filtered = filtered.filter((item: any) =>
-          item.title?.toLowerCase().includes(search.toLowerCase()),
-        );
-      }
-
-      if (category) {
-        filtered = filtered.filter((item: any) => item.category === category);
-      }
-
-      setMedia(filtered);
+      setMedia(fetchedMedia);
     } catch (err: any) {
       toast.error(err.message || "Failed to upload media");
     }

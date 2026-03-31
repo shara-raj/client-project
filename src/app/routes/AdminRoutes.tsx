@@ -12,6 +12,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import CreatePostPage from "@/modules/dashboard/post/pages/CreatePostPage";
 import MessagesPage from "@/modules/dashboard/admin/pages/MessagesPage";
 import AdminPostsPage from "@/modules/dashboard/admin/pages/AdminPostsPage";
+import AdminPostViewPage from "@/modules/dashboard/admin/pages/AdminPostViewPage";
 
 export function AdminRoutes() {
   return (
@@ -29,6 +30,7 @@ export function AdminRoutes() {
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="editors" element={<EditorsPage />} />
         <Route path="review" element={<ReviewQueuePage />} />
+        <Route path="review/:id" element={<AdminPostViewPage />} />
         <Route path="media" element={<MediaLibraryPage />} />
         <Route path="analytics" element={<AnalyticsPage />} />
         <Route path="messages" element={<MessagesPage />} />

@@ -4,6 +4,7 @@ import {
   type PostFilter,
 } from "../services/adminPosts.service";
 import type { AdminPostListItem } from "../../post/types/post.types";
+import { deletePost } from "../services/adminPosts.service";
 
 export const useAdminPosts = () => {
   const [posts, setPosts] = useState<AdminPostListItem[]>([]);
@@ -29,6 +30,15 @@ export const useAdminPosts = () => {
     }
   };
 
+  const handleDelete = async (postId: string) => {
+    try {
+      await deletePost(postId);
+      await fetchPosts(page, filter); // refresh list
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
+  };
+
   useEffect(() => {
     fetchPosts(page, filter);
   }, [page, filter]);
@@ -40,5 +50,6 @@ export const useAdminPosts = () => {
     setPage,
     filter,
     setFilter,
+    handleDelete,
   };
 };

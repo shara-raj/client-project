@@ -41,7 +41,7 @@ export const rejectPost = async (postId: string, feedback: string) => {
   const { error } = await supabase
     .from("posts")
     .update({
-      status: "draft",
+      status: "rejected",
       feedback,
       updated_at: new Date(),
     })
@@ -338,4 +338,15 @@ export const getAllPostsPaginatedForAdmin = async (
     data: enrichedPosts,
     total: count ?? 0,
   };
+};
+
+export const softDeletePost = async (postId: string) => {
+  const { error } = await supabase
+    .from("posts")
+    .update({
+      deleted_at: new Date().toISOString(),
+    })
+    .eq("id", postId);
+
+  if (error) throw error;
 };

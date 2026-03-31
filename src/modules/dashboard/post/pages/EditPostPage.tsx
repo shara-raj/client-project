@@ -23,7 +23,6 @@ const EditPostPage = () => {
   const auth = useAuth();
   const user = auth?.user;
   const { role, loading: roleLoading } = useUserRole();
-  if (roleLoading) return null;
 
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
@@ -73,6 +72,8 @@ const EditPostPage = () => {
 
     fetchPost();
   }, [id]);
+
+  if (roleLoading) return null;
 
   // ---------------- UPDATE ----------------
 

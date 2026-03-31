@@ -13,7 +13,7 @@ import { ActionButton } from "@/shared/components/ui/ActionButton";
 import { getPostActions } from "../utils/postActions.util";
 
 export default function AdminPostsPage() {
-  const { posts, loading, filter, setFilter } = useAdminPosts();
+  const { posts, loading, filter, setFilter, handleDelete } = useAdminPosts();
 
   return (
     <div className="p-6 space-y-6 dashboard-theme">
@@ -85,6 +85,16 @@ export default function AdminPostsPage() {
                             key={action}
                             label={formatActionLabel(action)}
                             variant={action === "delete" ? "danger" : "default"}
+                            onClick={() => {
+                              if (action === "delete") {
+                                const confirDelete = window.confirm(
+                                  "Are you sure you want to move this post to Trash?",
+                                );
+                                if (confirDelete) {
+                                  handleDelete(post.id);
+                                }
+                              }
+                            }}
                           />
                         ))}
                       </div>
@@ -117,7 +127,7 @@ const formatActionLabel = (action: string) => {
     case "delete":
       return "Delete";
     case "request_delete":
-      return "Request Delete";
+      return "Request Delete ";
     default:
       return action;
   }

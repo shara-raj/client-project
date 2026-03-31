@@ -3,14 +3,20 @@ import PostsTable from "../components/PostTable";
 import { useEditorPosts } from "../hooks/useEditorPosts";
 import { useDeletionRequests } from "../hooks/useDeletionRequests";
 import type { PostStatus } from "../../post/types/post.types";
+import { useAuth } from "@/modules/auth";
 
 const MyPostsPage = () => {
-  const authorId = "demo-editor-id";
+  const { user } = useAuth();
 
-  const { posts, loading, submitForReview } = useEditorPosts(authorId);
-  const { submitDeletionRequest } = useDeletionRequests(authorId);
+  const authorId = user?.id;
+  const { posts, loading, submitForReview } = useEditorPosts(authorId || "");
+  const { submitDeletionRequest } = useDeletionRequests(authorId || "");
 
   const [filter, setFilter] = useState<PostStatus | "all">("all");
+
+  if (!user?.id) {
+    return <div className="p-6">Editor Loading.....</div>;
+  }
 
   const filteredPosts =
     filter === "all" ? posts : posts.filter((post) => post.status === filter);

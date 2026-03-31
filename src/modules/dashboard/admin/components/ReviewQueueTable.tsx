@@ -3,9 +3,16 @@ type Props = {
   loading: boolean;
   onApprove: (id: string) => void;
   onReject: (id: string) => void;
+  onView: (id: string) => void;
 };
 
-const ReviewQueueTable = ({ posts, loading, onApprove, onReject }: Props) => {
+const ReviewQueueTable = ({
+  posts,
+  loading,
+  onApprove,
+  onReject,
+  onView,
+}: Props) => {
   if (loading) {
     return (
       <div className="card p-6 animate-pulse text-sub">
@@ -43,6 +50,13 @@ const ReviewQueueTable = ({ posts, loading, onApprove, onReject }: Props) => {
                 <td>{new Date(post.created_at).toLocaleDateString()}</td>
 
                 <td className="space-x-2">
+                  <button
+                    onClick={() => onView(post.id)}
+                    className="btn-prime px-3 py-1 rounded"
+                  >
+                    View
+                  </button>
+
                   <button
                     onClick={() => onApprove(post.id)}
                     className="btn-prime px-3 py-1 rounded"

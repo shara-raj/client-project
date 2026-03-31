@@ -16,7 +16,7 @@ export const getMedia = async ({
   category = "",
   page = 1,
   limit = 12,
-}: GetMediaParams) => {
+}: GetMediaParams = {}) => {
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 

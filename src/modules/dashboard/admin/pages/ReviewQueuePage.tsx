@@ -1,9 +1,12 @@
 import toast from "react-hot-toast";
 import ReviewQueueTable from "../components/ReviewQueueTable";
 import { useReviewQueue } from "../hooks/useReviewQueue";
+import { useNavigate } from "react-router-dom";
 
 const ReviewQueuePage = () => {
   const { posts, loading, approve, reject } = useReviewQueue();
+
+  const navigate = useNavigate();
 
   //Approve post
   const handleApprove = async (id: string) => {
@@ -33,6 +36,13 @@ const ReviewQueuePage = () => {
     }
   };
 
+  //view post from editor
+  const handleView = (id: string) => {
+    navigate(`/admin/review/${id}`, {
+      state: { from: "review-queue" },
+    });
+  };
+
   return (
     <div className="dashboard-theme p-6 space-y-6">
       <h1 className="text-2xl font-semibold">Review Queue</h1>
@@ -42,6 +52,7 @@ const ReviewQueuePage = () => {
         loading={loading}
         onApprove={handleApprove}
         onReject={handleReject}
+        onView={handleView}
       />
     </div>
   );

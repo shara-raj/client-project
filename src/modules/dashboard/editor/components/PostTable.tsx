@@ -9,7 +9,7 @@ interface PostsTableProps {
   posts: Post[];
   loading: boolean;
   onSubmitForReview: (postId: string) => void;
-  onRequestDeletion: (postId: string, reason: string) => void;
+  onRequestDeletion: (postId: string, reason: string) => Promise<void>;
 }
 
 const PostsTable: React.FC<PostsTableProps> = ({
@@ -42,7 +42,7 @@ const PostsTable: React.FC<PostsTableProps> = ({
         <p className="text-muted mb-4">You haven't created any posts yet.</p>
 
         <button
-          onClick={() => navigate("/editor/create")}
+          onClick={() => navigate("/editor/posts/create")}
           className="btn-prime px-4 py-2 rounded cursor-pointer hover:btn-prime-hover"
         >
           Create your first post

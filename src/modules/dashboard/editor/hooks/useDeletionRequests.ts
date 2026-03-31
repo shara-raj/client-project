@@ -33,7 +33,7 @@ export const useDeletionRequests = (authorId?: string) => {
         reason: req.reason,
         status: req.status,
         created_at: req.created_at,
-        posts: Array.isArray(req.posts) ? req.posts : [],
+        posts: req.posts ? [req.posts] : [],
       }));
 
       setRequests(formatted);

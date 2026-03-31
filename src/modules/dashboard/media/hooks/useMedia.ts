@@ -17,10 +17,10 @@ export const useMedia = () => {
 
     try {
       const res = await getMedia({
-        search,
-        category,
-        page,
-        limit,
+        search: search || "",
+        category: category || "",
+        page: page || 1,
+        limit: limit || 12,
       });
 
       setMedia(res.media);
