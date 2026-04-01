@@ -189,6 +189,11 @@ const CreatePostPage = () => {
       await submitForReview(currentPostId);
 
       toast.success("Submitted for review");
+      const redirectPath = getDashboardRouteByRole(role);
+
+      if (!redirectPath) return;
+
+      navigate(redirectPath);
     } catch (error: any) {
       toast.error(error.message || "Failed to submit for review");
     }

@@ -2,8 +2,10 @@ import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { useEffect } from "react";
-import { $getRoot } from "lexical";
+import { ImageNode } from "@/editor-system/lexical/nodes/ImageNode";
+import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
+import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
+import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 
 type Props = {
   content: any;
@@ -20,6 +22,9 @@ export const LexicalViewer = ({ content }: Props) => {
     onError(error: any) {
       console.error(error);
     },
+
+    nodes: [ImageNode, TableNode, TableCellNode, TableRowNode],
+
     editorState: JSON.stringify(content),
   };
 
@@ -29,7 +34,9 @@ export const LexicalViewer = ({ content }: Props) => {
         <RichTextPlugin
           contentEditable={<ContentEditable className="outline-none" />}
           placeholder={null}
+          ErrorBoundary={LexicalErrorBoundary}
         />
+        <TablePlugin />
         <HistoryPlugin />
       </div>
     </LexicalComposer>

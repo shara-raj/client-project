@@ -117,6 +117,22 @@ export const publishPost = async (postId: string) => {
   if (error) throw error;
 };
 
+export const requestEditPost = async (
+  postId: string,
+  feedback: string,
+) => {
+  const { error } = await supabase
+    .from("posts")
+    .update({
+      status: "needs_revision",
+      feedback,
+      updated_at: new Date(),
+    })
+    .eq("id", postId);
+
+  if (error) throw error;
+};
+
 // EDITOR WORKFLOW FUNCTIONS
 
 export const submitPostForReview = async (postId: string) => {

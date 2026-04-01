@@ -14,11 +14,22 @@ const MediaLibraryModal = ({ open, onClose, onSelect }: Props) => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [selecting, setSelecting] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
+  //1. EFFECT: Handle the debounce timer
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500); //500 ms delay
+
+    return () => clearTimeout(handler);
+  }, [search]);
+
+  //2. UPDATED: Load function uses debouncedSearch
   const loadMedia = async () => {
     try {
       const { media: fetchedMedia } = await getMedia({
-        search,
+        search: debouncedSearch,
         category,
         page,
         limit: 12,
@@ -30,9 +41,10 @@ const MediaLibraryModal = ({ open, onClose, onSelect }: Props) => {
     }
   };
 
+  // 3. EFFECT: Trigger load when debounced search or other filters change
   useEffect(() => {
     if (open) loadMedia();
-  }, [open, search, category, page]);
+  }, [open, debouncedSearch, category, page]);
 
   if (!open) return null;
 

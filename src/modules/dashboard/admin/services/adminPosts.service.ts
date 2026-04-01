@@ -1,7 +1,13 @@
 import { getAllPostsPaginatedForAdmin } from "@/services/supabase/post.service";
 import type { AdminPostListItem } from "../../post/types/post.types";
-import { softDeletePost } from "@/services/supabase/post.service";
-import { getPostById } from "@/services/supabase/post.service";
+import {
+  approvePost,
+  getPostById,
+  publishPost,
+  rejectPost,
+  requestEditPost,
+  softDeletePost,
+} from "@/services/supabase/post.service";
 
 export type PostFilter = "all" | "admin" | "editor";
 
@@ -35,4 +41,26 @@ export const deletePost = async (postId: string) => {
 
 export const fetchPostById = async (postId: string) => {
   return await getPostById(postId);
+};
+
+export const approvePostAdmin = async (postId: string) => {
+  await approvePost(postId);
+};
+
+export const publishPostAdmin = async (postId: string) => {
+  await publishPost(postId);
+};
+
+export const rejectPostAdmin = async (
+  postId: string,
+  feedback: string,
+) => {
+  await rejectPost(postId, feedback);
+};
+
+export const requestEditAdmin = async (
+  postId: string,
+  feedback: string,
+) => {
+  await requestEditPost(postId, feedback);
 };

@@ -2,9 +2,13 @@ import toast from "react-hot-toast";
 import ReviewQueueTable from "../components/ReviewQueueTable";
 import { useReviewQueue } from "../hooks/useReviewQueue";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { FeedbackModal } from "../components/FeedbackModal";
 
 const ReviewQueuePage = () => {
   const { posts, loading, approve, reject } = useReviewQueue();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -19,21 +23,23 @@ const ReviewQueuePage = () => {
   };
 
   //Reject post with feedback
-  const handleReject = async (id: string) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to reject this post?",
-    );
+  const handleReject = (id: string) => {
+    setSelectedPostId(id);
+    setIsModalOpen(true);
+  };
 
-    if (!confirmed) return;
-
-    const feedback = prompt("Optional: Add feedback for the editor") || "";
+  const handleFeedbackSubmit = async (feedback: string) => {
+    if (!selectedPostId) return;
 
     try {
-      await reject(id, feedback);
+      await reject(selectedPostId, feedback);
       toast.success("Post rejected");
     } catch (error: any) {
       toast.error(error.message || "Failed to reject post");
     }
+
+    setIsModalOpen(false);
+    setSelectedPostId(null);
   };
 
   //view post from editor
@@ -53,6 +59,13 @@ const ReviewQueuePage = () => {
         onApprove={handleApprove}
         onReject={handleReject}
         onView={handleView}
+      />
+
+      <FeedbackModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleFeedbackSubmit}
+        title="Reject Post"
       />
     </div>
   );

@@ -11,9 +11,39 @@ import { getStatusConfig } from "../utils/postStatus.util";
 import { StatusBadge } from "@/shared/components/ui/StatusBadge";
 import { ActionButton } from "@/shared/components/ui/ActionButton";
 import { getPostActions } from "../utils/postActions.util";
+import { FeedbackModal } from "../components/FeedbackModal";
+import { useState } from "react";
 
 export default function AdminPostsPage() {
-  const { posts, loading, filter, setFilter, handleDelete } = useAdminPosts();
+  const {
+    posts,
+    loading,
+    filter,
+    setFilter,
+    handleDelete,
+    handleApprove,
+    handlePublish,
+    handleReject,
+    handleRequestEdit,
+  } = useAdminPosts();
+
+  const [modalType, setModalType] = useState<"reject" | "edit" | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+
+  const handleFeedbackSubmit = async (feedback: string) => {
+    if (!selectedPostId) return;
+
+    if (modalType === "reject") {
+      await handleReject(selectedPostId, feedback);
+    }
+
+    if (modalType === "edit") {
+      await handleRequestEdit(selectedPostId, feedback);
+    }
+
+    setModalType(null);
+    setSelectedPostId(null);
+  };
 
   return (
     <div className="p-6 space-y-6 dashboard-theme">
@@ -86,13 +116,37 @@ export default function AdminPostsPage() {
                             label={formatActionLabel(action)}
                             variant={action === "delete" ? "danger" : "default"}
                             onClick={() => {
-                              if (action === "delete") {
-                                const confirDelete = window.confirm(
-                                  "Are you sure you want to move this post to Trash?",
-                                );
-                                if (confirDelete) {
-                                  handleDelete(post.id);
-                                }
+                              switch (action) {
+                                case "delete":
+                                  if (
+                                    window.confirm(
+                                      "Are you sure you want to move this post to Trash?",
+                                    )
+                                  ) {
+                                    handleDelete(post.id);
+                                  }
+                                  break;
+
+                                case "approve":
+                                  handleApprove(post.id);
+                                  break;
+
+                                case "publish":
+                                  handlePublish(post.id);
+                                  break;
+
+                                case "reject":
+                                  setSelectedPostId(post.id);
+                                  setModalType("reject");
+                                  break;
+
+                                case "request_edit":
+                                  setSelectedPostId(post.id);
+                                  setModalType("edit");
+                                  break;
+
+                                default:
+                                  break;
                               }
                             }}
                           />
@@ -106,6 +160,12 @@ export default function AdminPostsPage() {
           </Table>
         )}
       </div>
+      <FeedbackModal
+        isOpen={modalType !== null}
+        onClose={() => setModalType(null)}
+        onSubmit={handleFeedbackSubmit}
+        title={modalType === "reject" ? "Reject Post" : "Request Edit"}
+      />
     </div>
   );
 }
