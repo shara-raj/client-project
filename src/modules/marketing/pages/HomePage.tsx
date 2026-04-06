@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <main
       style={{
-        background: "url(/images/app-bg/pattern.png)",
+        background: "url(/images/app-bg/floral-pattern.png)",
       }}
     >
       <HeroSection />

@@ -64,14 +64,14 @@ const MainNavbar = () => {
                 }`}
               >
                 <img
-                  src="/images/favicon.png"
+                  src="/images/site/Logo Round.png"
                   alt="wellmoon veda logo"
-                  className="w-auto max-w-full h-12 md:h-14"
+                  className="w-auto max-w-full h-12 md:h-12"
                 />
                 <img
-                  src="/images/footerbanner.png"
+                  src="/images/site/Letter Logo.png"
                   alt="wellmoon veda tagline"
-                  className="w-auto max-w-full h-9 md:h-7"
+                  className="w-auto max-w-full h-9 md:h-8"
                 />
               </div>
             </Link>

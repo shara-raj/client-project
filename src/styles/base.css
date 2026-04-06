@@ -1,0 +1,44 @@
+/* GLOBAL BASE (SAFE + MINIMAL) */
+
+body {
+  color: var(--text-body);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.6;
+}
+
+/* HEADINGS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+/* TEXT */
+p {
+  margin-bottom: 1rem;
+}
+
+.subheading {
+  color: var(--text-subheading);
+}
+
+small {
+  color: var(--text-muted);
+}
+
+/* LINKS */
+a {
+  color: var(--link-default);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+}

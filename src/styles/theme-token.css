@@ -1,0 +1,54 @@
+/* GLOBAL DESIGN TOKENS (SHARED SYSTEM) */
+
+:root {
+  /* BRAND */
+  --color-primary: #3e5b3c;
+  --color-primary-dark: #2f4a2e;
+  --color-accent: #c5a033;
+
+  /* TEXT */
+  --text-heading: #1f2a1f;
+  --text-subheading: #4a4a4a;
+  --text-body: #2a2a2a;
+  --text-muted: #7a7a7a;
+
+  /* BASE BACKGROUNDS */
+  --bg-page: #faf8f2;
+
+  /* BORDER */
+  --border-soft: #e6dfc9;
+
+  /* CARD - GOLD */
+  --card-gold-bg: #eedaa3;
+  --card-gold-hover: #f5e7c2;
+  --card-gold-border: #e0c97a;
+  --card-gold-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  /* CARD - WHITE */
+  --card-white-bg: rgba(255, 255, 255, 0.92);
+  --card-white-hover: rgba(255, 255, 255, 0.96);
+  --card-white-border: #e6dfc9;
+  --card-white-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  /* BUTTONS */
+  --btn-primary-bg: #3e5b3c;
+  --btn-primary-hover: #2f4a2e;
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-border: #2f4a2e;
+  --btn-secondary-text: #2f4a2e;
+  --btn-secondary-hover-bg: #2f4a2e;
+  --btn-secondary-hover-text: #eef3ee;
+
+  /* LINKS */
+  --link-default: #3e5b3c;
+  --link-hover: #c5a033;
+
+  /* NAVBAR */
+  --navbar-bg: rgba(243, 238, 220, 0.85);
+  --navbar-border: rgba(224, 215, 189, 0.6);
+
+  /* OVERLAYS */
+  --overlay-light: rgba(250, 248, 242, 0.75);
+  --overlay-strong: rgba(255, 255, 255, 0.9);
+}

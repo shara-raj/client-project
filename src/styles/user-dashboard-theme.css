@@ -1,26 +1,34 @@
-/* USER DASHBOARD THEME (Healing Platform UI) */
+/* =====================================
+   USER DASHBOARD THEME
+   ===================================== */
 
 .user-theme {
+  /* BACKGROUNDS */
   --bg-page: #ffffff;
-  --bg-sidebar: #f2efe8;
+  --bg-sidebar: #f4f1ea;
 
+  /* CARDS */
   --card-bg: #ffffff;
   --card-soft: #f6f3ed;
 
-  --primary: #d4af37;
-  --secondary: #a5bfa4;
+  /* BRAND */
+  --primary: var(--color-accent);
+  --secondary: #a8c3a0;
 
-  --border-color: #82817f;
+  /* BORDER */
+  --border-color: var(--border-soft);
 
+  /* TEXT */
   --text-primary: #2f2f2f;
   --text-secondary: #5a5a5a;
-  --text-muted: #7a7a7a;
+  --text-muted: var(--text-muted);
 
-  --btn-primary: #d4af37;
+  /* BUTTONS */
+  --btn-primary: var(--color-accent);
   --btn-primary-hover: #e6c96a;
 
-  --btn-secondary: #a5bfa4;
-  --btn-secondary-hover: #bdd3bc;
+  --btn-secondary: #a8c3a0;
+  --btn-secondary-hover: #c2d8be;
 
   font-family: "Inter", sans-serif;
 
@@ -28,83 +36,74 @@
   color: var(--text-primary);
 }
 
-/* BACKGROUND UTILITIES */
+/* -------- BACKGROUNDS -------- */
 
 .user-theme .bg-page {
-  background-color: var(--bg-page);
+  background: var(--bg-page);
+}
+.user-theme .bg-sidebar {
+  background: var(--bg-sidebar);
+}
+.user-theme .bg-card {
+  background: var(--card-bg);
+}
+.user-theme .bg-soft {
+  background: var(--card-soft);
 }
 .user-theme .bg-primary {
-  background-color: var(--primary);
+  background: var(--primary);
 }
 .user-theme .bg-secondary {
-  background-color: var(--secondary);
+  background: var(--secondary);
 }
 
-.user-theme .bg-sidebar {
-  background-color: var(--bg-sidebar);
-}
-
-.user-theme .bg-card {
-  background-color: var(--card-bg);
-}
-
-.user-theme .bg-soft {
-  background-color: var(--card-soft);
-}
-
-/* TEXT UTILITIES*/
+/* -------- TEXT -------- */
 
 .user-theme .text-main {
   color: var(--text-primary);
 }
-
 .user-theme .text-sub {
   color: var(--text-secondary);
 }
-
 .user-theme .text-muted {
   color: var(--text-muted);
 }
 
-/* BORDER UTILITIES*/
+/* -------- BORDER -------- */
 
 .user-theme .border-main {
   border: 1px solid var(--border-color);
 }
+
 .user-theme .hover-border-main:hover {
   border: 1px solid var(--border-color);
 }
 
-/* CARD SYSTEM*/
+/* -------- CARD -------- */
 
 .user-theme .card {
-  background-color: var(--card-bg);
+  background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 16px;
 }
 
-/* BUTTON SYSTEM*/
+/* -------- BUTTONS -------- */
 
 .user-theme .btn-primary {
-  background-color: var(--btn-primary);
+  background: var(--btn-primary);
   color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: background 0.2s ease;
 }
 
 .user-theme .btn-primary:hover {
-  background-color: var(--btn-primary-hover);
+  background: var(--btn-primary-hover);
 }
 
 .user-theme .btn-secondary {
-  background-color: var(--btn-secondary);
+  background: var(--btn-secondary);
   color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
 }
 
 .user-theme .btn-secondary:hover {
-  background-color: var(--btn-secondary-hover);
+  background: var(--btn-secondary-hover);
 }

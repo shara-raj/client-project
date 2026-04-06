@@ -1,0 +1,51 @@
+/* MARKETING PAGE ONLY STYLES */
+
+/* PATTERN BACKGROUND */
+.marketing-bg {
+  background-image: url("/pattern2.png");
+  background-repeat: repeat;
+  background-size: 160px;
+}
+
+/* NAVBAR */
+.marketing-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid var(--navbar-border);
+  padding: 0.8rem 1.5rem;
+}
+
+/* NAV LINKS */
+.marketing-navbar a {
+  color: var(--color-primary-dark);
+  margin-right: 1.2rem;
+}
+
+.marketing-navbar a:hover {
+  color: var(--color-accent);
+}
+
+/* SECTIONS */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* OVERLAYS */
+.overlay-light {
+  background: var(--overlay-light);
+}
+
+.overlay-strong {
+  background: var(--overlay-strong);
+}

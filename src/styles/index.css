@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "./marketing.css";
+@import "./base.css";
+@import "./components.css";
+@import "./theme-token.css";
+@import "./dashboard-theme.css";
+@import "./user-dashboard-theme.css";
 
 /* Lexical Table Styling */
 

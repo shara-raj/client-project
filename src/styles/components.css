@@ -1,0 +1,74 @@
+/* SHARED COMPONENT STRUCTURE ONLY*/
+
+/* IMPORTANT:
+   NO strong visual identity here
+   dashboards can reuse safely
+*/
+
+/* CARD BASE */
+.card {
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.25s ease;
+}
+
+/* OPTIONAL VARIANTS (USED MAINLY IN MARKETING) */
+
+.card-gold {
+  background: var(--card-gold-bg);
+  border: 1px solid var(--card-gold-border);
+  box-shadow: var(--card-gold-shadow);
+}
+
+.card-gold:hover {
+  background: var(--card-gold-hover);
+}
+
+.card-white {
+  background: var(--card-white-bg);
+  border: 1px solid var(--card-white-border);
+  box-shadow: var(--card-white-shadow);
+}
+
+.card-white:hover {
+  background: var(--card-white-hover);
+}
+
+/* TEXT HELPERS */
+.card-title {
+  font-weight: 600;
+}
+.card-subheading {
+  color: var(--text-subheading);
+}
+.card-body {
+  color: var(--text-body);
+}
+
+/* BUTTON BASE */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* VARIANTS */
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+}
+
+.btn-secondary {
+  border: 1px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-text);
+}
+
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover-bg);
+  color: var(--btn-secondary-hover-text);
+}
