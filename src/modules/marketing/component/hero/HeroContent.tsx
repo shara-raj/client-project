@@ -1,5 +1,6 @@
 import { Play } from "lucide-react";
 import { scrollToId } from "../../../../utils/scrollToId";
+import Button from "@/components/ui/Button";
 
 const HeroContent = () => {
   const avatars = [
@@ -30,36 +31,35 @@ const HeroContent = () => {
       </div>
 
       {/* Video Pill */}
-      <button
-        className="inline-flex items-center font-medium gap-2 px-6 py-3 rounded-full text-black cursor-pointer bg-[#d4af37]/70 hover:bg-white"
+      <Button
+        variant="secondary"
+        className="inline-flex items-center font-medium gap-2 !rounded-full text-black !text-base cursor-pointer"
         aria-label="Watch introduction video"
       >
         <Play size={18} />
         Watch Intro
-      </button>
+      </Button>
 
       {/* CTAs */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <button
-          className="px-6 py-3 rounded-full bg-[#d4af37]/70 
-hover:bg-white transition-colors duration-300
-text-base font-medium shadow-soft cursor-pointer"
+        <Button
+          variant="secondary"
+          className="!rounded-full text-black !text-base cursor-pointer"
           onClick={() => {
             scrollToId("subscribe");
           }}
         >
           Subscribe Now
-        </button>
-        <button
-          className="px-6 py-3 rounded-full bg-[#d4af37]/70 
-hover:bg-white transition-colors duration-300
-text-base font-medium shadow-soft cursor-pointer"
+        </Button>
+        <Button
+          variant="secondary"
+          className="!rounded-full text-black !text-base cursor-pointer"
           onClick={() => {
             scrollToId("healing-paths");
           }}
         >
           Know More
-        </button>
+        </Button>
       </div>
 
       {/* Social Proof */}

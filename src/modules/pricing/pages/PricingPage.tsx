@@ -21,7 +21,7 @@ export default function PricingPage() {
   }
 
   return (
-    <Section className="bg-[url(/images/app-bg/pattern.png)] mt-30">
+    <Section className="bg-[url(/images/app-bg/pattern2.png)] py-16">
       <Container>
         {/* Header */}
         <div className="mx-auto mb-20 max-w-3xl text-center">

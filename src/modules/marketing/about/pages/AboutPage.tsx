@@ -5,7 +5,7 @@ import AboutClosingSection from "../sections/AboutClosingSection";
 
 const AboutPage = () => {
   return (
-    <div className="bg-[url(/images/app-bg/pattern.png)]">
+    <div className="bg-[url(/images/app-bg/pattern2.png)]">
       <AboutHeroSection />
       <PhilosophyIntroSection />
       <PhilosophyPillarsSection />

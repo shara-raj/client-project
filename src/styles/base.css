@@ -1,7 +1,10 @@
-/* GLOBAL BASE (SAFE + MINIMAL) */
+/* ================================
+   BASE STYLES
+   ================================ */
 
 body {
-  color: var(--text-body);
+  background: var(--color-bg-page);
+  color: var(--color-body);
   font-family:
     system-ui,
     -apple-system,
@@ -16,29 +19,40 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--text-heading);
+  color: var(--color-foreground);
   font-weight: 600;
 }
 
 /* TEXT */
-p {
-  margin-bottom: 1rem;
-}
-
 .subheading {
-  color: var(--text-subheading);
+  color: var(--color-subheading);
 }
 
 small {
-  color: var(--text-muted);
+  color: var(--color-muted-foreground);
 }
 
 /* LINKS */
 a {
-  color: var(--link-default);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--link-hover);
+  color: var(--color-accent);
+}
+
+/* CARD HOVER UTILITY */
+
+.card-hover {
+  @apply transition duration-300 ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.pattern-bg {
+  background-image: var(--background-pattern);
 }

@@ -13,7 +13,7 @@ export function BlogCard({ post }: BlogCardProps) {
   }
 
   return (
-    <article className="group bg-[#EEDAA3] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+    <article className="group bg-card-sand/70 hover:bg-card-sand/80 rounded-2xl overflow-hidden card-hover flex flex-col h-full">
       <div className="relative h-56 overflow-hidden">
         <img
           src={post.featured_image || "/images/hero/meditation-center.png"}

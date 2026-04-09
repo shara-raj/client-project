@@ -36,7 +36,7 @@ function HealingDropdown() {
       {/*Trigger */}
       <button
         onClick={() => setOpen(!open)}
-        className="font-body text-lg font-medium cursor-pointer text-foreground hover:text-[#be9d31] transition-colors"
+        className="font-body text-lg font-medium cursor-pointer text-primary-dark hover:text-accent transition-colors"
       >
         Healing Path
       </button>
@@ -49,7 +49,8 @@ function HealingDropdown() {
                 <Link
                   to={item.to}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-lg hover:bg-[#d4af37]/30 transition"
+                  className="block rounded-lg px-4 py-3 text-lg text-primary-dark hover:!text-primary
+    hover:bg-card-sand/30 transition"
                 >
                   {item.name}
                 </Link>

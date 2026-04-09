@@ -9,51 +9,39 @@ export default function SecondaryNavbar() {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF9F1] shadow-md">
+    <nav className="sticky top-0 z-50 bg-[#FFF9F1] shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* LOGO */}
           <Link to="/" className="flex items-center space-x-2">
             <img
-              src="/images/main logo.png"
+              src="/images/site/Logo.png"
               alt="logo"
-              className="h-14 md:h-25"
+              className="h-14 md:h-22"
             />
           </Link>
 
           {/* DESKTOP MENU */}
           <div className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className="text-lg font-medium hover:text-[#be9d31]">
+            <Link to="/" className="text-lg font-medium ">
               Home
             </Link>
 
             <HealingDropdown />
 
-            <Link
-              to="/plan-and-pricing"
-              className="text-lg font-medium hover:text-[#be9d31]"
-            >
+            <Link to="/pricing" className="text-lg font-medium ">
               Plans & Pricing
             </Link>
 
-            <Link
-              to="/about"
-              className="text-lg font-medium hover:text-[#be9d31]"
-            >
+            <Link to="/about" className="text-lg font-medium ">
               About
             </Link>
 
-            <Link
-              to="/blog"
-              className="text-lg font-medium hover:text-[#be9d31]"
-            >
+            <Link to="/blog" className="text-lg font-medium ">
               Blog
             </Link>
 
-            <Link
-              to="/contact"
-              className="text-lg font-medium hover:text-[#be9d31]"
-            >
+            <Link to="/contact" className="text-lg font-medium ">
               Contact
             </Link>
           </div>

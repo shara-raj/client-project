@@ -76,7 +76,7 @@ function MobileMenu({ isOpen, onClose }: Props) {
       </div>
       {/* OTHER LINKS */}
       <Link
-        to="/plan-and-pricing"
+        to="/pricing"
         onClick={onClose}
         className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
       >

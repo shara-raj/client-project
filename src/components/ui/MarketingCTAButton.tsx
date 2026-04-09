@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
+import Button from "./Button";
 
 type MarketingCTAProps = {
   children: ReactNode;
@@ -46,13 +47,14 @@ export function MarketingCTAButton({
   }
 
   return (
-    <button
+    <Button
+      variant="primary"
       type={type}
       onClick={handleClick}
       disabled={disabled}
       className={`${baseStyles} ${className}`}
     >
       {children}
-    </button>
+    </Button>
   );
 }

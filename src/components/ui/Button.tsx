@@ -20,14 +20,14 @@ export default function Button({
 
   const variantStyles =
     variant === "primary"
-      ? "bg-[#d4af37]/70 hover:bg-[#d4af37]/40 text-primary-foreground"
-      : "bg-[#d4af37]/70 hover:bg-neutral-200 border border-neutral-200 text-black cursor-pointer";
+      ? "bg-primary hover:bg-primary-dark text-white"
+      : "border border-accent text-accent bg-white hover:bg-accent hover:text-white";
 
   const widthStyles = fullWidth ? "w-full" : "";
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles} ${widthStyles} ${className}`}
+      className={`${baseStyles} ${variantStyles} ${widthStyles} ${className} cursor-pointer`}
       {...props}
     >
       {children}

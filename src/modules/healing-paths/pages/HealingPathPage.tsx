@@ -28,6 +28,11 @@ export default function HealingPathPage() {
 
   const { subscription } = useSubscription();
 
+  const auth = useAuth();
+  const user = auth?.user;
+
+  useUserActivity(user?.id, "healing_path", path?.id);
+
   if (loading) {
     return <div className="p-10">Loading healing path...</div>;
   }
@@ -44,15 +49,10 @@ export default function HealingPathPage() {
 
   const contentLoading = sessionsLoading || mudrasLoading;
 
-  const auth = useAuth();
-  const user = auth?.user;
-
-  useUserActivity(user?.id, "healing_path", path?.id);
-
   return (
-    <div className="max-w-5xl mx-auto space-y-10">
+    <div className="max-w-5xl mx-auto space-y-10 py-36 ">
       {/* HERO */}
-      <section>
+      <section className="text-center">
         <h1 className="text-3xl font-bold">{path.title}</h1>
         <p className="text-sub mt-2">{path.description}</p>
       </section>

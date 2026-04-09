@@ -34,12 +34,10 @@ export default function PlanCard({
         group
         rounded-2xl
         border border-neutral-200
-        bg-[#c1a88d]/70
+        bg-card-sand/70
+        hover:bg-card-sand/80
         p-8
-        transition-all
-        duration-300
-        hover:shadow-lg
-        hover:-translate-y-1
+        card-hover
         flex
         flex-col
       "

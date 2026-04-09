@@ -78,37 +78,22 @@ const MainNavbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link
-                to="/"
-                className="font-body text-lg font-medium text-foreground hover:text-[#be9d31] transition-colors"
-              >
+              <Link to="/" className="font-body text-lg font-medium ">
                 Home
               </Link>
 
               <HealingDropdown />
 
-              <Link
-                to="/plan-and-pricing"
-                className="font-body text-lg font-medium text-foreground hover:text-[#be9d31] transition-colors"
-              >
+              <Link to="/pricing" className="font-body text-lg font-medium ">
                 Plans & Pricing
               </Link>
-              <Link
-                to="/about"
-                className="font-body text-lg font-medium text-foreground hover:text-[#be9d31] transition-colors"
-              >
+              <Link to="/about" className="font-body text-lg font-medium ">
                 About
               </Link>
-              <Link
-                to="/blog"
-                className="font-body text-lg font-medium text-foreground hover:text-[#be9d31] transition-colors"
-              >
+              <Link to="/blog" className="font-body text-lg font-medium ">
                 Blog
               </Link>
-              <Link
-                to="/contact"
-                className="font-body text-lg font-medium text-foreground hover:text-[#be9d31] transition-colors"
-              >
+              <Link to="/contact" className="font-body text-lg font-medium ">
                 Contact
               </Link>
             </div>

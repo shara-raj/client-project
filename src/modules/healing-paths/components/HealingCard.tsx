@@ -8,7 +8,7 @@ interface HealingCardProps {
 export default function HealingCard({ healing }: HealingCardProps) {
   return (
     <Link to={`/healing-path/${healing.slug}`} className="block group">
-      <article className="rounded-3xl bg-[#CBB79E] p-10 text-center space-y-6 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
+      <article className="rounded-3xl bg-card-sand/70 hover:bg-card-sand/80 p-10 text-center space-y-6 card-hover h-full">
         {/* Video Circle */}
         <div className="flex justify-center">
           <div className="w-24 h-24 rounded-full overflow-hidden bg-white shadow-md">
@@ -25,12 +25,10 @@ export default function HealingCard({ healing }: HealingCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-semibold text-[#3E2F23]">
-          {healing.title}
-        </h3>
+        <h3 className="text-xl font-semibold">{healing.title}</h3>
 
         {/* Description */}
-        <p className="text-[#5C4A3A] leading-relaxed max-w-xs mx-auto">
+        <p className="text-foreground leading-relaxed max-w-xs mx-auto">
           {healing.shortDescription}
         </p>
       </article>

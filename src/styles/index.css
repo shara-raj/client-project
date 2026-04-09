@@ -1,7 +1,5 @@
 @import "tailwindcss";
-@import "./marketing.css";
 @import "./base.css";
-@import "./components.css";
 @import "./theme-token.css";
 @import "./dashboard-theme.css";
 @import "./user-dashboard-theme.css";
@@ -24,4 +22,50 @@ th {
 th {
   background-color: #f3f4f6;
   font-weight: 600;
+}
+
+@theme {
+  /* BRAND */
+  --color-primary: #3e5b3c;
+  --color-primary-dark: #2f4a2e;
+  --color-accent: #c5a033;
+
+  /* TEXT */
+  --color-foreground: #1f2a1f;
+  --color-muted-foreground: #7a7a7a;
+  --color-subheading: #4a4a4a;
+  --color-body: #2a2a2a;
+
+  /* BACKGROUND */
+  --color-bg-page: #faf8f2;
+
+  /* CARDS */
+  --color-card-sand: #c1a88d;
+
+  --color-card-white: rgba(255, 255, 255, 0.92);
+  --color-card-white-hover: rgba(255, 255, 255, 0.96);
+
+  /* BORDER */
+  --color-border-soft: #e6dfc9;
+
+  /* NAVBAR */
+  --color-navbar-bg: rgba(243, 238, 220, 0.85);
+  --color-navbar-border: rgba(224, 215, 189, 0.6);
+
+  /* OVERLAYS */
+  --color-overlay-light: rgba(250, 248, 242, 0.75);
+  --color-overlay-strong: rgba(255, 255, 255, 0.9);
+
+  /* SHADOWS */
+  --shadow-gold: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  /* RADIUS */
+  --radius-xl: 12px;
+
+  /* BACKDROP */
+  --blur-glass: 10px;
+
+  /* PATTERN */
+  --background-pattern: url("/images/app-bg/pattern2.png");
 }

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
 
 import PricingGrid from "../../component/pricing/PricingGrid";
 import { usePricingPreview } from "./usePricingPreview";
@@ -10,7 +11,7 @@ export default function PricingPreviewSection() {
   const plans = usePricingPreview();
 
   return (
-    <Section className="bg-neutral-50">
+    <Section>
       <Container>
         {/* Section Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
@@ -33,12 +34,13 @@ export default function PricingPreviewSection() {
 
         {/* View All CTA */}
         <div className="mt-16 text-center">
-          <button
-            onClick={() => navigate("/plan-and-pricing")}
-            className="text-sm font-medium text-neutral-700 underline-offset-4 hover:underline"
+          <Button
+            variant="secondary"
+            onClick={() => navigate("/pricing")}
+            className="!text-sm !text-subheading cursor-pointer"
           >
             View full pricing
-          </button>
+          </Button>
         </div>
       </Container>
     </Section>

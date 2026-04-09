@@ -1,15 +1,19 @@
 import { Outlet } from "react-router-dom";
-import SecondaryNavbar from "../../components/navigation/SecondaryNavbar";
 import Footer from "@/components/Footer/Footer";
+import SecondaryNavbar from "@/components/navigation/SecondaryNavbar";
 
-function SecondaryLayout() {
+function MainLayout() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <SecondaryNavbar />
-      <Outlet />
+
+      <main className="flex-grow pattern-bg">
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );
 }
 
-export default SecondaryLayout;
+export default MainLayout;

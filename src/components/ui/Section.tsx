@@ -16,7 +16,7 @@ export function Section({
   containerClassName = "",
 }: SectionProps) {
   return (
-    <section id={id} className={`py-20 lg:py-28 ${className}`}>
+    <section id={id} className={` ${className}`}>
       {container ? (
         <div className={`mx-auto max-w-6xl px-6 ${containerClassName}`}>
           {children}
