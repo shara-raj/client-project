@@ -7,12 +7,12 @@ const AboutHeroSection = () => {
 
   return (
     <Section>
-      <Container className="pt-30">
+      <Container className="pt-10">
         <div className="grid gap-16 md:grid-cols-2 items-center">
           <div className="space-y-6 max-w-md">
-            <p className="text-sm tracking-widest uppercase text-muted-foreground">
+            <h3 className="text-sm tracking-widest uppercase underline">
               {hero.label}
-            </p>
+            </h3>
 
             <h1 className="text-5xl font-semibold leading-tight">
               <span className="block underline">Who</span>

@@ -4,7 +4,7 @@ import EditorHeader from "@/modules/dashboard/editor/components/EditorHeader";
 
 const EditorLayout = () => {
   return (
-    <div className="dashboard-theme min-h-screen flex bg-page">
+    <div className="dashboard-theme min-h-screen flex bg-bg-page">
       {/* Sidebar */}
       <EditorSidebar />
 
@@ -14,7 +14,7 @@ const EditorLayout = () => {
         <EditorHeader />
 
         {/* Page Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 bg-bg-page">
           <Outlet />
         </main>
       </div>

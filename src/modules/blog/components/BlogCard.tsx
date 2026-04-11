@@ -41,7 +41,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
           <Link
             to={`/blog/${categorySlug || "uncategorized"}/${post.slug}`}
-            className="text-sm font-medium"
+            className="text-sm font-medium hover:!underline hover:!text-primary"
           >
             Read More
           </Link>

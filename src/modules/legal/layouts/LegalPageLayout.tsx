@@ -15,8 +15,8 @@ const LegalPageLayout = ({
   showMeta = true,
 }: LegalPageLayoutProps) => {
   return (
-    <Section className=" bg-[url(/images/app-bg/pattern.png)]">
-      <Container className="max-w-3xl pt-30">
+    <Section className=" bg-[url(/images/app-bg/pattern2.png)]">
+      <Container className="max-w-3xl py-10">
         <LegalHeader title={document.title} />
 
         {showMeta && (

@@ -9,7 +9,7 @@ export default function HealingLayout({ children }: HealingLayoutProps) {
     <main
       className="min-h-screen bg-white text-[#3E2F23]"
       style={{
-        backgroundImage: "url(/images/app-bg/pattern.png)",
+        backgroundImage: "url(/images/app-bg/pattern2.png)",
       }}
     >
       {children}

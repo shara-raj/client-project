@@ -16,9 +16,9 @@ const EditorTable = ({ editors, loading, onDelete }: Props) => {
   }
 
   return (
-    <div className="card overflow-hidden">
+    <div className=" overflow-hidden">
       <table className="w-full text-left">
-        <thead className="bg-card-header text-white">
+        <thead className=" text-white">
           <tr>
             <th className="p-4">Name</th>
             <th>Email</th>

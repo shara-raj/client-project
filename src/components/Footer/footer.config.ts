@@ -6,7 +6,7 @@ export const footerConfig: FooterData = {
     description:
       "Blending ancient Vedic wisdom with modern science for women's holistic wellness.",
     taglineImage: {
-      src: "/images/footerbanner.png",
+      src: "/images/site/Letter Logo.png",
       alt: "Ancient wisdom, modern wellness",
     },
   },

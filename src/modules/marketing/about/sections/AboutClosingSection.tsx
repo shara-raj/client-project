@@ -6,7 +6,7 @@ const AboutClosingSection = () => {
   const { closing } = aboutContent;
 
   return (
-    <Section className="bg-[#efece7]">
+    <Section className="bg-[#efece7] py-10">
       <Container>
         <div className="max-w-2xl mx-auto text-center space-y-4">
           <h2 className="text-2xl font-semibold">{closing.title}</h2>

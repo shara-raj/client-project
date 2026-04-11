@@ -15,7 +15,7 @@ export default function BlogPage() {
   });
 
   return (
-    <main className="bg-[url(/images/app-bg/pattern.png)] pt-30">
+    <main className="bg-[url(/images/app-bg/pattern2.png)]">
       {/* Page header */}
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-10">
         <h1 className="text-4xl font-semibold text-foreground">

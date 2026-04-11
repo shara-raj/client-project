@@ -55,7 +55,7 @@ const ContactForm = () => {
         <div className="p-4 bg-red-100 text-red-600 rounded-lg">{error}</div>
       )}
 
-      <form className="space-y-6" onSubmit={handleSubmit}>
+      <form className="space-y-6 pb-10" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Your name"

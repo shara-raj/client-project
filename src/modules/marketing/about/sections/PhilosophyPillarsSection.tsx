@@ -6,16 +6,14 @@ const PhilosophyPillarsSection = () => {
   return (
     <Section>
       <Container>
-        <div className="grid gap-12 md:grid-cols-3 text-center">
+        <div className="grid gap-12 md:grid-cols-3 text-center ">
           {aboutContent.philosophyPillars.map((pillar) => (
             <div
               key={pillar.title}
-              className="space-y-3 p-5 border rounded-lg border-black"
+              className="space-y-3 p-5 border rounded-lg border-black bg-card-sand/80"
             >
               <h3 className="font-semibold text-lg">{pillar.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {pillar.description}
-              </p>
+              <p className="text-sm  leading-relaxed">{pillar.description}</p>
             </div>
           ))}
         </div>

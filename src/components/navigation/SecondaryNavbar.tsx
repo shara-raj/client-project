@@ -30,7 +30,7 @@ export default function SecondaryNavbar() {
             <HealingDropdown />
 
             <Link to="/pricing" className="text-lg font-medium ">
-              Plans & Pricing
+              Pricing
             </Link>
 
             <Link to="/about" className="text-lg font-medium ">

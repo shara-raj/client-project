@@ -49,7 +49,7 @@ const MainNavbar = () => {
         >
           <div
             className={`
-            flex items-center justify-between
+            flex items-center justify-between gap-5
             transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
         ${isScrolled ? "h-20" : "h-24"}
           `}
@@ -57,9 +57,9 @@ const MainNavbar = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <div
-                className={`logoClass flex items-center w-40 md:w-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                className={`logoClass flex items-center pr-2 w-40 md:w-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   isScrolled
-                    ? "flex-row items-center space-x-2 scale-110"
+                    ? "flex-row items-center space-x-2 scale-110 "
                     : "flex-col items-center scale-120"
                 }`}
               >
@@ -77,7 +77,7 @@ const MainNavbar = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8 md:space-x-3 gap-3.5">
               <Link to="/" className="font-body text-lg font-medium ">
                 Home
               </Link>
@@ -85,7 +85,7 @@ const MainNavbar = () => {
               <HealingDropdown />
 
               <Link to="/pricing" className="font-body text-lg font-medium ">
-                Plans & Pricing
+                Pricing
               </Link>
               <Link to="/about" className="font-body text-lg font-medium ">
                 About
@@ -99,7 +99,7 @@ const MainNavbar = () => {
             </div>
 
             {/* Auth Buttons (Desktops) */}
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-2.5">
               <Button variant="primary" onClick={() => navigate("/auth/login")}>
                 Login
               </Button>

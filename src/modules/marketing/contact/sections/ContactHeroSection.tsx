@@ -7,7 +7,7 @@ const ContactHeroSection = () => {
 
   return (
     <Section>
-      <Container className="pt-30">
+      <Container className="py-10">
         <div className="max-w-3xl space-y-6">
           <h1 className="text-5xl font-medium tracking-tight">{title}</h1>
           {subtitle && (

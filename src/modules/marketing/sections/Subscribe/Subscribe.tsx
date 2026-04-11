@@ -61,7 +61,7 @@ const Subscribe = () => {
               Begin Your Healing Journey
             </h2>
 
-            <p className="text-lg max-w-2xl mx-auto leading-relaxed text-muted-foreground mb-10">
+            <p className="text-lg max-w-2xl mx-auto leading-relaxed mb-10">
               Subscribe to receive gentle reminders, healing stories, guided
               practices, and updates from WellMoon Veda. Join our community of
               women finding balance and clarity.
@@ -71,7 +71,7 @@ const Subscribe = () => {
             {status === "success" ? (
               <div className="animate-fade-in">
                 <p className="text-lg font-medium mb-2">You're in. 🌿</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm ">
                   Thank you for joining the WellMoon Veda community.
                 </p>
               </div>
@@ -85,8 +85,8 @@ const Subscribe = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={placeholder}
                     disabled={status === "loading"}
-                    className="flex-1 px-4 py-3 rounded-lg shadow-sm bg-white outline-none
-                      focus:ring-2 focus:ring-primary transition disabled:opacity-60"
+                    className="flex-1 px-4 py-3 rounded-lg shadow-sm bg-white outline-none ring-accent ring-1
+                      focus:ring-1 focus:ring-primary transition disabled:opacity-60"
                   />
 
                   <MarketingCTAButton

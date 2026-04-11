@@ -14,12 +14,12 @@ function MobileMenu({ isOpen, onClose }: Props) {
   if (!isOpen) return null;
 
   return (
-    <div className="lg:hidden mt-4 border-t pt-4 flex flex-col space-y-4">
+    <div className="lg:hidden mt-4 border-t pt-4  flex flex-col space-y-4">
       {/*Home */}
       <Link
         to="/"
         onClick={onClose}
-        className="text-base hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+        className="text-base hover:bg-card-sand hover:!text-primary-dark  w-fit p-1 p rounded-lg"
       >
         Home
       </Link>
@@ -28,10 +28,10 @@ function MobileMenu({ isOpen, onClose }: Props) {
       <div>
         <button
           onClick={() => setHealingOpen(!healingOpen)}
-          className="text-base flex justify-between hover:bg-[#d4af37]/70 w-200 p-1 rounded-lg"
+          className="text-base flex justify-between text-primary hover:bg-card-sand hover:!text-primary-dark w-full p-1 rounded-lg"
         >
           Healing Path
-          <span className="">{healingOpen ? "-" : "+"}</span>
+          <span className="text-primary">{healingOpen ? "-" : "+"}</span>
         </button>
 
         {healingOpen && (
@@ -39,35 +39,35 @@ function MobileMenu({ isOpen, onClose }: Props) {
             <Link
               to="/healing/wellness-yoga"
               onClick={onClose}
-              className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+              className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
             >
               Wellness Yoga
             </Link>
             <Link
               to="/healing/mudra-healing"
               onClick={onClose}
-              className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+              className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
             >
               Mudra Healing
             </Link>
             <Link
               to="/healing/aura-healing"
               onClick={onClose}
-              className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+              className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
             >
               Aura Healing
             </Link>
             <Link
               to="/healing/virtual-nature-healing"
               onClick={onClose}
-              className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+              className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
             >
               Virtual Nature Healing
             </Link>
             <Link
               to="/healing/sound-healing"
               onClick={onClose}
-              className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+              className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
             >
               Sound Healing
             </Link>
@@ -78,15 +78,15 @@ function MobileMenu({ isOpen, onClose }: Props) {
       <Link
         to="/pricing"
         onClick={onClose}
-        className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+        className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
       >
-        Plans & Pricing
+        Pricing
       </Link>
 
       <Link
         to="/about"
         onClick={onClose}
-        className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+        className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
       >
         About
       </Link>
@@ -94,7 +94,7 @@ function MobileMenu({ isOpen, onClose }: Props) {
       <Link
         to="/blog"
         onClick={onClose}
-        className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+        className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
       >
         Blog
       </Link>
@@ -102,7 +102,7 @@ function MobileMenu({ isOpen, onClose }: Props) {
       <Link
         to="/contact"
         onClick={onClose}
-        className="hover:bg-[#d4af37]/70 w-fit p-1 p rounded-lg"
+        className="hover:bg-card-sand hover:!text-primary-dark w-fit p-1 p rounded-lg"
       >
         Contact
       </Link>

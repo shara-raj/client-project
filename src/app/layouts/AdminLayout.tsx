@@ -6,11 +6,11 @@ import { AdminAnalyticsProvider } from "@/modules/dashboard/admin/providers/Admi
 export default function AdminLayout() {
   return (
     <AdminAnalyticsProvider>
-      <div className="dashboard-theme min-h-screen bg-page flex">
+      <div className="dashboard-theme min-h-screen bg-bg-page flex">
         <AdminSidebar />
         <div className="flex flex-col flex-1">
           <AdminHeader />
-          <main className="p-6 flex-1 overflow-y-auto">
+          <main className="p-6 flex-1 overflow-y-auto bg-bg-page">
             <Outlet />
           </main>
         </div>

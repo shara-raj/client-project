@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/modules/auth";
 
 function getPageTitle(pathname: string) {
   if (pathname.includes("dashboard")) return "Dashboard";
@@ -24,7 +23,7 @@ export default function AdminHeader() {
   }
 
   return (
-    <header className="bg-page border-b border-main px-6 py-4 flex items-center justify-between">
+    <header className=" border-b border-border-soft px-6 py-4 flex items-center justify-between">
       {/* Page Title */}
       <h1 className="text-lg font-semibold text-main">{title}</h1>
 
@@ -37,7 +36,7 @@ export default function AdminHeader() {
 
         {/* Logout */}
         <button
-          className="btn-secondary text-white px-3 py-1 rounded-md text-sm hover:text-main transition cursor-pointer"
+          className="btn-primary  px-3 py-1 rounded-md text-sm hover:text-main transition cursor-pointer"
           onClick={handleLogout}
         >
           Logout
