@@ -53,7 +53,7 @@ const Subscribe = () => {
   };
 
   return (
-    <section className="py-24 lg:py-32">
+    <section className="py-24 lg:py-32 pattern-bg">
       <div className="container mx-auto px-6">
         <RevealOnScroll>
           <div ref={ref} className="max-w-3xl mx-auto text-center">

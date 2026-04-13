@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import Button from "@/components/ui/Button";
 
 type Props = {
   onUpload: (file: File) => Promise<void>;
@@ -39,7 +40,7 @@ const MediaUploadDropzone = ({ onUpload, uploading, fileName }: Props) => {
       }}
       onDragLeave={() => setDragging(false)}
       onDrop={handleDrop}
-      className={`border-2 border-dashed rounded-lg p-10 text-center space-y-4
+      className={`bg-card-white border-2 border-dashed rounded-lg p-10 text-center space-y-4
       ${dragging ? "bg-soft border-primary" : "border-main"}`}
     >
       {uploading ? (
@@ -52,15 +53,18 @@ const MediaUploadDropzone = ({ onUpload, uploading, fileName }: Props) => {
         </div>
       ) : (
         <>
-          <div className="text-sub">Drag & Drop image here</div>
+          <div className="">
+            <h4>Drag & Drop image here</h4>
+          </div>
           <div className="text-muted text-sm">or</div>
 
-          <button
-            className="btn-prime px-4 py-2 rounded cursor-pointer"
+          <Button
+            variant="secondary"
+            className="btn-prime px-2! py-2! text-base! rounded cursor-pointer"
             onClick={() => fileInputRef.current?.click()}
           >
             Choose Image
-          </button>
+          </Button>
           <input
             ref={fileInputRef}
             type="file"

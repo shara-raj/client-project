@@ -8,11 +8,7 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 export default function HomePage() {
   return (
-    <main
-      style={{
-        background: "url(/images/app-bg/floral-pattern2.png)",
-      }}
-    >
+    <main>
       <HeroSection />
       <RevealOnScroll>
         <HealingPreviewSection />

@@ -293,14 +293,14 @@ const CreatePostPage = () => {
 
           <button
             onClick={handlePreview}
-            className="btn-secondary px-4 py-2 rounded text-white"
+            className="btn-secondary px-4 py-1 rounded text-white"
           >
             Preview
           </button>
 
           <button
             onClick={handleSave}
-            className="btn-prime px-4 py-2 rounded text-white"
+            className="btn-secondary px-4 py-1 rounded text-white"
           >
             {loading ? "Saving..." : "Save Draft"}
           </button>
@@ -314,7 +314,7 @@ const CreatePostPage = () => {
               {role === "admin" && (
                 <button
                   onClick={handlePublish}
-                  className="btn-prime px-4 py-2 rounded text-white"
+                  className="btn-primary px-4 py-1 rounded text-white"
                 >
                   {" "}
                   Publish{" "}

@@ -48,7 +48,7 @@ export interface CreatePostPayload {
 }
 
 export type AdminPost = Post & {
-  role: "admin" | "editor";
+  role: "admin" | "editor" | "unknown";
 };
 
 export type AdminPostListItem = {
@@ -57,5 +57,10 @@ export type AdminPostListItem = {
   status: PostStatus;
   author_id: string;
   created_at: string;
-  role: "admin" | "editor";
+  role: "admin" | "editor" | "unknown";
+
+  users?: {
+    name: string;
+    email: string;
+  }[];
 };

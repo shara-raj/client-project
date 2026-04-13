@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EditorTable from "../components/EditorTable";
 import { useEditors } from "../hooks/useEditors";
+import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 
 const EditorsPage = () => {
@@ -47,12 +48,13 @@ const EditorsPage = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Editors</h1>
 
-        <button
+        <Button
+          variant="primary"
           onClick={() => setShowModal(true)}
-          className="btn-prime px-4 py-2 rounded"
+          className="py-2! text-base!"
         >
           Add Editor
-        </button>
+        </Button>
       </div>
 
       <h2 className="text-lg font-semibold">Active Editors</h2>
@@ -65,9 +67,9 @@ const EditorsPage = () => {
 
       <h2 className="text-lg font-semibold mt-10">Disabled Editors</h2>
 
-      <div className="card overflow-hidden">
+      <div className="card px-4 overflow-hidden">
         <table className="w-full text-left">
-          <thead className="bg-card-header text-white">
+          <thead className=" text-white">
             <tr>
               <th className="p-4">Name</th>
               <th>Email</th>
@@ -125,17 +127,18 @@ const EditorsPage = () => {
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => setShowModal(false)}
-                className="btn-secondary px-3 py-2 rounded"
+                className="btn-secondary px-3 py-2 rounded-full"
               >
                 Cancel
               </button>
 
-              <button
+              <Button
+                variant="secondary"
                 onClick={handleCreate}
-                className="btn-prime px-3 py-2 rounded"
+                className=" px-2! py-2! text-base! rounded-full!"
               >
                 Create
-              </button>
+              </Button>
             </div>
           </div>
         </div>

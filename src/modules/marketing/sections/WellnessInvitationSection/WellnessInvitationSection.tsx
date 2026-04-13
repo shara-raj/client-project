@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 
 export function WellnessInvitationSection() {
   return (
-    <Section className="bg-gradient-warm">
+    <Section className="pattern-bg">
       <Container>
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-6">

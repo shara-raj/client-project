@@ -320,7 +320,11 @@ export const getAllPostsPaginatedForAdmin = async (
       status,
       created_at,
       author_id,
-      deleted_at
+      deleted_at,
+      users (
+      name,
+      email
+      )
     `,
       { count: "exact" },
     )
@@ -347,7 +351,7 @@ export const getAllPostsPaginatedForAdmin = async (
   // MERGE ROLE INTO POSTS
   const enrichedPosts: AdminPostListItem[] = (data ?? []).map((post) => ({
     ...post,
-    role: roleMap.get(post.author_id) ?? "admin",
+    role: roleMap.get(post.author_id) ?? "unknown",
   }));
 
   return {

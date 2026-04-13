@@ -15,14 +15,14 @@ const ReviewQueueTable = ({
 }: Props) => {
   if (loading) {
     return (
-      <div className="card p-6 animate-pulse text-sub">
+      <div className="animate-pulse text-sub">
         Fetching posts awaiting admin review...
       </div>
     );
   }
 
   return (
-    <div className="card overflow-hidden">
+    <div className=" card px-4 overflow-hidden">
       <table className="w-full text-left">
         <thead className="bg-card-header text-white">
           <tr>

@@ -64,7 +64,7 @@ const PostCategorySelect = ({ value, onChange }: Props) => {
         <button
           onClick={handleCreate}
           disabled={creating || !newCategory.trim()}
-          className="px-3 py-2 bg-[#d4af37] hover:bg-[#e5c663] text-white rounded disabled:opacity-50 cursor-pointer"
+          className="px-3 py-1 btn-secondary text-black rounded disabled:opacity-50 cursor-pointer"
         >
           {creating ? "..." : "Add"}
         </button>

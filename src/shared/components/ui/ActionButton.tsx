@@ -12,11 +12,11 @@ export const ActionButton = ({
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1 text-xs rounded-md transition
+      className={`px-3 py-1 text-xs rounded-md transition cursor-pointer
         ${
           variant === "danger"
             ? "bg-red-100 text-red-700 hover:bg-red-200"
-            : "bg-soft text-main hover-soft"
+            : "btn-secondary text-white"
         }`}
     >
       {label}

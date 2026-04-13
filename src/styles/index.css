@@ -12,6 +12,10 @@ table {
   margin: 1rem 0;
 }
 
+tbody {
+  background-color: #ffffff;
+}
+
 td,
 th {
   border: 1px solid #d1d5db; /* light gray */

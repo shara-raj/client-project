@@ -11,15 +11,23 @@ export const useMediaLibrary = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadFileName, setUploadFileName] = useState<string | null>(null);
 
+  const [page, setPage] = useState(1);
+  const [limit] = useState(12);
+  const [total, setTotal] = useState(0);
+
+  const totalPages = Math.ceil(total / limit);
+
   const fetchMedia = async () => {
     try {
       setLoading(true);
 
       const data = await getMedia();
 
-      setMedia(data);
+      setMedia(data.media ?? []);
+      setTotal(data.total ?? 0);
     } catch (error) {
       console.error("Media load error", error);
+      setMedia([]);
     } finally {
       setLoading(false);
     }
@@ -58,18 +66,24 @@ export const useMediaLibrary = () => {
   };
 
   const remove = async (id: string, url: string) => {
-    try {
-      await deleteMedia(id, url);
-
-      await fetchMedia();
-    } catch (error: any) {
-      throw error;
-    }
+    await deleteMedia(id, url);
+    await fetchMedia();
   };
 
   useEffect(() => {
     fetchMedia();
-  }, []);
+  }, [page]);
+
+  //Pagination Controls
+  const nextPage = () => {
+    if (page < totalPages) setPage((p) => p + 1);
+  };
+  const prevPage = () => {
+    if (page > 1) setPage((p) => p - 1);
+  };
+  const goToPage = (p: number) => {
+    setPage(p);
+  };
 
   return {
     media,
@@ -78,5 +92,10 @@ export const useMediaLibrary = () => {
     remove,
     uploading,
     uploadFileName,
+    page,
+    totalPages,
+    nextPage,
+    prevPage,
+    goToPage,
   };
 };

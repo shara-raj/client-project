@@ -95,7 +95,13 @@ export default function AdminPostsPage() {
                     <TableCell>{post.title}</TableCell>
 
                     <TableCell>
-                      {post.role === "admin" ? "Admin" : "Editor"}
+                      <div className="flex flex-col">
+                        {post.role === "admin"
+                          ? "Admin"
+                          : post.role === "editor"
+                            ? "Editor"
+                            : "Unknown"}
+                      </div>
                     </TableCell>
 
                     <TableCell>

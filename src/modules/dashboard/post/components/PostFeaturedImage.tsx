@@ -50,7 +50,7 @@ const PostFeaturedImage = ({ value, onChange }: Props) => {
       ) : (
         <button
           onClick={() => setLibraryOpen(true)}
-          className="btn-prime px-3 py-2 rounded text-white w-full"
+          className="btn-secondary px-3 py-1 rounded text-white w-full"
         >
           Select Featured Image
         </button>

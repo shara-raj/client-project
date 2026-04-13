@@ -2,12 +2,23 @@ import MediaGrid from "../components/MediaGrid";
 import { useMediaLibrary } from "../hooks/useMediaLibrary";
 import MediaUploadDropzone from "../../media/components/MediaUploadDropzone";
 import { useAuth } from "@/modules/auth";
-import toast from "react-hot-toast";
 import { withToast } from "@/utils/withToast";
+import Pagination from "../../media/components/Pagination";
 
 const MediaLibraryPage = () => {
-  const { media, loading, upload, remove, uploading, uploadFileName } =
-    useMediaLibrary();
+  const {
+    media,
+    loading,
+    upload,
+    remove,
+    uploading,
+    uploadFileName,
+    page,
+    totalPages,
+    nextPage,
+    prevPage,
+    goToPage,
+  } = useMediaLibrary();
 
   const { user } = useAuth() ?? {};
 
@@ -44,6 +55,14 @@ const MediaLibraryPage = () => {
       {/* Media Grid */}
 
       <MediaGrid media={media} loading={loading} onDelete={handleDelete} />
+
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onPageChange={goToPage}
+        onNext={nextPage}
+        onPrev={prevPage}
+      />
     </div>
   );
 };

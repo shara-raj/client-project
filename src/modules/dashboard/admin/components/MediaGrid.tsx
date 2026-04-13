@@ -43,13 +43,6 @@ const MediaGrid = ({ media, loading, onDelete }: Props) => {
             {/* Hover Actions */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 transition">
               <button
-                onClick={() => copyUrl(item.url)}
-                className="btn-prime text-xs px-2 py-1 rounded cursor-pointer"
-              >
-                Copy
-              </button>
-
-              <button
                 onClick={() => {
                   toast((t) => (
                     <div className="flex flex-col gap-2">

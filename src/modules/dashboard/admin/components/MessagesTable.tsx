@@ -15,7 +15,7 @@ const MessagesTable = ({ messages, loading }: Props) => {
 
   if (loading) {
     return (
-      <div className="card p-6">
+      <div className="card px-4">
         <p className="text-muted">Loading messages...</p>
       </div>
     );
@@ -23,14 +23,14 @@ const MessagesTable = ({ messages, loading }: Props) => {
 
   if (!messages.length) {
     return (
-      <div className="card p-6 text-center text-muted">
+      <div className="card px-4 text-center text-muted">
         No messages received yet.
       </div>
     );
   }
 
   return (
-    <div className="card overflow-x-auto">
+    <div className="card px-4 overflow-x-auto">
       <table className="w-full text-left">
         <thead className="bg-card-header text-white">
           <tr>

@@ -33,7 +33,7 @@ const PostTagsInput = ({ value, onChange }: Props) => {
 
         <button
           onClick={addTag}
-          className="btn-prime px-3 py-1 text-white rounded"
+          className="btn-secondary px-3 py-1 text-white rounded"
         >
           Add
         </button>
