@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "@/modules/auth";
 
 function getPageTitle(pathname: string) {
   if (pathname.includes("dashboard")) return "Dashboard";
@@ -13,30 +14,41 @@ function getPageTitle(pathname: string) {
 
 export default function AdminHeader() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const { profile, logout } = useAuth();
 
   const title = getPageTitle(location.pathname);
 
-  const navigate = useNavigate();
-  function handleLogout() {
-    // Clear auth state and redirect to login
+  const name = profile?.name?.trim() || "Admin";
+  const initial = name.charAt(0).toUpperCase();
+
+  const handleLogout = async () => {
+    await logout();
     navigate("/auth/login");
-  }
+  };
 
   return (
-    <header className=" border-b border-border-soft px-6 py-4 flex items-center justify-between">
+    <header className="border-b border-border-soft px-6 py-4 flex items-center justify-between">
       {/* Page Title */}
       <h1 className="text-lg font-semibold text-main">{title}</h1>
 
       {/* Right Section */}
       <div className="flex items-center gap-4">
-        {/* Admin Avatar */}
-        <div className="w-9 h-9 rounded-full bg-soft flex items-center justify-center text-sm font-medium">
-          A
+        {/* Profile Section */}
+        <div className="flex items-center gap-2">
+          {/* Avatar */}
+          <div className="w-9 h-9 rounded-full bg-soft flex items-center justify-center text-sm font-medium text-main">
+            {initial}
+          </div>
+
+          {/* Name */}
+          <span className="text-sm text-main">{name}</span>
         </div>
 
         {/* Logout */}
         <button
-          className="btn-primary  px-3 py-1 rounded-md text-sm hover:text-main transition cursor-pointer"
+          className="btn-primary px-3 py-1 rounded-md text-sm hover:opacity-90 transition cursor-pointer"
           onClick={handleLogout}
         >
           Logout

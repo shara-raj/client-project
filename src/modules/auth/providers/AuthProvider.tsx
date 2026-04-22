@@ -1,46 +1,119 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/services/supabase/supabaseClient";
 import { AuthContext } from "../context/AuthContext";
 import { loginUser } from "@/services/supabase/auth.service";
+import type {
+  LoginCredentials,
+  AuthRole,
+  UserProfile,
+  AuthContextValue,
+} from "../types/auth.types";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+
   const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [role, setRole] = useState<AuthRole | null>(null);
+
+  const initialized = useRef(false);
+
+  const loadUserData = async (userId: string) => {
+    try {
+      const [roleRes, profileRes] = await Promise.all([
+        supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", userId)
+          .maybeSingle(),
+        supabase
+          .from("users")
+          .select("id, name, email")
+          .eq("id", userId)
+          .maybeSingle(),
+      ]);
+
+      console.log("LoadUserData called for:", userId);
+
+      const rawRole = roleRes?.data?.role;
+      console.log("Role fetched:", rawRole);
+      if (rawRole === "admin" || rawRole === "editor" || rawRole === "user") {
+        setRole(rawRole);
+      } else {
+        console.warn(`Unexpected role: ${rawRole}. Defaulting to 'user'.`);
+        setRole("user");
+      }
+
+      if (profileRes?.data) {
+        setProfile(profileRes.data as UserProfile);
+        console.log("Profile fetched:", profileRes.data);
+      } else {
+        setProfile(null);
+      }
+    } catch (err) {
+      console.error("Error loading user extended data:", err);
+      setRole("user");
+    }
+  };
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data.user ?? null);
-      setLoading(false);
+    if (initialized.current) return;
+    initialized.current = true;
+
+    const initialize = async () => {
+      try {
+        setLoading(true);
+        const { data } = await supabase.auth.getUser();
+        const currentUser = data.user ?? null;
+
+        if (currentUser) {
+          await loadUserData(currentUser.id);
+        }
+
+        setUser(currentUser);
+      } catch (err) {
+        console.error("Auth init failed: ", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    getUser();
+    initialize();
 
     const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
+      async (event, session) => {
+        const currentUser = session?.user ?? null;
+
+        if (currentUser) {
+          await loadUserData(currentUser.id);
+        } else {
+          setProfile(null);
+          setRole(null);
+        }
+
+        console.log("Auth state changed:", event);
+        console.log("Session user:", session?.user);
+
+        setUser(currentUser);
+
+        console.log("Setting user AFTER role load:", currentUser?.id);
       },
     );
 
-    return () => {
-      listener.subscription.unsubscribe();
-    };
+    return () => listener.subscription.unsubscribe();
   }, []);
 
-  const login = async ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => {
+  const login = async (credentials: LoginCredentials) => {
     setIsLoading(true);
-
     try {
-      const user = await loginUser(email, password);
-      return user;
+      const result = await loginUser(credentials.email, credentials.password);
+      if (result) {
+        await loadUserData(result.id);
+        setUser(result);
+      }
+      return result;
     } finally {
       setIsLoading(false);
     }
@@ -57,16 +130,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
+  const fetchProfile = async (userId: string) => {
+    const { data, error } = await supabase
+      .from("users")
+      .select("id, name, email")
+      .eq("id", userId)
+      .single();
+
+    if (!error && data) {
+      setProfile(data);
+    }
+  };
+
+  const refreshProfile = async () => {
+    if (!user) return;
+    await fetchProfile(user.id);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
+        profile,
+        role,
         loading,
         isLoading,
         login,
         logout: signOut,
         signInWithGoogle,
         isAuthenticated: !!user,
+        refreshProfile,
       }}
     >
       {children}

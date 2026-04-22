@@ -17,18 +17,28 @@ export interface ResetPasswordPayload {
   email: string;
 }
 
-// Auth Context 
+// Auth Context
 export interface AuthContextValue {
   user: User | null;
+  profile: UserProfile | null;
+  role: AuthRole | null;
 
   loading: boolean;
   isLoading: boolean;
   isAuthenticated: boolean;
 
-  login: (credentials: LoginCredentials) => Promise<User>;
+  login: (credentials: LoginCredentials) => Promise<User | null>;
 
   logout: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+
+  refreshProfile: () => Promise<void>;
 }
 
 export type AuthRole = "user" | "admin" | "editor";
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+}

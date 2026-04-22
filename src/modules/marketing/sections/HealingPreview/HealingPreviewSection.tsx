@@ -3,7 +3,7 @@ import { healingPaths } from "../../../healing-paths/config/healing.config";
 
 export default function HealingPreviewSection() {
   return (
-    <section className="py-28 pattern-bg">
+    <section className="py-28">
       <div className="text-center mb-16 space-y-4">
         <h2 className="text-3xl font-semibold ">Explore Our Healing Paths</h2>
         <p className=" max-w-2xl mx-auto">

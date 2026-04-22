@@ -86,7 +86,7 @@ const EditorsPage = () => {
                 <td>
                   <button
                     onClick={() => setEditorToActivate(editor.id)}
-                    className="btn-prime px-3 py-1 rounded"
+                    className="btn-secondary px-3 py-1 rounded"
                   >
                     Reactivate
                   </button>
@@ -175,7 +175,7 @@ const EditorsPage = () => {
                     toast.error(error.message || "Failed to diable editor");
                   }
                 }}
-                className="btn-prime px-3 py-2 rounded"
+                className="btn-primary px-3 py-2 rounded"
               >
                 Disable Editor
               </button>
@@ -215,7 +215,7 @@ const EditorsPage = () => {
                     toast.error(error.message || "Failed to reactivate editor");
                   }
                 }}
-                className="btn-prime px-3 py-2 rounded"
+                className="btn-primary px-3 py-2 rounded"
               >
                 Reactivate Editor
               </button>

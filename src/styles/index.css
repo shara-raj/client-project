@@ -29,6 +29,10 @@ th {
   color: black;
 }
 
+button {
+  cursor: pointer;
+}
+
 @theme {
   /* BRAND */
   --color-primary: #3e5b3c;

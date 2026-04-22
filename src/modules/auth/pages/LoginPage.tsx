@@ -6,35 +6,35 @@ import { PasswordField } from "../components/PasswordField";
 import { AuthButton } from "../components/AuthButton";
 import { AuthFooterLink } from "../components/AuthFooterLink";
 import { useAuth } from "../providers/AuthProvider";
-import { useUserRole } from "../hooks/useUserRole";
 import { getDashboardRouteByRole } from "../utils/roleRedirect";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
-  const { login, signInWithGoogle, isLoading, user, loading } = useAuth();
+  const { login, signInWithGoogle, isLoading, user, loading, role } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const { role, loading: roleLoading } = useUserRole();
-
   useEffect(() => {
+    console.log("🧠 useEffect triggered");
+
+    console.log("➡ loading:", loading);
+    console.log("➡ user:", user);
+    console.log("➡ role:", role);
     if (loading) return;
 
     if (!user) return;
 
-    if (roleLoading) return;
-
     if (!role) return;
+
+    console.log("Navigating Now...");
 
     const redirectPath = getDashboardRouteByRole(role);
 
-    if (redirectPath) {
-      navigate(redirectPath);
-    }
-  }, [user, loading, role, roleLoading, navigate]);
+    navigate(redirectPath);
+  }, [user, loading, role, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,6 +59,7 @@ export default function LoginPage() {
           : error.message || "Login failed",
       );
     }
+    console.log("🟡 Login success, waiting for auth state...");
   };
 
   const hangleGoogleLogin = async () => {

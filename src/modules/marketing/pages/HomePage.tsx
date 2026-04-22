@@ -8,7 +8,7 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="pattern-bg">
       <HeroSection />
       <RevealOnScroll>
         <HealingPreviewSection />

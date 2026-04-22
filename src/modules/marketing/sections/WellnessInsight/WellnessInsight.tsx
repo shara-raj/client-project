@@ -15,7 +15,7 @@ export function WellnessInsight() {
   });
 
   return (
-    <Section id="blog" className="py-24 pattern-bg">
+    <Section id="blog" className="py-24">
       <InsightHeader />
 
       <InsightPreview posts={recentPosts} />

@@ -11,7 +11,7 @@ export default function PricingPreviewSection() {
   const plans = usePricingPreview();
 
   return (
-    <Section className="pattern-bg">
+    <Section>
       <Container>
         {/* Section Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
