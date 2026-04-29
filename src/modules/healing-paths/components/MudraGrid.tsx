@@ -1,11 +1,31 @@
 import MudraCard from "./MudraCard";
+import { useState } from "react";
+import MudraModal from "./MudraModal";
+import type { Mudra } from "../types/healing.types";
 
-export default function MudraGrid({ mudras }: any) {
+interface Props {
+  mudras: Mudra[];
+}
+
+export default function MudraGrid({ mudras }: Props) {
+  const [selectedMudra, setSelectedMudra] = useState<Mudra | null>(null);
+
   return (
-    <div className="grid md:grid-cols-3 gap-6">
-      {mudras.map((mudra: any) => (
-        <MudraCard key={mudra.id} mudra={mudra} />
-      ))}
-    </div>
+    <>
+      <div className="grid md:grid-cols-3 gap-6">
+        {mudras.map((mudra) => (
+          <MudraCard
+            key={mudra.id}
+            mudra={mudra}
+            onClick={() => setSelectedMudra(mudra)}
+          />
+        ))}
+      </div>
+      <MudraModal
+        isOpen={!!selectedMudra}
+        mudra={selectedMudra}
+        onClose={() => setSelectedMudra(null)}
+      />
+    </>
   );
 }

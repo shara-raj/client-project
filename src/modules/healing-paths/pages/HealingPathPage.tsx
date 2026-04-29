@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useHealingPath } from "../hooks/useHealingPath";
 import { useHealingSessions } from "../hooks/useHealingSessions";
 import { useMudras } from "../hooks/useMudras";
 import { useSubscription } from "@/modules/dashboard/user/hooks/useSubscription";
+import { getMudrasByCondition } from "@/services/supabase/healingContent.service";
 
 import MudraGrid from "../components/MudraGrid";
 import VideoSessionList from "../components/VideoSessionList";
@@ -70,7 +72,7 @@ export default function HealingPathPage() {
         {contentLoading ? (
           <HealingSkeleton />
         ) : (
-          <LockedContentGate isUnlocked={isSubscribed}>
+          <LockedContentGate isUnlocked={false}>
             {isMudraPath ? (
               <MudraGrid mudras={mudras} />
             ) : (

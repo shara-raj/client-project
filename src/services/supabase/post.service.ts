@@ -370,3 +370,25 @@ export const softDeletePost = async (postId: string) => {
 
   if (error) throw error;
 };
+
+export interface SearchPostResult {
+  title: string;
+  content: string;
+  slug: string;
+}
+
+export const searchBlogPosts = async (
+  query: string,
+): Promise<SearchPostResult[]> => {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("title, content, slug")
+    .eq("status", "published")
+    .is("deleted_at", null)
+    .or(`title.ilike.%${query}%`)
+    .limit(6);
+
+  if (error) throw error;
+
+  return data ?? [];
+};
