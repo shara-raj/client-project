@@ -244,9 +244,12 @@ export const getPublishedPostsPaginated = async (
   const { data, count, error } = await supabase.from("posts").select(
     ` id, title, slug, content, created_at, featured_image, category_id, categories (id, name, slug) `,
     { count: "exact" },
-  ).eq("status", "published").is("deleted_at", null).order("created_at", {
-    ascending: false,
-  }).range(from, to);
+  ).eq("status", "published").is("deleted_at", null).order(
+    "created_at",
+    {
+      ascending: false,
+    },
+  ).range(from, to);
   if (error) throw error;
   return { data: data ?? [], total: count ?? 0 };
 };
@@ -270,6 +273,8 @@ export const getPublishedPostsRaw = async () => {
     .eq("status", "published")
     .is("deleted_at", null)
     .order("created_at", { ascending: false });
+
+  console.log("Blog Service Response: ", { data, error });
 
   if (error) throw error;
 
@@ -373,7 +378,7 @@ export const softDeletePost = async (postId: string) => {
 
 export interface SearchPostResult {
   title: string;
-  content: string;
+  content: unknown;
   slug: string;
 }
 
@@ -385,7 +390,7 @@ export const searchBlogPosts = async (
     .select("title, content, slug")
     .eq("status", "published")
     .is("deleted_at", null)
-    .or(`title.ilike.%${query}%`)
+    .ilike("title", `%${query}%`)
     .limit(6);
 
   if (error) throw error;
