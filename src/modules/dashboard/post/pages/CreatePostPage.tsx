@@ -8,7 +8,6 @@ import PostSEOFields from "../components/PostSEOFields";
 import PostCategorySelect from "../components/PostCategorySelect";
 import PostPreviewModal from "../components/PostPreviewModal";
 import { useAuth } from "@/modules/auth";
-import { useAutosaveDraft } from "../hooks/useAutosaveDraft";
 import { loadDraftBackup, clearDraftBackup } from "../utils/draftRecovery";
 import { useUserRole } from "@/modules/auth/hooks/useUserRole";
 import { useEffect } from "react";
