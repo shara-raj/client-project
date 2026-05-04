@@ -60,12 +60,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const initialize = async () => {
       try {
         setLoading(true);
-        const { data } = await supabase.auth.getUser();
-        const currentUser = data.user ?? null;
 
-        if (currentUser) {
-          await loadUserData(currentUser.id);
-        }
+        const { data } = await supabase.auth.getSession();
+        const currentUser = data.session?.user ?? null;
 
         setUser(currentUser);
       } catch (err) {
@@ -87,6 +84,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return () => listener.subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (!user?.id) {
+      setProfile(null);
+      setRole(null);
+      return;
+    }
+
+    loadUserData(user.id);
+  }, [user?.id]);
 
   const login = async (credentials: LoginCredentials) => {
     setIsLoading(true);
