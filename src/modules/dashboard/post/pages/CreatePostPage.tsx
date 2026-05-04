@@ -66,13 +66,10 @@ const CreatePostPage = () => {
     if (!slug) {
       setSlug(generateSlug(value));
     }
-
-    triggerSave();
   };
 
   const handleFeaturedImageChange = (url: string | null) => {
     setFeaturedImage(url);
-    triggerSave();
   };
 
   const setPostId = (id: string | null) => {
@@ -87,6 +84,14 @@ const CreatePostPage = () => {
       toast.error("User not loaded yet");
       return;
     }
+
+    if (contentState.length < 50) return;
+    if (isSavingRef.current) {
+      toast("Please wait, saving in progress...");
+      return;
+    }
+
+    isSavingRef.current = true;
 
     try {
       if (!postIdRef.current) {
@@ -119,6 +124,8 @@ const CreatePostPage = () => {
       const message =
         error instanceof Error ? error.message : "Failed to save draft";
       toast.error(message);
+    } finally {
+      isSavingRef.current = false;
     }
   };
 
@@ -217,9 +224,11 @@ const CreatePostPage = () => {
     )
       return;
 
-    try {
-      isSavingRef.current = true;
+    if (isSavingRef.current) return;
 
+    isSavingRef.current = true;
+
+    try {
       if (!postIdRef.current) {
         const post = await saveDraft(title, contentState, authorId, slug, {
           post_type: postType,
@@ -251,7 +260,7 @@ const CreatePostPage = () => {
       isSavingRef.current = false;
     }
   };
-  const { triggerSave, status } = useAutosaveDraft(autosave, 3000);
+  const { triggerSave, status } = useAutosaveDraft(autosave, 8000);
 
   const handlePreview = () => {
     setPreviewOpen(true);
@@ -315,6 +324,7 @@ const CreatePostPage = () => {
           <button
             onClick={handleSave}
             className="btn-secondary px-4 py-1 rounded text-white"
+            disabled={isSavingRef.current || loading}
           >
             {loading ? "Saving..." : "Save Draft"}
           </button>
