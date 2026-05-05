@@ -81,6 +81,10 @@ const CreatePostPage = () => {
   // ---------------- SAVE DRAFT ----------------
 
   const handleSave = async () => {
+    console.log("[SAVE CLICK]", {
+      isSaving: isSavingRef.current,
+      loading,
+    });
     if (!authorId) {
       toast.error("User not loaded yet");
       return;

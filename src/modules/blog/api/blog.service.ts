@@ -33,6 +33,8 @@ const mapToBlogPost = (post: unknown): BlogPost => {
   const p = post as UnknownRecord;
   const category = normalizeCategory(p.categories);
 
+  console.log("RAW DB DATA:", p);
+
   return {
     id: p.id as string,
     title: p.title as string,
@@ -175,7 +177,7 @@ const calculateReadingTime = (content: unknown): number => {
   return Math.max(1, Math.ceil(text.split(" ").length / 200));
 };
 
-const normalizeContent = (content: unknown) => {
+const normalizeContent = (content: unknown): RichTextBlock[] | string => {
   if (!content) return [];
 
   let blocks: unknown[] = [];
@@ -204,7 +206,7 @@ const normalizeContent = (content: unknown) => {
         blocks = parsed;
       }
     } catch {
-      return [];
+      return content;
     }
   } else {
     return [];

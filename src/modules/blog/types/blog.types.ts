@@ -60,7 +60,7 @@ export interface BlogPost {
   excerpt: string;
   featured_image?: string | null;
 
-  content: RichTextBlock[];
+  content: string | RichTextBlock[];
 
   contentType: ContentType;
 
