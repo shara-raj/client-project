@@ -14,7 +14,7 @@ export default function LockedContentGate({ isUnlocked, children }: Props) {
 
   return (
     <div className="relative mt-16 bg-white">
-      <div className="blur-sm pointer-events-none">{children}</div>
+      <div className="blur-md pointer-events-none">{children}</div>
 
       <div className="absolute inset-0 flex flex-col items-center mx-auto mt-8 rounded-lg text-center p-8 w-fit h-fit bg-card-sand/70 ">
         <h3 className="text-lg font-semibold text-main">
