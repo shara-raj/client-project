@@ -46,13 +46,13 @@ function HealingDropdown() {
           ${open ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-2 invisible"}
         `}
       >
-        <ul className="space-y-2">
+        <ul className="space-y-1">
           {healingPaths.map((item) => (
             <li key={item.to}>
               <Link
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="block rounded-lg px-4 py-3 text-lg text-primary hover:!text-primary hover:bg-card-sand/30 transition"
+                className="block rounded-lg px-4 py-1 text-base text-primary hover:!text-primary hover:bg-card-sand/30 transition"
               >
                 {item.name}
               </Link>
