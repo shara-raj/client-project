@@ -14,6 +14,7 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What is Aura & Why It Matters",
+        variant: "minimal",
         content:
           "The human body is surrounded by a biofield, often referred to as the aura—an energy field that reflects physical, emotional, and mental states. When this energy field becomes imbalanced, it may be experienced as:",
         points: [
@@ -25,6 +26,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What is Biofield & Aura Alignment (Wellmoon Method)",
+        variant: "floating-points",
         content: "The Wellmoon Method is a guided process of:",
         points: [
           "Experiencing and sensing the energy field",
@@ -35,6 +37,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content:
           "A unique integration of traditional wisdom and modern wellness:",
         points: [
@@ -47,6 +50,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Combines ancient yogic practices with emerging biofield science concepts",
           "Focuses on direct experience and awareness, not belief systems",
@@ -56,6 +60,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Aura Healing & Biofield Alignment",
+        variant: "energy-grid",
         content: "Regular practice may support:",
         points: [
           "Emotional balance and lightness",
@@ -68,6 +73,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "This practice is suitable for:",
         points: [
           "Students experiencing stress or lack of focus",
@@ -79,6 +85,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Consider Biofield & Aura Alignment",
+        variant: "floating-points",
         points: [
           "Feeling drained without a clear reason",
           "Emotional heaviness or overwhelm",
@@ -89,6 +96,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How an Aura Healing Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Grounding and intention setting",
@@ -100,6 +108,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Aligned with emerging research in biofield science and energy medicine",
           "Supports the relaxation response and mind-body regulation",
@@ -108,6 +117,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Awareness Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Sit quietly for 2–3 minutes",
@@ -118,6 +128,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "Participants often report:",
         points: [
           "A sense of lightness in the body",
@@ -128,13 +139,145 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "This is a complementary wellness practice and does not replace medical diagnosis or treatment. It supports the body’s natural ability to restore balance.",
       },
       {
         title: "Begin Your Journey",
+        variant: "journey",
         content:
           "Experience energy not as something abstract, but as a felt shift in awareness, balance, and presence.Step into the Wellmoon Method and explore Biofield & Aura Alignment for positive health.",
+      },
+    ],
+  },
+
+  {
+    slug: "cognitive-balance-practice",
+    title: "Cognitive Balance Practice",
+    shortDescription:
+      "Brain Integration, Focus & Creative Awareness through Guided Exercises",
+    videoSrc: "/videos/healing-path/cognitive-balance-practice.webm",
+
+    intro:
+      "Brain Integration, Focus & Creative Awareness through Guided Exercises. When both sides of the brain begin to work in harmony, thinking becomes clearer, attention deepens, and creativity flows naturally.",
+
+    sections: [
+      {
+        title: "What is Cognitive Balance & Why It Matters",
+        content: "The brain functions through interconnected hemispheres:",
+        points: [
+          "Left hemisphere → logic, structure, analysis",
+          "Right hemisphere → creativity, intuition, imagination",
+        ],
+      },
+      {
+        title: "What is Cognitive Balance Practice (Wellmoon Method)",
+        content: "The Wellmoon Method uses guided exercises to:",
+        points: [
+          "Activate non-dominant hand usage",
+          "Improve hand-brain coordination",
+          "Enhance neural engagement and awareness",
+          "Develop attention and cognitive flexibility",
+        ],
+      },
+      {
+        title: "The Wellmoon Approach",
+        content: "Cognitive Practice is integrated with:",
+        points: [
+          "Calm, distraction-free environment",
+          "Breath awareness for grounding",
+          "Structured brain coordination exercises",
+          "Left-hand colouring and pattern tracing",
+          "Awareness-based observation",
+        ],
+      },
+      {
+        title: "What Makes the Wellmoon Method Unique",
+        points: [
+          "Combines cognitive exercises with awareness practices",
+          "Uses non-dominant hand activation",
+          "Integrates breath and sensory engagement",
+          "Designed for all age groups",
+        ],
+      },
+      {
+        title: "Benefits of Cognitive Balance Practice",
+        content: "Regular practice may support:",
+        points: [
+          "Improved focus and concentration",
+          "Better coordination",
+          "Enhanced creativity",
+          "Reduced mental fatigue",
+          "Improved memory",
+        ],
+      },
+      {
+        title: "Who Can Benefit",
+        content: "This practice is ideal for:",
+        points: [
+          "Students",
+          "Professionals",
+          "Children",
+          "Anyone seeking mental clarity",
+        ],
+      },
+      {
+        title: "When to Practice",
+        points: [
+          "Before study or work",
+          "During breaks",
+          "Daily cognitive training",
+          "Alongside meditation",
+        ],
+      },
+      {
+        title: "How a Session Works",
+        content: "A typical session includes:",
+        points: [
+          "Grounding",
+          "Brain activation exercises",
+          "Left-hand drawing",
+          "Observation phase",
+          "Integration",
+        ],
+      },
+      {
+        title: "Scientific & Integrative Perspective",
+        points: [
+          "Supports neuroplasticity",
+          "Enhances coordination",
+          "Improves attention",
+        ],
+      },
+      {
+        title: "A Simple Cognitive Practice",
+        content: "Try this:",
+        points: [
+          "Use your non-dominant hand",
+          "Draw simple shapes",
+          "Focus on movement",
+        ],
+      },
+      {
+        title: "Experience & Outcomes",
+        content: "Participants often notice:",
+        points: [
+          "Increased focus",
+          "Improved coordination",
+          "Calm mental state",
+          "Enhanced creativity",
+        ],
+      },
+      {
+        title: "Gentle Note",
+        content:
+          "This is a supportive cognitive wellness practice and does not replace medical or psychological treatment.",
+      },
+      {
+        title: "Begin Your Practice",
+        content:
+          "Train your brain through awareness and simple guided exercises. Explore Cognitive Balance Practice with the Wellmoon Method.",
       },
     ],
   },
@@ -403,6 +546,132 @@ export const healingPaths: HealingPathVideo[] = [
         title: "Begin Your Experience",
         content:
           "Allow sound to guide you into a state of rest, awareness, and inner harmony. Explore Sound Healing with the Wellmoon Method.",
+      },
+    ],
+  },
+
+  {
+    slug: "visual-wellness-eye-exercises",
+    title: "Visual Wellness Practice",
+    shortDescription:
+      "Eye relaxation techniques to reduce strain and improve focus.",
+    videoSrc: "/videos/healing-path/visual-wellness.webm",
+
+    intro:
+      "Eye Relaxation, Focus & Screen Balance for Modern Lifestyles. When the eyes relax, the mind follows.",
+
+    sections: [
+      {
+        title: "What is Visual Wellness & Why It Matters",
+        content:
+          "The eyes are closely connected to the brain and nervous system. Modern habits can lead to:",
+        points: [
+          "Eye strain",
+          "Reduced focus",
+          "Headaches",
+          "Mental fatigue",
+        ],
+      },
+      {
+        title: "What is Visual Wellness Practice (Wellmoon Method)",
+        content: "The Wellmoon Method uses guided techniques to:",
+        points: [
+          "Relax eye muscles",
+          "Improve visual awareness",
+          "Support focus",
+          "Balance visual input",
+        ],
+      },
+      {
+        title: "The Wellmoon Approach",
+        content: "Visual Wellness is integrated with:",
+        points: [
+          "Nature-based viewing",
+          "Breath techniques",
+          "Eye exercises",
+          "Focus shifting",
+          "Soft gaze practices",
+        ],
+      },
+      {
+        title: "What Makes the Wellmoon Method Unique",
+        points: [
+          "Combines eye exercises with awareness",
+          "Supports nervous system relaxation",
+          "Designed for digital lifestyles",
+        ],
+      },
+      {
+        title: "Benefits of Visual Wellness Practice",
+        content: "Regular practice may support:",
+        points: [
+          "Reduced eye strain",
+          "Improved focus",
+          "Better concentration",
+          "Less fatigue",
+        ],
+      },
+      {
+        title: "Who Can Benefit",
+        content: "This practice is ideal for:",
+        points: [
+          "Students",
+          "Professionals",
+          "Screen users",
+          "Anyone with eye fatigue",
+        ],
+      },
+      {
+        title: "When to Practice",
+        points: [
+          "During screen breaks",
+          "After device use",
+          "Before sleep",
+        ],
+      },
+      {
+        title: "How a Session Works",
+        content: "A typical session includes:",
+        points: [
+          "Breath awareness",
+          "Eye movements",
+          "Focus exercises",
+          "Relaxation",
+        ],
+      },
+      {
+        title: "Scientific & Integrative Perspective",
+        points: [
+          "Supports eye coordination",
+          "Reduces digital strain",
+        ],
+      },
+      {
+        title: "A Simple Eye Relaxation Practice",
+        content: "Try this:",
+        points: [
+          "Rub palms",
+          "Place over eyes",
+          "Breathe slowly",
+        ],
+      },
+      {
+        title: "Experience & Outcomes",
+        content: "Participants often notice:",
+        points: [
+          "Relaxed eyes",
+          "Improved clarity",
+          "Reduced fatigue",
+        ],
+      },
+      {
+        title: "Gentle Note",
+        content:
+          "This is a supportive wellness practice and does not replace professional eye care.",
+      },
+      {
+        title: "Begin Your Practice",
+        content: "Restore comfort and clarity through guided visual practices.",
       },
     ],
   },
@@ -677,262 +946,6 @@ export const healingPaths: HealingPathVideo[] = [
         title: "Begin Your Practice",
         content:
           "Return to a state of ease, awareness, and balance through gentle, integrative yoga. Explore Wellness Yoga with the Wellmoon Method.",
-      },
-    ],
-  },
-
-  {
-    slug: "cognitive-balance-practice",
-    title: "Cognitive Balance Practice",
-    shortDescription:
-      "Brain Integration, Focus & Creative Awareness through Guided Exercises",
-    videoSrc: "/videos/healing-path/cognitive.webm",
-
-    intro:
-      "Brain Integration, Focus & Creative Awareness through Guided Exercises. When both sides of the brain begin to work in harmony, thinking becomes clearer, attention deepens, and creativity flows naturally.",
-
-    sections: [
-      {
-        title: "What is Cognitive Balance & Why It Matters",
-        content: "The brain functions through interconnected hemispheres:",
-        points: [
-          "Left hemisphere → logic, structure, analysis",
-          "Right hemisphere → creativity, intuition, imagination",
-        ],
-      },
-      {
-        title: "What is Cognitive Balance Practice (Wellmoon Method)",
-        content: "The Wellmoon Method uses guided exercises to:",
-        points: [
-          "Activate non-dominant hand usage",
-          "Improve hand-brain coordination",
-          "Enhance neural engagement and awareness",
-          "Develop attention and cognitive flexibility",
-        ],
-      },
-      {
-        title: "The Wellmoon Approach",
-        content: "Cognitive Practice is integrated with:",
-        points: [
-          "Calm, distraction-free environment",
-          "Breath awareness for grounding",
-          "Structured brain coordination exercises",
-          "Left-hand colouring and pattern tracing",
-          "Awareness-based observation",
-        ],
-      },
-      {
-        title: "What Makes the Wellmoon Method Unique",
-        points: [
-          "Combines cognitive exercises with awareness practices",
-          "Uses non-dominant hand activation",
-          "Integrates breath and sensory engagement",
-          "Designed for all age groups",
-        ],
-      },
-      {
-        title: "Benefits of Cognitive Balance Practice",
-        content: "Regular practice may support:",
-        points: [
-          "Improved focus and concentration",
-          "Better coordination",
-          "Enhanced creativity",
-          "Reduced mental fatigue",
-          "Improved memory",
-        ],
-      },
-      {
-        title: "Who Can Benefit",
-        content: "This practice is ideal for:",
-        points: [
-          "Students",
-          "Professionals",
-          "Children",
-          "Anyone seeking mental clarity",
-        ],
-      },
-      {
-        title: "When to Practice",
-        points: [
-          "Before study or work",
-          "During breaks",
-          "Daily cognitive training",
-          "Alongside meditation",
-        ],
-      },
-      {
-        title: "How a Session Works",
-        content: "A typical session includes:",
-        points: [
-          "Grounding",
-          "Brain activation exercises",
-          "Left-hand drawing",
-          "Observation phase",
-          "Integration",
-        ],
-      },
-      {
-        title: "Scientific & Integrative Perspective",
-        points: [
-          "Supports neuroplasticity",
-          "Enhances coordination",
-          "Improves attention",
-        ],
-      },
-      {
-        title: "A Simple Cognitive Practice",
-        content: "Try this:",
-        points: [
-          "Use your non-dominant hand",
-          "Draw simple shapes",
-          "Focus on movement",
-        ],
-      },
-      {
-        title: "Experience & Outcomes",
-        content: "Participants often notice:",
-        points: [
-          "Increased focus",
-          "Improved coordination",
-          "Calm mental state",
-          "Enhanced creativity",
-        ],
-      },
-      {
-        title: "Gentle Note",
-        content:
-          "This is a supportive cognitive wellness practice and does not replace medical or psychological treatment.",
-      },
-      {
-        title: "Begin Your Practice",
-        content:
-          "Train your brain through awareness and simple guided exercises. Explore Cognitive Balance Practice with the Wellmoon Method.",
-      },
-    ],
-  },
-
-  {
-    slug: "visual-wellness-eye-exercises",
-    title: "Visual Wellness Practice",
-    shortDescription:
-      "Eye relaxation techniques to reduce strain and improve focus.",
-    videoSrc: "/videos/healing-path/visual.webm",
-
-    intro:
-      "Eye Relaxation, Focus & Screen Balance for Modern Lifestyles. When the eyes relax, the mind follows.",
-
-    sections: [
-      {
-        title: "What is Visual Wellness & Why It Matters",
-        content:
-          "The eyes are closely connected to the brain and nervous system. Modern habits can lead to:",
-        points: [
-          "Eye strain",
-          "Reduced focus",
-          "Headaches",
-          "Mental fatigue",
-        ],
-      },
-      {
-        title: "What is Visual Wellness Practice (Wellmoon Method)",
-        content: "The Wellmoon Method uses guided techniques to:",
-        points: [
-          "Relax eye muscles",
-          "Improve visual awareness",
-          "Support focus",
-          "Balance visual input",
-        ],
-      },
-      {
-        title: "The Wellmoon Approach",
-        content: "Visual Wellness is integrated with:",
-        points: [
-          "Nature-based viewing",
-          "Breath techniques",
-          "Eye exercises",
-          "Focus shifting",
-          "Soft gaze practices",
-        ],
-      },
-      {
-        title: "What Makes the Wellmoon Method Unique",
-        points: [
-          "Combines eye exercises with awareness",
-          "Supports nervous system relaxation",
-          "Designed for digital lifestyles",
-        ],
-      },
-      {
-        title: "Benefits of Visual Wellness Practice",
-        content: "Regular practice may support:",
-        points: [
-          "Reduced eye strain",
-          "Improved focus",
-          "Better concentration",
-          "Less fatigue",
-        ],
-      },
-      {
-        title: "Who Can Benefit",
-        content: "This practice is ideal for:",
-        points: [
-          "Students",
-          "Professionals",
-          "Screen users",
-          "Anyone with eye fatigue",
-        ],
-      },
-      {
-        title: "When to Practice",
-        points: [
-          "During screen breaks",
-          "After device use",
-          "Before sleep",
-        ],
-      },
-      {
-        title: "How a Session Works",
-        content: "A typical session includes:",
-        points: [
-          "Breath awareness",
-          "Eye movements",
-          "Focus exercises",
-          "Relaxation",
-        ],
-      },
-      {
-        title: "Scientific & Integrative Perspective",
-        points: [
-          "Supports eye coordination",
-          "Reduces digital strain",
-        ],
-      },
-      {
-        title: "A Simple Eye Relaxation Practice",
-        content: "Try this:",
-        points: [
-          "Rub palms",
-          "Place over eyes",
-          "Breathe slowly",
-        ],
-      },
-      {
-        title: "Experience & Outcomes",
-        content: "Participants often notice:",
-        points: [
-          "Relaxed eyes",
-          "Improved clarity",
-          "Reduced fatigue",
-        ],
-      },
-      {
-        title: "Gentle Note",
-        content:
-          "This is a supportive wellness practice and does not replace professional eye care.",
-      },
-      {
-        title: "Begin Your Practice",
-        content: "Restore comfort and clarity through guided visual practices.",
       },
     ],
   },

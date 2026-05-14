@@ -1,7 +1,17 @@
+export type SectionVariant =
+  | "minimal"
+  | "floating-points"
+  | "energy-grid"
+  | "timeline"
+  | "immersive"
+  | "gentle-note"
+  | "journey";
+
 export interface HealingSection {
   title: string;
   content?: string;
   points?: string[];
+  variant?: SectionVariant;
 }
 
 export interface HealingPathVideo {

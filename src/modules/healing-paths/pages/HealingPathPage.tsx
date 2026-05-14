@@ -9,6 +9,7 @@ import LockedContentGate from "../components/LockedContentGate";
 import HealingSkeleton from "../components/HealingSkeleton";
 import { useAuth } from "@/modules/auth";
 import { useUserActivity } from "@/modules/dashboard/user/hooks/useUserActivity";
+import SectionRenderer from "@/components/sections/SectionRenderer";
 
 export default function HealingPathPage() {
   const { slug } = useParams();
@@ -52,56 +53,46 @@ export default function HealingPathPage() {
   const hasLockedContent = hasMudras || hasSessions;
 
   return (
-    <div className="max-w-5xl mx-auto space-y-10 py-36 ">
+    <>
       {/* HERO */}
-      <section className="text-center">
-        <h1 className="text-3xl font-bold">{path.title}</h1>
+      <section className="text-center tracking-wide leading-tight min-h-[40vh] bg-[url('/images/healingpath/hero/aurahero.png')] bg-cover bg-center flex flex-col items-center justify-center">
+        <h1 className="text-6xl font-light">{path.title}</h1>
         <p className="text-sub mt-2">{path.description}</p>
       </section>
 
-      {/* INTRO */}
-      {path.intro && (
-        <section className="card">
-          <h2 className="font-semibold mb-2 text-lg">Introduction</h2>
-          <p>{path.intro}</p>
-        </section>
-      )}
+      <div className="max-w-4xl mx-auto space-y-10 py-36 ">
+        {/* INTRO */}
+        {path.intro && (
+          <section className="card text-center tracking-wide leading-tight">
+            <h2 className="font-light mb-2 text-4xl">Introduction</h2>
+            <p className="text-lg">{path.intro}</p>
+          </section>
+        )}
 
-      {/* SECTIONS */}
-      {path.sections?.map((section, index) => (
-        <section key={index} className="card">
-          <h2 className="font-semibold text-lg mb-2">{section.title}</h2>
+        {/* SECTIONS */}
+        {path.sections?.map((section, index) => (
+          <SectionRenderer key={index} section={section} />
+        ))}
 
-          {section.content && <p className="mb-2">{section.content}</p>}
-
-          {section.points && (
-            <ul className="list-disc pl-5 space-y-1">
-              {section.points.map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
+        {/* PREMIUM CONTENT */}
+        <section>
+          {contentLoading ? (
+            <HealingSkeleton />
+          ) : hasLockedContent ? (
+            <LockedContentGate isUnlocked={isSubscribed}>
+              {isMudraPath ? (
+                <MudraGrid mudras={mudras} />
+              ) : (
+                <VideoSessionList sessions={sessions} />
+              )}
+            </LockedContentGate>
+          ) : (
+            <p className="mt-4 text-base italic text-muted text-center rounded-lg border border-2 border-accent bg-white p-4">
+              Session content for {path.title} coming soon...
+            </p>
           )}
         </section>
-      ))}
-
-      {/* PREMIUM CONTENT */}
-      <section>
-        {contentLoading ? (
-          <HealingSkeleton />
-        ) : hasLockedContent ? (
-          <LockedContentGate isUnlocked={isSubscribed}>
-            {isMudraPath ? (
-              <MudraGrid mudras={mudras} />
-            ) : (
-              <VideoSessionList sessions={sessions} />
-            )}
-          </LockedContentGate>
-        ) : (
-          <p className="mt-4 text-base italic text-muted text-center rounded-lg border border-2 border-accent bg-white p-4">
-            Session content for {path.title} coming soon...
-          </p>
-        )}
-      </section>
-    </div>
+      </div>
+    </>
   );
 }
