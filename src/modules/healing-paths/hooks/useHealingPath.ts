@@ -5,6 +5,7 @@ import { healingPaths } from "../config/healing.config";
 
 type EnrichedHealingPath = HealingPath & {
   intro: string;
+  pageBackground?: string;
   sections: HealingSection[];
 };
 
@@ -32,6 +33,7 @@ export function useHealingPath(slug: string) {
         const enrichedPath: EnrichedHealingPath = {
           ...data,
           intro: staticContent?.intro ?? "",
+          pageBackground: staticContent?.pageBackground,
           sections: staticContent?.sections ?? [],
         };
 

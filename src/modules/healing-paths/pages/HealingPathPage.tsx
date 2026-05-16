@@ -53,11 +53,14 @@ export default function HealingPathPage() {
   const hasLockedContent = hasMudras || hasSessions;
 
   return (
-    <>
+    <div
+      className="relative overflow-hidden bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: `url('${path.pageBackground}')` }}
+    >
       {/* HERO */}
-      <section className="text-center tracking-wide leading-tight min-h-[40vh] bg-[url('/images/healingpath/hero/aurahero.png')] bg-cover bg-center flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-light">{path.title}</h1>
-        <p className="text-sub mt-2">{path.description}</p>
+      <section className="text-center tracking-wide leading-tight min-h-[40vh] flex flex-col items-center justify-center">
+        <h1 className="text-7xl font-light">{path.title}</h1>
+        <p className="text-lg mt-2">{path.description}</p>
       </section>
 
       <div className="max-w-4xl mx-auto space-y-10 py-36 ">
@@ -93,6 +96,6 @@ export default function HealingPathPage() {
           )}
         </section>
       </div>
-    </>
+    </div>
   );
 }

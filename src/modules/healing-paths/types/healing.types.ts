@@ -12,6 +12,11 @@ export interface HealingSection {
   content?: string;
   points?: string[];
   variant?: SectionVariant;
+
+  media?: {
+    type: "video";
+    src: string;
+  };
 }
 
 export interface HealingPathVideo {
@@ -19,6 +24,8 @@ export interface HealingPathVideo {
   title: string;
   shortDescription: string;
   videoSrc: string;
+
+  pageBackground?: string;
 
   intro: string;
   sections: HealingSection[];

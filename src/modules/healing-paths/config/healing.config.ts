@@ -7,6 +7,7 @@ export const healingPaths: HealingPathVideo[] = [
     shortDescription:
       "Aura Healing & Energy Field Balancing for Holistic Wellbeing",
     videoSrc: "/videos/healing-path/aurahealing_.webm",
+    pageBackground: "/images/healingpath/aura/aurapgbg.png",
 
     intro:
       "Aura Healing & Energy Field Balancing for Holistic Wellbeing. When the energy field is clear, the mind settles, emotions soften, and life regains its natural rhythm.",
@@ -118,6 +119,10 @@ export const healingPaths: HealingPathVideo[] = [
       {
         title: "A Simple Awareness Practice",
         variant: "immersive",
+        media: {
+          type: "video",
+          src: "/videos/healing-path/aura/aurasession.mp4",
+        },
         content: "Try this:",
         points: [
           "Sit quietly for 2–3 minutes",
@@ -145,6 +150,10 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Begin Your Journey",
+        media: {
+          type: "video",
+          src: "/videos/healing-path/aura/aurajourney.mp4",
+        },
         variant: "journey",
         content:
           "Experience energy not as something abstract, but as a felt shift in awareness, balance, and presence.Step into the Wellmoon Method and explore Biofield & Aura Alignment for positive health.",
@@ -165,6 +174,7 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What is Cognitive Balance & Why It Matters",
+        variant: "minimal",
         content: "The brain functions through interconnected hemispheres:",
         points: [
           "Left hemisphere → logic, structure, analysis",
@@ -173,6 +183,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What is Cognitive Balance Practice (Wellmoon Method)",
+        variant: "floating-points",
         content: "The Wellmoon Method uses guided exercises to:",
         points: [
           "Activate non-dominant hand usage",
@@ -183,6 +194,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content: "Cognitive Practice is integrated with:",
         points: [
           "Calm, distraction-free environment",
@@ -194,6 +206,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Combines cognitive exercises with awareness practices",
           "Uses non-dominant hand activation",
@@ -203,6 +216,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Cognitive Balance Practice",
+        variant: "energy-grid",
         content: "Regular practice may support:",
         points: [
           "Improved focus and concentration",
@@ -214,6 +228,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "This practice is ideal for:",
         points: [
           "Students",
@@ -224,6 +239,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Practice",
+        variant: "floating-points",
         points: [
           "Before study or work",
           "During breaks",
@@ -233,6 +249,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How a Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Grounding",
@@ -244,6 +261,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Supports neuroplasticity",
           "Enhances coordination",
@@ -252,6 +270,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Cognitive Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Use your non-dominant hand",
@@ -261,6 +280,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "Participants often notice:",
         points: [
           "Increased focus",
@@ -271,11 +291,13 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "This is a supportive cognitive wellness practice and does not replace medical or psychological treatment.",
       },
       {
         title: "Begin Your Practice",
+        variant: "journey",
         content:
           "Train your brain through awareness and simple guided exercises. Explore Cognitive Balance Practice with the Wellmoon Method.",
       },
@@ -294,12 +316,14 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What are Mudras & Why They Matter",
+        variant: "minimal",
         content:
           "Mudras are ancient yogic hand positions that help regulate the flow of energy within the body. Each finger represents an element:",
         points: ["Fire", "Air", "Earth", "Water", "Space"],
       },
       {
         title: "What is Mudra Healing (Wellmoon Method)",
+        variant: "floating-points",
         content:
           "The Wellmoon Method applies mudras as a guided, experiential practice:",
         points: [
@@ -311,6 +335,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content: "Mudra Healing is combined with:",
         points: [
           "Nature-based awareness (grounding and sensory connection)",
@@ -322,6 +347,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Integrates traditional mudra science with modern wellness understanding",
           "Focuses on awareness and consistency, not complexity",
@@ -331,6 +357,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Mudra Healing",
+        variant: "energy-grid",
         content: "Regular practice may support:",
         points: [
           "Improved focus and concentration",
@@ -343,6 +370,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "Mudra Healing is suitable for:",
         points: [
           "Students seeking better concentration and memory",
@@ -354,6 +382,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Practice Mudras",
+        variant: "floating-points",
         points: [
           "During stress or mental overload",
           "Before meditation or yoga",
@@ -364,6 +393,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How a Mudra Healing Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Grounding and breath awareness",
@@ -375,6 +405,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Mudras are linked with neuro-muscular and sensory feedback mechanisms",
           "May support mind-body coordination and relaxation response",
@@ -383,6 +414,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Mudra Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Sit comfortably",
@@ -393,6 +425,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "With regular practice, one may experience:",
         points: [
           "Improved mental clarity",
@@ -403,11 +436,13 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "Mudra Healing is a complementary wellness practice and does not replace medical diagnosis or treatment. It supports natural balance and awareness.",
       },
       {
         title: "Begin Your Practice",
+        variant: "journey",
         content:
           "Experience the power of simple gestures to create deep inner shifts in energy, awareness, and balance. Explore Mudra Healing with the Wellmoon Method.",
       },
@@ -427,6 +462,7 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What is Sound Healing & Why It Matters",
+        variant: "minimal",
         content:
           "Sound Healing works with vibrational frequencies that interact with the body and mind. The human system naturally responds to sound through:",
         points: [
@@ -437,6 +473,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What is Sound Healing (Wellmoon Method)",
+        variant: "floating-points",
         content: "The Wellmoon Method offers a guided experience using:",
         points: [
           "Therapeutic sound instruments (e.g., singing bowls, chimes, gentle tones)",
@@ -447,6 +484,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content: "Sound Healing is integrated with:",
         points: [
           "Nature-based sensory awareness",
@@ -458,6 +496,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Combines ancient sound practices with modern relaxation approaches",
           "Emphasizes awareness and presence, not passive listening",
@@ -467,6 +506,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Sound Healing",
+        variant: "energy-grid",
         content: "Regular sessions may support:",
         points: [
           "Deep relaxation and stress reduction",
@@ -479,6 +519,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "Sound Healing is suitable for:",
         points: [
           "Individuals experiencing stress or anxiety",
@@ -490,6 +531,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Experience Sound Healing",
+        variant: "floating-points",
         points: [
           "During periods of stress or overwhelm",
           "Before sleep or for deep relaxation",
@@ -500,6 +542,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How a Sound Healing Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Grounding and relaxation preparation",
@@ -511,6 +554,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Sound vibrations may influence the nervous system and brainwave states",
           "Supports activation of the relaxation response",
@@ -519,6 +563,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Sound Awareness Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Sit quietly in a calm space",
@@ -529,6 +574,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "Participants often experience:",
         points: [
           "Deep physical and mental relaxation",
@@ -539,11 +585,13 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "Sound Healing is a complementary wellness practice and does not replace medical diagnosis or treatment. It supports natural relaxation and balance.",
       },
       {
         title: "Begin Your Experience",
+        variant: "journey",
         content:
           "Allow sound to guide you into a state of rest, awareness, and inner harmony. Explore Sound Healing with the Wellmoon Method.",
       },
@@ -563,6 +611,7 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What is Visual Wellness & Why It Matters",
+        variant: "minimal",
         content:
           "The eyes are closely connected to the brain and nervous system. Modern habits can lead to:",
         points: [
@@ -574,6 +623,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What is Visual Wellness Practice (Wellmoon Method)",
+        variant: "floating-points",
         content: "The Wellmoon Method uses guided techniques to:",
         points: [
           "Relax eye muscles",
@@ -584,6 +634,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content: "Visual Wellness is integrated with:",
         points: [
           "Nature-based viewing",
@@ -595,6 +646,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Combines eye exercises with awareness",
           "Supports nervous system relaxation",
@@ -603,6 +655,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Visual Wellness Practice",
+        variant: "energy-grid",
         content: "Regular practice may support:",
         points: [
           "Reduced eye strain",
@@ -613,6 +666,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "This practice is ideal for:",
         points: [
           "Students",
@@ -623,6 +677,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Practice",
+        variant: "floating-points",
         points: [
           "During screen breaks",
           "After device use",
@@ -631,6 +686,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How a Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Breath awareness",
@@ -641,6 +697,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Supports eye coordination",
           "Reduces digital strain",
@@ -648,6 +705,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Eye Relaxation Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Rub palms",
@@ -657,6 +715,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "Participants often notice:",
         points: [
           "Relaxed eyes",
@@ -666,11 +725,13 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "This is a supportive wellness practice and does not replace professional eye care.",
       },
       {
         title: "Begin Your Practice",
+        variant: "journey",
         content: "Restore comfort and clarity through guided visual practices.",
       },
     ],
@@ -688,6 +749,7 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What is Virtual Nature Healing & Why It Matters",
+        variant: "minimal",
         content:
           "Human wellbeing is deeply connected to nature. Time in natural environments is known to support:",
         points: [
@@ -698,6 +760,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What is Virtual Nature Healing (Wellmoon Method)",
+        variant: "floating-points",
         content:
           "The Wellmoon Method creates a guided, experiential journey using:",
         points: [
@@ -709,6 +772,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content: "Virtual Nature Healing is integrated with:",
         points: [
           "Forest Therapy principles",
@@ -720,6 +784,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Translates forest therapy into an accessible online format",
           "Focuses on guided awareness, not screen consumption",
@@ -729,6 +794,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Virtual Nature Healing",
+        variant: "energy-grid",
         content: "Regular sessions may support:",
         points: [
           "Reduced stress and mental fatigue",
@@ -741,6 +807,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "This practice is ideal for:",
         points: [
           "Students experiencing digital fatigue",
@@ -752,6 +819,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Practice Virtual Nature Healing",
+        variant: "floating-points",
         points: [
           "During work breaks",
           "After long screen exposure",
@@ -762,6 +830,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How a Virtual Nature Healing Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Grounding and breath awareness",
@@ -773,6 +842,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Inspired by nature therapy research",
           "Supports mental relaxation and recovery",
@@ -782,6 +852,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Nature Awareness Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Look at a natural element",
@@ -792,6 +863,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "Participants often report:",
         points: [
           "Calmness and mental refreshment",
@@ -802,11 +874,13 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "Virtual Nature Healing is a complementary wellness practice and does not replace medical or psychological treatment. It supports natural relaxation and wellbeing.",
       },
       {
         title: "Begin Your Experience",
+        variant: "journey",
         content:
           "Reconnect with nature anytime through guided awareness and intentional presence. Explore Virtual Nature Healing with the Wellmoon Method.",
       },
@@ -826,6 +900,7 @@ export const healingPaths: HealingPathVideo[] = [
     sections: [
       {
         title: "What is Wellness Yoga & Why It Matters",
+        variant: "minimal",
         content: "Unlike performance-based yoga, Wellness Yoga emphasizes:",
         points: [
           "Ease over intensity",
@@ -835,6 +910,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What is Wellness Yoga (Wellmoon Method)",
+        variant: "floating-points",
         content:
           "The Wellmoon Method offers a structured yet gentle practice combining:",
         points: [
@@ -846,6 +922,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "The Wellmoon Approach",
+        variant: "floating-points",
         content: "Wellness Yoga is integrated with:",
         points: [
           "Nature-based awareness (when possible)",
@@ -857,6 +934,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "What Makes the Wellmoon Method Unique",
+        variant: "minimal",
         points: [
           "Combines yoga therapy principles with holistic wellness practices",
           "Focuses on individual experience, not standard routines",
@@ -866,6 +944,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Benefits of Wellness Yoga",
+        variant: "energy-grid",
         content: "Regular practice may support:",
         points: [
           "Improved flexibility and body comfort",
@@ -878,6 +957,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Who Can Benefit",
+        variant: "floating-points",
         content: "Wellness Yoga is suitable for:",
         points: [
           "Beginners and those new to yoga",
@@ -889,6 +969,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "When to Practice Wellness Yoga",
+        variant: "floating-points",
         points: [
           "In the morning to start the day with clarity",
           "During breaks to release tension",
@@ -899,6 +980,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "How a Wellness Yoga Session Works",
+        variant: "timeline",
         content: "A typical session includes:",
         points: [
           "Gentle grounding and breath awareness",
@@ -910,6 +992,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Scientific & Integrative Perspective",
+        variant: "minimal",
         points: [
           "Supports mind-body coordination and nervous system regulation",
           "May improve flexibility, posture, and breathing patterns",
@@ -919,6 +1002,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "A Simple Wellness Yoga Practice",
+        variant: "immersive",
         content: "Try this:",
         points: [
           "Sit or stand comfortably",
@@ -929,6 +1013,7 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Experience & Outcomes",
+        variant: "energy-grid",
         content: "With consistent practice, one may experience:",
         points: [
           "Greater ease in the body",
@@ -939,11 +1024,13 @@ export const healingPaths: HealingPathVideo[] = [
       },
       {
         title: "Gentle Note",
+        variant: "gentle-note",
         content:
           "Wellness Yoga is a complementary practice and does not replace medical advice or treatment. It supports natural balance and wellbeing.",
       },
       {
         title: "Begin Your Practice",
+        variant: "journey",
         content:
           "Return to a state of ease, awareness, and balance through gentle, integrative yoga. Explore Wellness Yoga with the Wellmoon Method.",
       },
